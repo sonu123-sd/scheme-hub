@@ -1,0 +1,279 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Scheme Hub Design System - Government Portal Theme */
+/* Colors inspired by Indian flag: Saffron, White, Green with Navy accents */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Noto+Sans:wght@400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    /* Core Government Colors */
+    --background: 0 0% 98%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* Saffron Primary */
+    --primary: 24 95% 53%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Navy Secondary */
+    --secondary: 220 60% 20%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Green Accent */
+    --accent: 145 63% 32%;
+    --accent-foreground: 0 0% 100%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 24 95% 53%;
+
+    --radius: 0.75rem;
+
+    /* Custom Scheme Hub Colors */
+    --saffron: 24 95% 53%;
+    --saffron-light: 24 95% 65%;
+    --saffron-dark: 24 95% 42%;
+    
+    --indian-green: 145 63% 32%;
+    --indian-green-light: 145 63% 45%;
+    --indian-green-dark: 145 63% 22%;
+    
+    --navy: 220 60% 20%;
+    --navy-light: 220 45% 35%;
+    --navy-dark: 220 60% 12%;
+
+    --gold: 45 93% 47%;
+    --cream: 40 33% 96%;
+
+    /* Gradients */
+    --gradient-saffron: linear-gradient(135deg, hsl(24, 95%, 53%) 0%, hsl(24, 95%, 42%) 100%);
+    --gradient-green: linear-gradient(135deg, hsl(145, 63%, 32%) 0%, hsl(145, 63%, 22%) 100%);
+    --gradient-navy: linear-gradient(135deg, hsl(220, 60%, 20%) 0%, hsl(220, 60%, 12%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(220, 60%, 20%) 0%, hsl(24, 95%, 53%) 100%);
+    --gradient-tricolor: linear-gradient(180deg, hsl(24, 95%, 53%) 0%, hsl(0, 0%, 100%) 50%, hsl(145, 63%, 32%) 100%);
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(220 60% 20% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(220 60% 20% / 0.1), 0 2px 4px -2px hsl(220 60% 20% / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(220 60% 20% / 0.1), 0 4px 6px -4px hsl(220 60% 20% / 0.1);
+    --shadow-xl: 0 20px 25px -5px hsl(220 60% 20% / 0.1), 0 8px 10px -6px hsl(220 60% 20% / 0.1);
+    --shadow-glow-saffron: 0 0 20px hsl(24 95% 53% / 0.4);
+    --shadow-glow-green: 0 0 20px hsl(145 63% 32% / 0.4);
+
+    /* Sidebar */
+    --sidebar-background: 220 60% 20%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 24 95% 53%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 45% 35%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 220 45% 35%;
+    --sidebar-ring: 24 95% 53%;
+  }
+
+  .dark {
+    --background: 222 47% 6%;
+    --foreground: 0 0% 98%;
+
+    --card: 222 47% 8%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 222 47% 8%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 24 95% 53%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 45% 25%;
+    --secondary-foreground: 0 0% 98%;
+
+    --accent: 145 63% 40%;
+    --accent-foreground: 0 0% 100%;
+
+    --muted: 222 47% 15%;
+    --muted-foreground: 220 9% 65%;
+
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 222 47% 20%;
+    --input: 222 47% 20%;
+    --ring: 24 95% 53%;
+
+    --sidebar-background: 222 47% 6%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 24 95% 53%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 222 47% 15%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 222 47% 20%;
+    --sidebar-ring: 24 95% 53%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Noto Sans', 'Poppins', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+  }
+}
+
+@layer utilities {
+  .gradient-saffron {
+    background: var(--gradient-saffron);
+  }
+  
+  .gradient-green {
+    background: var(--gradient-green);
+  }
+  
+  .gradient-navy {
+    background: var(--gradient-navy);
+  }
+  
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+  
+  .gradient-tricolor {
+    background: var(--gradient-tricolor);
+  }
+
+  .text-gradient-saffron {
+    background: var(--gradient-saffron);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .shadow-glow-saffron {
+    box-shadow: var(--shadow-glow-saffron);
+  }
+  
+  .shadow-glow-green {
+    box-shadow: var(--shadow-glow-green);
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+
+  .animate-slide-down {
+    animation: slideDown 0.3s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out forwards;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--foreground) / 0.5);
+}
+
+/* Slideshow animations */
+.slideshow-enter {
+  opacity: 0;
+}
+
+.slideshow-enter-active {
+  opacity: 1;
+  transition: opacity 1000ms ease-in-out;
+}
+
+.slideshow-exit {
+  opacity: 1;
+}
+
+.slideshow-exit-active {
+  opacity: 0;
+  transition: opacity 1000ms ease-in-out;
+}
