@@ -4693,58 +4693,595 @@
     }
   },
   {
-    "id": "pm-kisan",
-    "name": "PM-KISAN Samman Nidhi",
-    "category": "Agriculture, Rural & Environment",
-    "type": "Central",
-    "state": "",
-    "official_link": "https://pmkisan.gov.in",
-    "youtube_video": "https://youtu.be/52ZX8klOHW4",
+    "id": "dl-marriage-assistance-construction",
+    "name": "Financial Assistance for Marriage for the Construction Workers",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://dbocwwb.delhi.gov.in/cwapp/MyLoginPage",
+    "youtube_video": "https://youtu.be/OPgmAmdKxW0",
     "pdf_file": "",
-    "description": "Income support of Rs 6000 per year to farmer families across India.",
+    "description": "Marriage financial assistance for registered construction workers or their children.",
     "apply_steps": [
-      "Visit PM-KISAN portal",
-      "Register with Aadhaar",
-      "Submit land details",
-      "Receive direct benefit transfer"
+      "Apply online",
+      "Upload documents",
+      "Verification",
+      "Amount disbursement"
     ],
     "documents_required": [
       "Aadhaar Card",
-      "Land Records",
-      "Bank Account",
-      "Mobile Number"
+      "Labour Card",
+      "Marriage Card",
+      "Bank Passbook"
     ],
     "eligibility": {
       "gender": "All",
       "minAge": 18,
-      "maxAge": 100,
+      "maxAge": 60,
       "caste": [
         "All"
       ],
       "income": 0,
-      "employment": "Farmer"
+      "education": "Not Required"
     }
   },
   {
-    "id": "ayushman-bharat",
-    "name": "Ayushman Bharat - PM-JAY",
-    "category": "Health & Wellness",
-    "type": "Central",
-    "state": "",
-    "official_link": "https://pmjay.gov.in",
-    "youtube_video": "https://youtu.be/RcGGWjJKIIk",
+    "id": "dl-disability-pension-construction",
+    "name": "Disability Pension for the Construction Workers",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://dbocwwb.delhi.gov.in/cwapp/MyLoginPage",
+    "youtube_video": "https://youtu.be/W-rqee55c44",
     "pdf_file": "",
-    "description": "Health coverage of Rs 5 lakhs per family per year for secondary and tertiary hospitalization.",
+    "description": "Monthly pension for disabled construction workers.",
     "apply_steps": [
-      "Check eligibility on portal",
-      "Visit CSC or empaneled hospital",
-      "Get Ayushman card",
-      "Avail cashless treatment"
+      "Apply online",
+      "Upload disability proof",
+      "Verification",
+      "Pension start"
     ],
     "documents_required": [
       "Aadhaar Card",
-      "Ration Card",
-      "SECC Data verification"
+      "Labour Card",
+      "Disability Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 65,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "Not Required"
+    }
+  },
+  {
+    "id": "dl-old-age-assistance",
+    "name": "Old Age Assistance",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://edistrict.delhigovt.nic.in/",
+    "youtube_video": "https://youtu.be/3PDI3OrTSwq",
+    "pdf_file": "",
+    "description": "Monthly pension for senior citizens of Delhi.",
+    "apply_steps": [
+      "Apply online",
+      "Upload documents",
+      "Verification",
+      "Pension disbursement"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Age Proof",
+      "Residence Proof",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 60,
+      "maxAge": 120,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "Not Required"
+    }
+  },
+  {
+    "id": "dl-accidental-death-construction",
+    "name": "Accidental Death Assistance for the Construction Workers",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://dbocwwb.delhi.gov.in/cwapp/MyLoginPage",
+    "youtube_video": "https://youtu.be/B2Aq6O7rN8",
+    "pdf_file": "",
+    "description": "Financial compensation to the family of construction workers who die due to accidents.",
+    "apply_steps": [
+      "Apply online",
+      "Upload accident proof",
+      "Verification",
+      "Compensation disbursement"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Labour Card",
+      "Death Certificate",
+      "FIR/Accident Report",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 65,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "Not Required"
+    }
+  },
+  {
+    "id": "dl-pension-benefit-construction",
+    "name": "Pension Benefit for the Construction Workers",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://dbocwwb.delhi.gov.in/cwapp/MyLoginPage",
+    "youtube_video": "",
+    "pdf_file": "",
+    "description": "Monthly pension for elderly construction workers.",
+    "apply_steps": [
+      "Apply online",
+      "Upload documents",
+      "Verification",
+      "Pension start"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Labour Card",
+      "Age Proof",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 60,
+      "maxAge": 120,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "Not Required"
+    }
+  },
+  {
+    "id": "dl-funeral-assistance-construction",
+    "name": "Funeral Assistance for the Construction Workers",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://dbocwwb.delhi.gov.in/cwapp/MyLoginPage",
+    "youtube_video": "",
+    "pdf_file": "",
+    "description": "Funeral expense assistance to families of deceased construction workers.",
+    "apply_steps": [
+      "Apply online",
+      "Upload death proof",
+      "Verification",
+      "Amount disbursement"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Labour Card",
+      "Death Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 120,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "Not Required"
+    }
+  },
+  {
+    "id": "dl-marriage-widow-orphan",
+    "name": "Financial Assistance for the Marriage of Daughters of Poor Widows and Orphan Girls",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://dbocwwb.delhi.gov.in/cwapp/MyLoginPage",
+    "youtube_video": "https://youtu.be/vc6FQ0eQw4",
+    "pdf_file": "",
+    "description": "Marriage assistance for daughters of widows and orphan girls from poor families.",
+    "apply_steps": [
+      "Apply online",
+      "Upload documents",
+      "Verification",
+      "Amount disbursement"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Income Certificate",
+      "Marriage Proof",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "Female",
+      "minAge": 18,
+      "maxAge": 40,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "Not Required"
+    }
+  },
+  {
+    "id": "dl-house-construction-workers",
+    "name": "Purchase/Construction of House for the Construction Workers",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://dbocwwb.delhi.gov.in/cwapp/MyLoginPage",
+    "youtube_video": "https://youtu.be/Kj5qRCjqc",
+    "pdf_file": "",
+    "description": "Housing assistance for registered construction workers.",
+    "apply_steps": [
+      "Apply online",
+      "Upload property documents",
+      "Verification",
+      "Subsidy disbursement"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Labour Card",
+      "Property Papers",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 21,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "Not Required"
+    }
+  },
+  {
+    "id": "dl-post-matric-scholarship-sc",
+    "name": "Post Matric Scholarship for SC Students (Delhi)",
+    "category": "Education & Learning",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://edistrict.delhigovt.nic.in/",
+    "youtube_video": "https://youtu.be/Y-lrTxwk1E",
+    "pdf_file": "",
+    "description": "Scholarship for SC students studying after matric.",
+    "apply_steps": [
+      "Apply online",
+      "Upload documents",
+      "Verification",
+      "Scholarship disbursement"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Caste Certificate",
+      "Marksheet",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 15,
+      "maxAge": 35,
+      "caste": [
+        "SC"
+      ],
+      "income": 0,
+      "education": "10th Pass"
+    }
+  },
+  {
+    "id": "dl-post-matric-sc",
+    "name": "Post Matric Scholarship for SC Students (Delhi)",
+    "category": "Education & Learning",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://edistrict.delhigovt.nic.in/",
+    "youtube_video": "https://youtu.be/YrTwxk1iE",
+    "pdf_file": "",
+    "description": "Scholarship for SC students studying in post-matric courses.",
+    "apply_steps": [
+      "Apply online",
+      "Upload documents",
+      "Verification",
+      "Scholarship disbursement"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Caste Certificate",
+      "Income Certificate",
+      "Marksheet",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 15,
+      "maxAge": 35,
+      "caste": [
+        "SC"
+      ],
+      "income": 250000,
+      "education": "10th Pass"
+    }
+  },
+  {
+    "id": "dl-education-loan",
+    "name": "Education Loan Scheme – Delhi",
+    "category": "Education & Learning",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://edistrict.delhigovt.nic.in/",
+    "youtube_video": "https://youtu.be/seZTXVn8",
+    "pdf_file": "",
+    "description": "Education loan assistance for higher studies.",
+    "apply_steps": [
+      "Apply online",
+      "Upload admission proof",
+      "Verification",
+      "Loan sanction"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Admission Letter",
+      "Income Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 17,
+      "maxAge": 45,
+      "caste": [
+        "All"
+      ],
+      "income": 600000,
+      "education": "12th Pass"
+    }
+  },
+  {
+    "id": "dl-education-assistance-construction",
+    "name": "Education Assistance for the Construction Workers",
+    "category": "Education & Learning",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://dbocwwb.delhi.gov.in/cwapp/MyLoginPage",
+    "youtube_video": "https://youtu.be/sKOYHzAbD9A",
+    "pdf_file": "",
+    "description": "Education support for children of registered construction workers.",
+    "apply_steps": [
+      "Apply online",
+      "Upload documents",
+      "Verification",
+      "Benefit disbursement"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Labour Card",
+      "Birth Certificate",
+      "School ID Card",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 5,
+      "maxAge": 25,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "School/College Student"
+    }
+  },
+  {
+    "id": "dl-dr-ambedkar-scholarship",
+    "name": "Dr. B. R. Ambedkar State Award to SC/ST/OBC/Minorities Students",
+    "category": "Education & Learning",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://district.delhigovt.nic.in/",
+    "youtube_video": "https://youtu.be/K2LmbImkfzq",
+    "pdf_file": "",
+    "description": "Merit award for SC/ST/OBC/Minority students.",
+    "apply_steps": [
+      "Apply online",
+      "Upload marksheet",
+      "Verification",
+      "Award disbursement"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Caste/Community Certificate",
+      "Marksheet",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 10,
+      "maxAge": 30,
+      "caste": [
+        "SC",
+        "ST",
+        "OBC",
+        "Minority"
+      ],
+      "income": 0,
+      "education": "School/College Student"
+    }
+  },
+  {
+    "id": "dl-skill-development-guarantee",
+    "name": "Higher Education and Skill Development Guarantee Scheme",
+    "category": "Education & Learning",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://edistrict.delhigovt.nic.in/",
+    "youtube_video": "https://youtu.be/Anbqwof30k",
+    "pdf_file": "",
+    "description": "Guarantee support for higher education and skill training.",
+    "apply_steps": [
+      "Apply online",
+      "Upload documents",
+      "Verification",
+      "Benefit disbursement"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Admission Proof",
+      "Income Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 17,
+      "maxAge": 40,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "12th Pass"
+    }
+  },
+  {
+    "id": "dl-internship-program",
+    "name": "Viksit Delhi CM Internship Programme",
+    "category": "Education & Learning",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://viksitdelhiyuva.org/about.php",
+    "youtube_video": "https://youtu.be/5vS1VGaFU7s",
+    "pdf_file": "",
+    "description": "Internship programme for youth of Delhi.",
+    "apply_steps": [
+      "Apply online",
+      "Upload resume",
+      "Selection",
+      "Internship start"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Education Certificate",
+      "Resume",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 35,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "Graduate"
+    }
+  },
+  {
+    "id": "dl-education-loan",
+    "name": "Education Loan Scheme – Delhi",
+    "category": "Education & Learning",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://edistrict.delhigovt.nic.in/",
+    "youtube_video": "https://youtu.be/seZTXVn8",
+    "pdf_file": "",
+    "description": "Education loan assistance for higher studies.",
+    "apply_steps": [
+      "Apply online",
+      "Upload documents",
+      "Verification",
+      "Loan sanction"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Admission Proof",
+      "Income Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 17,
+      "maxAge": 40,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "12th Pass"
+    }
+  },
+  {
+    "id": "dl-medical-assistance-construction",
+    "name": "Medical Assistance for the Construction Workers",
+    "category": "Health & Wellness",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://dbocwwb.delhi.gov.in/",
+    "youtube_video": "https://youtu.be/DxrR9bXbjF4",
+    "pdf_file": "",
+    "description": "Medical expense reimbursement for registered construction workers and their families.",
+    "apply_steps": [
+      "Apply online",
+      "Upload medical bills",
+      "Verification",
+      "Reimbursement"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Labour Card",
+      "Medical Bills",
+      "Doctor Prescription",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "Not required"
+    }
+  },
+  {
+    "id": "dl-delhi-arogya-nidhi",
+    "name": "Delhi Arogya Nidhi",
+    "category": "Health & Wellness",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://dghs.delhi.gov.in/dghs/delhi-arogya-nidhi",
+    "youtube_video": "https://youtu.be/RwNX6GqghGM",
+    "pdf_file": "",
+    "description": "Financial help for poor patients suffering from life-threatening diseases.",
+    "apply_steps": [
+      "Apply online",
+      "Upload hospital certificate",
+      "Verification",
+      "Financial aid"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Income Certificate",
+      "Hospital Certificate",
+      "Medical Report",
+      "Bank Passbook"
     ],
     "eligibility": {
       "gender": "All",
@@ -4753,39 +5290,483 @@
       "caste": [
         "All"
       ],
-      "income": 200000
+      "income": 300000,
+      "education": "Not required"
     }
   },
   {
-    "id": "nps-vatsalya",
-    "name": "NPS Vatsalya",
-    "category": "Banking, Financial Services & Insurance",
-    "type": "Central",
-    "state": "",
-    "official_link": "https://npstrust.org.in",
-    "youtube_video": "",
+    "id": "dl-financial-assistance-special-needs",
+    "name": "Financial Assistance For Persons With Special Needs",
+    "category": "Health & Wellness",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://edistrict.delhigovt.nic.in/",
+    "youtube_video": "https://youtu.be/Jf2706exZEc",
     "pdf_file": "",
-    "description": "Pension scheme for minors to secure their financial future with minimal investment.",
+    "description": "Monthly pension and medical support for persons with disabilities.",
     "apply_steps": [
-      "Visit any POP-SP",
-      "Open NPS Vatsalya account",
-      "Make minimum contribution",
-      "Continue till child turns 18"
+      "Apply online",
+      "Upload disability certificate",
+      "Verification",
+      "Benefit disbursement"
     ],
     "documents_required": [
-      "Child's Aadhaar/Birth Certificate",
-      "Parent's Aadhaar",
-      "Parent's PAN",
-      "Bank Account"
+      "Aadhaar Card",
+      "Disability Certificate",
+      "Income Certificate",
+      "Residence Proof",
+      "Bank Passbook"
     ],
     "eligibility": {
       "gender": "All",
-      "minAge": 0,
-      "maxAge": 18,
+      "minAge": 18,
+      "maxAge": 59,
       "caste": [
         "All"
       ],
-      "income": 0
+      "income": 100000,
+      "education": "Not required"
+    }
+  },
+  {
+    "id": "dl-maternity-assistance-construction",
+    "name": "Maternity Assistance for the Construction Workers",
+    "category": "Health & Wellness",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://dbocwwb.delhi.gov.in/",
+    "youtube_video": "https://youtu.be/eGCLd47wg5I",
+    "pdf_file": "",
+    "description": "Financial support for pregnant women registered as construction workers.",
+    "apply_steps": [
+      "Apply online",
+      "Upload maternity certificate",
+      "Verification",
+      "Benefit disbursement"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Labour Card",
+      "Pregnancy Certificate",
+      "Delivery Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "Female",
+      "minAge": 18,
+      "maxAge": 45,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "Not required"
+    }
+  },
+  {
+    "id": "dl-widow-pension-health",
+    "name": "Delhi Pension Scheme to Women in Distress (Widow Pension)",
+    "category": "Health & Wellness",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://edistrict.delhigovt.nic.in/",
+    "youtube_video": "https://youtu.be/7gc6V7UfIm0",
+    "pdf_file": "",
+    "description": "Monthly pension support for widows in distress.",
+    "apply_steps": [
+      "Apply online",
+      "Upload documents",
+      "Verification",
+      "Monthly pension"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Husband Death Certificate",
+      "Income Certificate",
+      "Residence Proof",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "Female",
+      "minAge": 18,
+      "maxAge": 59,
+      "caste": [
+        "All"
+      ],
+      "income": 100000,
+      "education": "Not required"
+    }
+  },
+  {
+    "id": "dl-miscarriage-assistance",
+    "name": "Financial Assistance for Miscarriage for the Construction Workers",
+    "category": "Health & Wellness",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://dbocwwb.delhi.gov.in/cwapp/MyLoginPage",
+    "youtube_video": "https://youtu.be/eGCLd47wg5I",
+    "pdf_file": "",
+    "description": "Financial help for female construction workers in case of miscarriage.",
+    "apply_steps": [
+      "Apply online",
+      "Upload medical certificate",
+      "Verification",
+      "Benefit disbursement"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Labour Card",
+      "Medical Certificate",
+      "Hospital Report",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "Female",
+      "minAge": 18,
+      "maxAge": 45,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "Not required"
+    }
+  },
+  {
+    "id": "dl-marriage-assistance-orphan-girls",
+    "name": "Financial Assistance for the Marriage of Daughters of Poor Widows and Orphan Girls",
+    "category": "Women & Child",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://edistrict.delhigovt.nic.in/",
+    "youtube_video": "https://youtu.be/ZEuVhV7npic",
+    "pdf_file": "",
+    "description": "Financial help for marriage of daughters of poor widows and orphan girls.",
+    "apply_steps": [
+      "Apply online",
+      "Upload documents",
+      "Verification",
+      "Benefit transfer"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Income Certificate",
+      "Widow/Orphan Certificate",
+      "Residence Proof",
+      "Bank Passbook",
+      "Marriage Proof"
+    ],
+    "eligibility": {
+      "gender": "Female",
+      "minAge": 18,
+      "maxAge": 35,
+      "caste": [
+        "All"
+      ],
+      "income": 200000,
+      "education": "Not required"
+    }
+  },
+  {
+    "id": "dl-widow-pension",
+    "name": "Delhi Pension Scheme to Women in Distress (Widow Pension)",
+    "category": "Women & Child",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://edistrict.delhigovt.nic.in/",
+    "youtube_video": "https://youtu.be/7gc6V7UfIm0",
+    "pdf_file": "",
+    "description": "Monthly pension for widows in distress.",
+    "apply_steps": [
+      "Apply online",
+      "Upload documents",
+      "Verification",
+      "Monthly pension"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Death Certificate of Husband",
+      "Income Certificate",
+      "Residence Proof",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "Female",
+      "minAge": 18,
+      "maxAge": 59,
+      "caste": [
+        "All"
+      ],
+      "income": 100000,
+      "education": "Not required"
+    }
+  },
+  {
+    "id": "dl-widow-daughter-marriage",
+    "name": "Widow Daughter Marriage Scheme",
+    "category": "Women & Child",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://edistrict.delhigovt.nic.in/Account/Login",
+    "youtube_video": "https://youtu.be/vc6FQ0eQqw4",
+    "pdf_file": "",
+    "description": "Marriage assistance for daughters of widows.",
+    "apply_steps": [
+      "Apply online",
+      "Upload documents",
+      "Verification",
+      "Benefit transfer"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Widow Certificate",
+      "Income Certificate",
+      "Residence Proof",
+      "Marriage Proof",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "Female",
+      "minAge": 18,
+      "maxAge": 35,
+      "caste": [
+        "All"
+      ],
+      "income": 200000,
+      "education": "Not required"
+    }
+  },
+  {
+    "id": "dl-maternity-assistance",
+    "name": "Maternity Assistance for the Construction Workers",
+    "category": "Women & Child",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://dbocwwb.delhi.gov.in/",
+    "youtube_video": "https://youtu.be/eGCLd47wg5I",
+    "pdf_file": "",
+    "description": "Financial support for pregnant women construction workers.",
+    "apply_steps": [
+      "Apply online",
+      "Upload medical proof",
+      "Verification",
+      "Benefit transfer"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Labour Card",
+      "Pregnancy Certificate",
+      "Delivery Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "Female",
+      "minAge": 18,
+      "maxAge": 45,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "Not required"
+    }
+  },
+  {
+    "id": "dl-miscarriage-assistance",
+    "name": "Financial Assistance for Miscarriage for the Construction Workers",
+    "category": "Women & Child",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://dbocwwb.delhi.gov.in/cwapp/MyLoginPage",
+    "youtube_video": "https://youtu.be/eGCLd47wg5I",
+    "pdf_file": "",
+    "description": "Financial help to female construction workers in case of miscarriage.",
+    "apply_steps": [
+      "Apply online",
+      "Upload hospital report",
+      "Verification",
+      "Benefit transfer"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Labour Card",
+      "Medical Certificate",
+      "Hospital Report",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "Female",
+      "minAge": 18,
+      "maxAge": 45,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "Not required"
+    }
+  },
+  {
+    "id": "dl-cm-internship",
+    "name": "Viksit Delhi CM Internship Programme",
+    "category": "Skill & Employment",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://viksitdelhiyuva.org/about.php",
+    "youtube_video": "https://youtu.be/MK_GDyW0UVs",
+    "pdf_file": "",
+    "description": "Paid internship programme for youth in Delhi government departments.",
+    "apply_steps": [
+      "Apply online",
+      "Upload resume",
+      "Selection",
+      "Internship joining"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Resume",
+      "Educational Certificates",
+      "Bank Passbook",
+      "Photo"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 30,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "Graduate"
+    }
+  },
+  {
+    "id": "dl-tirth-yatra",
+    "name": "Mukhyamantri Tirth Yatra Yojana - Delhi",
+    "category": "Travel & Tourism",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://edistrict.delhigovt.nic.in/",
+    "youtube_video": "https://youtu.be/HsoB7UkdNEA",
+    "pdf_file": "",
+    "description": "Free pilgrimage travel for senior citizens.",
+    "apply_steps": [
+      "Apply online",
+      "Upload age proof",
+      "Verification",
+      "Travel allotment"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Age Proof",
+      "Residence Proof",
+      "Photo"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 60,
+      "maxAge": 100,
+      "caste": [
+        "All"
+      ],
+      "income": 300000,
+      "education": "Not required"
+    }
+  },
+  {
+    "id": "dl-dtc-yatra-pass",
+    "name": "Yatra Pass in DTC non AC Buses for the Construction Workers",
+    "category": "Transport & Infrastructure",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://dtcpas.delhi.gov.in/apply",
+    "youtube_video": "https://youtu.be/4bhOFFXry1E",
+    "pdf_file": "",
+    "description": "Free or subsidized DTC bus pass for construction workers.",
+    "apply_steps": [
+      "Apply online",
+      "Upload labour card",
+      "Verification",
+      "Bus pass issue"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Labour Card",
+      "Residence Proof",
+      "Photo"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "Not required"
+    }
+  },
+  {
+    "id": "dl-dtc-yatra-pass",
+    "name": "Yatra Pass in DTC non AC Buses for the Construction Workers",
+    "category": "Transport & Infrastructure",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://dtcpas.delhi.gov.in/apply",
+    "youtube_video": "https://youtu.be/4bhOFFXry1E",
+    "pdf_file": "",
+    "description": "Free or subsidized DTC bus pass for construction workers.",
+    "apply_steps": [
+      "Apply online",
+      "Upload labour card",
+      "Verification",
+      "Bus pass issue"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Labour Card",
+      "Residence Proof",
+      "Photo"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "Not required"
+    }
+  },
+  {
+    "id": "dl-house-construction-workers",
+    "name": "Purchase/Construction of House for the Construction Workers",
+    "category": "Housing & Shelter",
+    "type": "State",
+    "state": "Delhi",
+    "official_link": "https://dbocwwb.delhi.gov.in/cwapp/MyLoginPage",
+    "youtube_video": "https://youtu.be/7UmXL6OR6SI",
+    "pdf_file": "",
+    "description": "Financial assistance for house purchase or construction for construction workers.",
+    "apply_steps": [
+      "Apply online",
+      "Upload property documents",
+      "Verification",
+      "Benefit transfer"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Labour Card",
+      "Property Documents",
+      "Income Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "Not required"
     }
   },
   {
@@ -4915,6 +5896,3956 @@
       ],
       "income": 0,
       "education": "Graduate"
+    }
+  },
+  {
+    "id": "goa-dk-kosambi-research-fellowship",
+    "name": "D. D. Kosambi Research Fellowship Scheme",
+    "category": "Sports & Culture",
+    "type": "State",
+    "state": "Goa",
+    "official_link": "not found",
+    "youtube_video": "not found",
+    "pdf_file": "",
+    "description": "This scheme provides research fellowship support to scholars working in the fields of history, culture, arts, and social sciences in Goa.",
+    "apply_steps": [
+      "Offline application at Directorate of Art & Culture",
+      "Submit research proposal",
+      "Attach required documents",
+      "Selection by committee"
+    ],
+    "documents_required": [
+      "Application Form",
+      "Research Proposal",
+      "Educational Certificates",
+      "Aadhaar Card",
+      "Residence Proof",
+      "Bank Details"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 21,
+      "maxAge": 45,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "Postgraduate"
+    }
+  },
+  {
+    "id": "goa-yuva-srijan-puraskar",
+    "name": "Yuva Srijan Puraskar (Navasrijan Chetana Puraskar)",
+    "category": "Sports & Culture",
+    "type": "State",
+    "state": "Goa",
+    "official_link": "not found",
+    "youtube_video": "not found",
+    "pdf_file": "",
+    "description": "An award scheme to encourage young creative artists and cultural contributors in Goa.",
+    "apply_steps": [
+      "Offline nomination/application",
+      "Submit portfolio of work",
+      "Screening by expert committee"
+    ],
+    "documents_required": [
+      "Application Form",
+      "Portfolio of Work",
+      "Aadhaar Card",
+      "Residence Proof",
+      "Passport Size Photo"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 35,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "Any"
+    }
+  },
+  {
+    "id": "goa-ashraya-aadhar-scheme",
+    "name": "Ashraya Aadhar Scheme",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Goa",
+    "official_link": "not found",
+    "youtube_video": "not found",
+    "pdf_file": "",
+    "description": "This scheme provides financial assistance to senior citizens, widows and persons with disabilities for basic sustenance.",
+    "apply_steps": [
+      "Offline application at Social Welfare Department",
+      "Document verification",
+      "Approval and DBT transfer"
+    ],
+    "documents_required": [
+      "Application Form",
+      "Aadhaar Card",
+      "Residence Proof",
+      "Age Proof",
+      "Bank Account Details",
+      "Disability Certificate (if applicable)"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 0,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "Any"
+    }
+  },
+  {
+    "id": "goa-ashraya-aadhar-scheme",
+    "name": "Ashraya Aadhar Scheme",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Goa",
+    "official_link": "not found",
+    "youtube_video": "not found",
+    "pdf_file": "",
+    "description": "Monthly financial assistance to senior citizens, widows and persons with disabilities for basic sustenance.",
+    "apply_steps": [
+      "Offline application at Social Welfare Department",
+      "Document verification",
+      "Approval",
+      "DBT transfer"
+    ],
+    "documents_required": [
+      "Application Form",
+      "Aadhaar Card",
+      "Residence Proof",
+      "Age Proof",
+      "Bank Passbook",
+      "Disability Certificate (if applicable)"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 0,
+      "caste": [
+        "All"
+      ],
+      "income": 300000,
+      "education": "Any"
+    }
+  },
+  {
+    "id": "goa-foster-care-vatsalaya",
+    "name": "Foster Care Scheme (Vatsalaya)",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Goa",
+    "official_link": "not found",
+    "youtube_video": "not found",
+    "pdf_file": "",
+    "description": "Financial support to foster families for the care and upbringing of orphaned and abandoned children.",
+    "apply_steps": [
+      "Offline application",
+      "Home study report",
+      "Verification",
+      "Approval"
+    ],
+    "documents_required": [
+      "Application Form",
+      "Aadhaar Card",
+      "Income Certificate",
+      "Residence Proof",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 25,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 500000,
+      "education": "Any"
+    }
+  },
+  {
+    "id": "goa-eklavya-prashikshan-yojana",
+    "name": "Eklavya Prashikshan Yojana",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Goa",
+    "official_link": "not found",
+    "youtube_video": "not found",
+    "pdf_file": "",
+    "description": "Coaching and training scheme for Scheduled Tribe students studying in Classes X, XI and XII.",
+    "apply_steps": [
+      "Offline application through Tribal Welfare Department",
+      "Submit academic records",
+      "Merit-based selection"
+    ],
+    "documents_required": [
+      "Application Form",
+      "Caste Certificate (ST)",
+      "Income Certificate",
+      "Aadhaar Card",
+      "Mark Sheets",
+      "Residence Proof"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 14,
+      "maxAge": 25,
+      "caste": [
+        "ST"
+      ],
+      "income": 250000,
+      "education": "Class 10+"
+    }
+  },
+  {
+    "id": "goa-kanya-dhan-sc",
+    "name": "Kanya Dhan Scheme for SC Students",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Goa",
+    "official_link": "not found",
+    "youtube_video": "not found",
+    "pdf_file": "",
+    "description": "Financial incentive scheme for Scheduled Caste girl students to encourage education.",
+    "apply_steps": [
+      "Offline application",
+      "Document verification",
+      "Approval",
+      "DBT transfer"
+    ],
+    "documents_required": [
+      "Application Form",
+      "Caste Certificate (SC)",
+      "Aadhaar Card",
+      "Residence Proof",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "Female",
+      "minAge": 10,
+      "maxAge": 25,
+      "caste": [
+        "SC"
+      ],
+      "income": 300000,
+      "education": "Any"
+    }
+  },
+  {
+    "id": "goa-patrakar-kirtadnya-nidhi",
+    "name": "Patrakar Kirtadnya Nidhi Scheme",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Goa",
+    "official_link": "not found",
+    "youtube_video": "not found",
+    "pdf_file": "",
+    "description": "Benevolent fund scheme to provide financial assistance to journalists and their families.",
+    "apply_steps": [
+      "Offline application at Information Department",
+      "Verification",
+      "Approval",
+      "Benefit disbursement"
+    ],
+    "documents_required": [
+      "Application Form",
+      "Press Accreditation Card",
+      "Aadhaar Card",
+      "Residence Proof",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 21,
+      "maxAge": 0,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "Any"
+    }
+  },
+  {
+    "id": "goa-eklavya-prashikshan-yojana",
+    "name": "Eklavya Prashikshan Yojana",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Goa",
+    "official_link": "not found",
+    "youtube_video": "not found",
+    "pdf_file": "",
+    "description": "Coaching scheme for Scheduled Tribe students studying in Class X, XII and XII for competitive examinations.",
+    "apply_steps": [
+      "Offline application through Tribal Welfare Department",
+      "Submit academic records",
+      "Selection based on merit"
+    ],
+    "documents_required": [
+      "Application Form",
+      "Caste Certificate",
+      "Income Certificate",
+      "Aadhaar Card",
+      "Mark Sheets",
+      "Residence Proof"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 14,
+      "maxAge": 25,
+      "caste": [
+        "ST"
+      ],
+      "income": 250000,
+      "education": "Class 10+"
+    }
+  },
+  {
+    "id": "goa-technology-fellowship-patent-promotion",
+    "name": "Technology Fellowship and Patent Promotion Scheme",
+    "category": "Business & Entrepreneurship",
+    "type": "State",
+    "state": "Goa",
+    "official_link": "not found",
+    "youtube_video": "not found",
+    "pdf_file": "",
+    "description": "This scheme supports innovators and startups in Goa by providing fellowship and assistance for patent filing and technology development.",
+    "apply_steps": [
+      "Online/Offline application",
+      "Submit innovation details",
+      "Screening by expert panel",
+      "Grant of fellowship/support"
+    ],
+    "documents_required": [
+      "Application Form",
+      "Project Report",
+      "Aadhaar Card",
+      "Residence Proof",
+      "Educational Certificates",
+      "Bank Details"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 45,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "Graduate"
+    }
+  },
+  {
+    "id": "goa-technology-fellowship-patent-promotion",
+    "name": "Technology Fellowship and Patent Promotion Scheme",
+    "category": "Business & Entrepreneurship",
+    "type": "State",
+    "state": "Goa",
+    "official_link": "",
+    "youtube_video": "",
+    "pdf_file": "",
+    "description": "Supports innovators and startups by providing fellowship and assistance for patent filing and technology development.",
+    "apply_steps": [
+      "Online/Offline application",
+      "Submit project proposal",
+      "Screening by expert panel",
+      "Grant approval"
+    ],
+    "documents_required": [
+      "Application Form",
+      "Project Report",
+      "Aadhaar Card",
+      "Residence Proof",
+      "Educational Certificates",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 45,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "Graduate"
+    }
+  },
+  {
+    "id": "goa-logistics-interest-subsidy",
+    "name": "Goa State Logistics – Interest Subsidy Scheme",
+    "category": "Business & Entrepreneurship",
+    "type": "State",
+    "state": "Goa",
+    "official_link": "",
+    "youtube_video": "",
+    "pdf_file": "",
+    "description": "Provides interest subsidy on loans taken by logistics units in Goa.",
+    "apply_steps": [
+      "Online application",
+      "Upload loan documents",
+      "Verification",
+      "Subsidy disbursement"
+    ],
+    "documents_required": [
+      "Application Form",
+      "Business Registration Certificate",
+      "Loan Sanction Letter",
+      "Bank Passbook",
+      "GST Certificate"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 21,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "Any"
+    }
+  },
+  {
+    "id": "goa-logistics-fixed-capital-subsidy",
+    "name": "Goa State Logistics – Fixed Capital Investment Subsidy",
+    "category": "Business & Entrepreneurship",
+    "type": "State",
+    "state": "Goa",
+    "official_link": "",
+    "youtube_video": "",
+    "pdf_file": "",
+    "description": "Subsidy on fixed capital investment for logistics and warehousing units.",
+    "apply_steps": [
+      "Online application",
+      "Submit investment proof",
+      "Verification",
+      "Subsidy release"
+    ],
+    "documents_required": [
+      "Application Form",
+      "Business Registration Certificate",
+      "Investment Invoices",
+      "Land/Lease Documents",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 21,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "Any"
+    }
+  },
+  {
+    "id": "goa-prabhat-training-scheme",
+    "name": "PRABHAT Training Scheme",
+    "category": "Business & Entrepreneurship",
+    "type": "State",
+    "state": "Goa",
+    "official_link": "",
+    "youtube_video": "",
+    "pdf_file": "",
+    "description": "Vocational and entrepreneurship training programme for women to promote self-employment.",
+    "apply_steps": [
+      "Offline registration",
+      "Attend training sessions",
+      "Certification"
+    ],
+    "documents_required": [
+      "Application Form",
+      "Aadhaar Card",
+      "Residence Proof",
+      "Passport Size Photo"
+    ],
+    "eligibility": {
+      "gender": "Female",
+      "minAge": 18,
+      "maxAge": 45,
+      "caste": [
+        "All"
+      ],
+      "income": 300000,
+      "education": "Any"
+    }
+  },
+  {
+    "id": "goa-loan-for-purchase-of-tools",
+    "name": "Loan for Purchase of Tools Scheme",
+    "category": "Business & Entrepreneurship",
+    "type": "State",
+    "state": "Goa",
+    "official_link": "",
+    "youtube_video": "",
+    "pdf_file": "",
+    "description": "Provides loan assistance to workers and artisans for purchasing tools for their trade.",
+    "apply_steps": [
+      "Offline application at Labour Department",
+      "Document verification",
+      "Loan sanction",
+      "Amount disbursement"
+    ],
+    "documents_required": [
+      "Application Form",
+      "Occupation Proof",
+      "Income Certificate",
+      "Aadhaar Card",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 21,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 300000,
+      "education": "Any"
+    }
+  },
+  {
+    "id": "goa-dk-kosambi-research-fellowship",
+    "name": "D. D. Kosambi Research Fellowship Scheme",
+    "category": "Education & Learning",
+    "type": "State",
+    "state": "Goa",
+    "official_link": "",
+    "youtube_video": "",
+    "pdf_file": "",
+    "description": "Provides research fellowship support to meritorious students and scholars in Goa.",
+    "apply_steps": [
+      "Offline application",
+      "Submit research proposal",
+      "Screening by committee",
+      "Fellowship award"
+    ],
+    "documents_required": [
+      "Application Form",
+      "Research Proposal",
+      "Aadhaar Card",
+      "Residence Proof",
+      "Educational Certificates",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 21,
+      "maxAge": 45,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "Postgraduate"
+    }
+  },
+  {
+    "id": "goa-eklavya-prashikshan-yojana",
+    "name": "Eklavya Prashikshan Yojana",
+    "category": "Education & Learning",
+    "type": "State",
+    "state": "Goa",
+    "official_link": "",
+    "youtube_video": "",
+    "pdf_file": "",
+    "description": "Coaching scheme for Scheduled Tribe students studying in Classes 10th to 12th.",
+    "apply_steps": [
+      "Offline application",
+      "Submit caste certificate",
+      "Merit selection",
+      "Enrollment in coaching"
+    ],
+    "documents_required": [
+      "Application Form",
+      "Caste Certificate",
+      "School ID Card",
+      "Aadhaar Card",
+      "Residence Proof"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 14,
+      "maxAge": 19,
+      "caste": [
+        "ST"
+      ],
+      "income": 250000,
+      "education": "Class 10–12"
+    }
+  },
+  {
+    "id": "goa-kanya-dhan-scheme",
+    "name": "Kanya Dhan Scheme for SC Students",
+    "category": "Education & Learning",
+    "type": "State",
+    "state": "Goa",
+    "official_link": "",
+    "youtube_video": "",
+    "pdf_file": "",
+    "description": "Financial incentive scheme to encourage education of SC girl students.",
+    "apply_steps": [
+      "Offline application",
+      "Document verification",
+      "Approval",
+      "Benefit transfer"
+    ],
+    "documents_required": [
+      "Application Form",
+      "Caste Certificate",
+      "Birth Certificate",
+      "School Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "Female",
+      "minAge": 10,
+      "maxAge": 25,
+      "caste": [
+        "SC"
+      ],
+      "income": 300000,
+      "education": "Any"
+    }
+  },
+  {
+    "id": "goa-pre-matric-scholarship",
+    "name": "Pre Matric Scholarship (Saral Vidya Sahay)",
+    "category": "Education & Learning",
+    "type": "State",
+    "state": "Goa",
+    "official_link": "",
+    "youtube_video": "",
+    "pdf_file": "",
+    "description": "Scholarship scheme for SC and OBC students studying in Classes 5 to 8.",
+    "apply_steps": [
+      "Offline application",
+      "School verification",
+      "Approval",
+      "Scholarship disbursement"
+    ],
+    "documents_required": [
+      "Application Form",
+      "Caste Certificate",
+      "School Certificate",
+      "Aadhaar Card",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 9,
+      "maxAge": 15,
+      "caste": [
+        "SC",
+        "OBC"
+      ],
+      "income": 250000,
+      "education": "Class 5–8"
+    }
+  },
+  {
+    "id": "goa-state-scholarship-ncad",
+    "name": "Government of Goa State Scholarship to NCAD Cadets",
+    "category": "Education & Learning",
+    "type": "State",
+    "state": "Goa",
+    "official_link": "",
+    "youtube_video": "",
+    "pdf_file": "",
+    "description": "Scholarship support for Goan students enrolled as cadets in the National Cadet Corps.",
+    "apply_steps": [
+      "Offline application",
+      "Submit NCC certificate",
+      "Verification",
+      "Scholarship award"
+    ],
+    "documents_required": [
+      "Application Form",
+      "NCC Certificate",
+      "Aadhaar Card",
+      "Residence Proof",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 15,
+      "maxAge": 25,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "Any"
+    }
+  },
+  {
+    "id": "gujarat-chaff-cutter",
+    "name": "Assistance for Power Driven Chaff Cutter Scheme",
+    "category": "Agriculture, Rural & Environment",
+    "type": "State",
+    "state": "Gujarat",
+    "official_link": "https://ikhedut.gujarat.gov.in/site/",
+    "youtube_video": "https://youtu.be/oQ-8A9ncJ48",
+    "pdf_file": "",
+    "description": "Financial assistance for farmers to purchase power-driven chaff cutters.",
+    "apply_steps": [
+      "Register on iKhedut portal",
+      "Fill application form",
+      "Upload documents",
+      "Submit application"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Land Records",
+      "Bank Passbook",
+      "Caste Certificate (if applicable)"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "gujarat-cattle-shed",
+    "name": "Cattle Shed Subsidy Scheme (SC Category)",
+    "category": "Agriculture, Rural & Environment",
+    "type": "State",
+    "state": "Gujarat",
+    "official_link": "https://ikhedut.gujarat.gov.in/site/",
+    "youtube_video": "",
+    "pdf_file": "",
+    "description": "Subsidy for construction of cattle sheds for Scheduled Caste farmers.",
+    "apply_steps": [
+      "Online registration",
+      "Apply for scheme",
+      "Site verification",
+      "Subsidy release"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Caste Certificate",
+      "Land Proof",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 60,
+      "caste": [
+        "SC"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "gujarat-castration",
+    "name": "Intensive Castration Scheme",
+    "category": "Agriculture, Rural & Environment",
+    "type": "State",
+    "state": "Gujarat",
+    "official_link": "https://ikhedut.gujarat.gov.in/site/",
+    "youtube_video": "",
+    "pdf_file": "",
+    "description": "Support for livestock population control through castration services.",
+    "apply_steps": [
+      "Contact local veterinary office",
+      "Register animals",
+      "Avail service"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Livestock Details"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 65,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "gujarat-animal-farm",
+    "name": "Establishment of 1 to 20 Milch Animal Farm",
+    "category": "Agriculture, Rural & Environment",
+    "type": "State",
+    "state": "Gujarat",
+    "official_link": "https://ikhedut.gujarat.gov.in/site/",
+    "youtube_video": "",
+    "pdf_file": "",
+    "description": "Subsidy and loan support to establish dairy farms.",
+    "apply_steps": [
+      "Apply on iKhedut",
+      "Submit project report",
+      "Verification",
+      "Loan & subsidy approval"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Project Report",
+      "Land Proof",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 55,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "8th Pass"
+    }
+  },
+  {
+    "id": "gujarat-pregnant-feed",
+    "name": "Assistance of Concentrate Feed for Pregnant Animals",
+    "category": "Agriculture, Rural & Environment",
+    "type": "State",
+    "state": "Gujarat",
+    "official_link": "https://ikhedut.gujarat.gov.in/site/",
+    "youtube_video": "",
+    "pdf_file": "",
+    "description": "Financial help for nutritious feed for pregnant cattle.",
+    "apply_steps": [
+      "Online apply",
+      "Animal verification",
+      "Feed distribution"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Livestock Record",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 65,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "gujarat-kadaknath",
+    "name": "Subsidy Scheme on Establishment of Kadaknath Birds Unit",
+    "category": "Business & Entrepreneurship",
+    "type": "State",
+    "state": "Gujarat",
+    "official_link": "https://ikhedut.gujarat.gov.in/site/",
+    "youtube_video": "https://youtu.be/0reCrbWU1E",
+    "pdf_file": "",
+    "description": "Subsidy for setting up Kadaknath poultry farms for ST beneficiaries.",
+    "apply_steps": [
+      "Apply online",
+      "Submit documents",
+      "Site inspection",
+      "Subsidy release"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Caste Certificate",
+      "Land Proof",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 50,
+      "caste": [
+        "ST"
+      ],
+      "income": 0,
+      "education": "8th Pass"
+    }
+  },
+  {
+    "id": "gujarat-sc-shop",
+    "name": "Scheme for SC to Buy Place of Business/Shop",
+    "category": "Business & Entrepreneurship",
+    "type": "State",
+    "state": "Gujarat",
+    "official_link": "https://esamajkalyan.gujarat.gov.in/",
+    "youtube_video": "",
+    "pdf_file": "",
+    "description": "Financial support for Scheduled Castes to purchase shops.",
+    "apply_steps": [
+      "Register online",
+      "Apply for scheme",
+      "Document verification"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Caste Certificate",
+      "Income Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 21,
+      "maxAge": 50,
+      "caste": [
+        "SC"
+      ],
+      "income": 300000,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "gujarat-gtkm",
+    "name": "Mahila Samriddhi Yojana (GTKM)",
+    "category": "Business & Entrepreneurship",
+    "type": "State",
+    "state": "Gujarat",
+    "official_link": "https://gnndconline.gujarat.gov.in/",
+    "youtube_video": "https://youtu.be/SFrSueD4eGU",
+    "pdf_file": "",
+    "description": "Loan and subsidy for women entrepreneurs.",
+    "apply_steps": [
+      "Online registration",
+      "Loan application",
+      "Approval & disbursement"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Bank Passbook",
+      "Business Plan"
+    ],
+    "eligibility": {
+      "gender": "Female",
+      "minAge": 18,
+      "maxAge": 55,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "10th Pass"
+    }
+  },
+  {
+    "id": "gujarat-cluster",
+    "name": "Cluster Development Scheme",
+    "category": "Business & Entrepreneurship",
+    "type": "State",
+    "state": "Gujarat",
+    "official_link": "https://gnndconline.gujarat.gov.in/",
+    "youtube_video": "",
+    "pdf_file": "",
+    "description": "Support for development of industrial and artisan clusters.",
+    "apply_steps": [
+      "Proposal submission",
+      "Approval",
+      "Fund release"
+    ],
+    "documents_required": [
+      "Project Report",
+      "Aadhaar Card",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 21,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "gujarat-handicraft",
+    "name": "Handicraft Rebate Scheme",
+    "category": "Business & Entrepreneurship",
+    "type": "State",
+    "state": "Gujarat",
+    "official_link": "https://e-kutir.gujarat.gov.in/Registration.aspx",
+    "youtube_video": "",
+    "pdf_file": "",
+    "description": "Rebate support for handicraft artisans.",
+    "apply_steps": [
+      "Register on e-Kutir",
+      "Apply scheme",
+      "Verification"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Artisan ID",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "gujarat-mmulsy",
+    "name": "Mukhyamantri Mahila Utkarsh Yojana",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Gujarat",
+    "official_link": "https://dbocwwb.delhi.gov.in/",
+    "youtube_video": "https://youtu.be/KXIKK2zVaUk",
+    "pdf_file": "",
+    "description": "Interest-free loans for women self-help groups.",
+    "apply_steps": [
+      "SHG registration",
+      "Apply online",
+      "Loan approval"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "SHG Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "Female",
+      "minAge": 18,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "gujarat-maternity",
+    "name": "Maternity Assistance Scheme",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Gujarat",
+    "official_link": "https://saman.gujarat.gov.in/",
+    "youtube_video": "",
+    "pdf_file": "",
+    "description": "Financial assistance for pregnant women workers.",
+    "apply_steps": [
+      "Online apply",
+      "Document verification",
+      "Fund transfer"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Pregnancy Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "Female",
+      "minAge": 18,
+      "maxAge": 45,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "gujarat-tablet",
+    "name": "Tablet Assistance to SC Students (12th Std)",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Gujarat",
+    "official_link": "https://www.digitalgujarat.gov.in/",
+    "youtube_video": "",
+    "pdf_file": "",
+    "description": "Free tablets for SC students studying in 12th standard.",
+    "apply_steps": [
+      "Apply on Digital Gujarat",
+      "School verification",
+      "Tablet distribution"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Caste Certificate",
+      "Bonafide Certificate"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 15,
+      "maxAge": 25,
+      "caste": [
+        "SC"
+      ],
+      "income": 250000,
+      "education": "10th Pass"
+    }
+  },
+  {
+    "id": "gujarat-ebike",
+    "name": "Go-Green Three Wheelers Scheme",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Gujarat",
+    "official_link": "https://www.digitalgujarat.gov.in/",
+    "youtube_video": "",
+    "pdf_file": "",
+    "description": "Subsidy for electric three-wheelers.",
+    "apply_steps": [
+      "Apply online",
+      "Vehicle purchase",
+      "Subsidy claim"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Invoice",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "gujarat-education",
+    "name": "Educational Study Scheme",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Gujarat",
+    "official_link": "https://esamajkalyan.gujarat.gov.in/",
+    "youtube_video": "",
+    "pdf_file": "",
+    "description": "Scholarship for higher education students.",
+    "apply_steps": [
+      "Online apply",
+      "Verification",
+      "Scholarship credit"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Caste Certificate",
+      "Income Certificate",
+      "Marksheet"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 17,
+      "maxAge": 30,
+      "caste": [
+        "SC",
+        "ST",
+        "OBC"
+      ],
+      "income": 300000,
+      "education": "12th Pass"
+    }
+  },
+  {
+    "id": "gujarat-pilot-loan-sc",
+    "name": "Loan Assistance to SC Students for Commercial Pilot Training",
+    "category": "Banking, Financial Services & Insurance",
+    "type": "State",
+    "state": "Gujarat",
+    "official_link": "https://esamajkalyan.gujarat.gov.in/",
+    "youtube_video": "https://youtu.be/vj2pdwqcE3s",
+    "pdf_file": "",
+    "description": "Education loan assistance for Scheduled Caste students for commercial pilot training.",
+    "apply_steps": [
+      "Register on eSamajKalyan",
+      "Fill application form",
+      "Upload documents",
+      "Submit application"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Caste Certificate",
+      "Income Certificate",
+      "Admission Letter",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 32,
+      "caste": [
+        "SC"
+      ],
+      "income": 600000,
+      "education": "12th Pass"
+    }
+  },
+  {
+    "id": "gujarat-sc-shop-loan",
+    "name": "Scheme for SC to Buy a Place of Business/Shop",
+    "category": "Banking, Financial Services & Insurance",
+    "type": "State",
+    "state": "Gujarat",
+    "official_link": "https://esamajkalyan.gujarat.gov.in/",
+    "youtube_video": "",
+    "pdf_file": "",
+    "description": "Financial assistance for Scheduled Castes to purchase a shop or business place.",
+    "apply_steps": [
+      "Online registration",
+      "Apply for scheme",
+      "Document verification",
+      "Loan & subsidy approval"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Caste Certificate",
+      "Income Certificate",
+      "Shop Agreement",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 21,
+      "maxAge": 50,
+      "caste": [
+        "SC"
+      ],
+      "income": 300000,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "gujarat-sc-land-purchase",
+    "name": "Financial Assistance for Purchase of Agricultural Land to SC Farmers",
+    "category": "Banking, Financial Services & Insurance",
+    "type": "State",
+    "state": "Gujarat",
+    "official_link": "https://esamajkalyan.gujarat.gov.in/",
+    "youtube_video": "https://youtu.be/aAMotAM5S9s",
+    "pdf_file": "",
+    "description": "Subsidy and loan support to Scheduled Caste farmers for purchasing agricultural land.",
+    "apply_steps": [
+      "Apply online",
+      "Upload land details",
+      "Verification",
+      "Subsidy disbursement"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Caste Certificate",
+      "Land Agreement",
+      "Income Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 21,
+      "maxAge": 60,
+      "caste": [
+        "SC"
+      ],
+      "income": 250000,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "gujarat-education-loan-gtkvn",
+    "name": "New Aakanksha Scheme (Educational Loan) – GTKVN",
+    "category": "Banking, Financial Services & Insurance",
+    "type": "State",
+    "state": "Gujarat",
+    "official_link": "https://gtkdconline.gujarat.gov.in/",
+    "youtube_video": "https://youtu.be/V06VLnKW",
+    "pdf_file": "",
+    "description": "Education loan scheme for higher studies under GTKVN.",
+    "apply_steps": [
+      "Online registration",
+      "Apply loan",
+      "Document verification",
+      "Loan sanction"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Admission Proof",
+      "Marksheet",
+      "Income Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 17,
+      "maxAge": 35,
+      "caste": [
+        "SC",
+        "ST",
+        "OBC"
+      ],
+      "income": 600000,
+      "education": "12th Pass"
+    }
+  },
+  {
+    "id": "gujarat-foreign-study-loan",
+    "name": "Foreign Study Loan Scheme",
+    "category": "Banking, Financial Services & Insurance",
+    "type": "State",
+    "state": "Gujarat",
+    "official_link": "https://gueedc.gujarat.gov.in/",
+    "youtube_video": "https://youtu.be/sw7N5bxfkB8",
+    "pdf_file": "",
+    "description": "Loan assistance for students pursuing education abroad.",
+    "apply_steps": [
+      "Online apply",
+      "Upload admission proof",
+      "Verification",
+      "Loan sanction"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Passport",
+      "Admission Letter",
+      "Income Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 40,
+      "caste": [
+        "All"
+      ],
+      "income": 600000,
+      "education": "Graduate"
+    }
+  },
+  {
+    "id": "gujarat-pmajay-skill",
+    "name": "Pradhan Mantri Anusuchit Jati Abhyuday Yojana – Skill Development",
+    "category": "Skill & Employment",
+    "type": "State",
+    "state": "Gujarat",
+    "official_link": "https://ikhedut.gujarat.gov.in/site/",
+    "youtube_video": "",
+    "pdf_file": "",
+    "description": "Skill training program for Scheduled Caste youth.",
+    "apply_steps": [
+      "Register online",
+      "Select course",
+      "Document verification",
+      "Training enrollment"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Caste Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 35,
+      "caste": [
+        "SC"
+      ],
+      "income": 0,
+      "education": "8th Pass"
+    }
+  },
+  {
+    "id": "gujarat-poultry-stipend",
+    "name": "Stipend Scheme for Poultry Farming Training",
+    "category": "Skill & Employment",
+    "type": "State",
+    "state": "Gujarat",
+    "official_link": "https://ikhedut.gujarat.gov.in/site/",
+    "youtube_video": "https://youtu.be/iBigEw6sAo",
+    "pdf_file": "",
+    "description": "Stipend support for weaker sections undergoing poultry training.",
+    "apply_steps": [
+      "Online apply",
+      "Training registration",
+      "Attendance verification"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Caste Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 45,
+      "caste": [
+        "All"
+      ],
+      "income": 200000,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "gujarat-term-loan-gskvn",
+    "name": "Term Loan Scheme (GSKVN)",
+    "category": "Skill & Employment",
+    "type": "State",
+    "state": "Gujarat",
+    "official_link": "https://esamajkalyan.gujarat.gov.in/index.aspx",
+    "youtube_video": "https://youtu.be/IzT9JvqSJ94",
+    "pdf_file": "",
+    "description": "Term loan for self-employment activities.",
+    "apply_steps": [
+      "Online registration",
+      "Loan application",
+      "Verification",
+      "Loan sanction"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Project Report",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 21,
+      "maxAge": 55,
+      "caste": [
+        "All"
+      ],
+      "income": 300000,
+      "education": "10th Pass"
+    }
+  },
+  {
+    "id": "gujarat-saksham-kvk",
+    "name": "SAKSHAM – KVK 2.0",
+    "category": "Skill & Employment",
+    "type": "State",
+    "state": "Gujarat",
+    "official_link": "https://skills.gujarat.gov.in/",
+    "youtube_video": "https://youtu.be/9bIKZShiu28",
+    "pdf_file": "",
+    "description": "Advanced skill development and placement support.",
+    "apply_steps": [
+      "Register online",
+      "Choose skill course",
+      "Training",
+      "Placement support"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Educational Certificates",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 40,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "10th Pass"
+    }
+  },
+  {
+    "id": "gujarat-horticulture-training",
+    "name": "Fruit & Vegetable Preservation Training (HRT-5)",
+    "category": "Skill & Employment",
+    "type": "State",
+    "state": "Gujarat",
+    "official_link": "https://ikhedut.gujarat.gov.in/site/",
+    "youtube_video": "https://youtu.be/FvD3mKKp1NQ",
+    "pdf_file": "",
+    "description": "Training program in horticulture preservation and processing.",
+    "apply_steps": [
+      "Apply online",
+      "Training enrollment",
+      "Certificate issuance"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 50,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "gujarat-maternity-glwb",
+    "name": "Maternity Assistance Scheme – Gujarat Labour Welfare Board",
+    "category": "Women & Child",
+    "type": "State",
+    "state": "Gujarat",
+    "official_link": "https://saman.gujarat.gov.in/",
+    "youtube_video": "https://youtu.be/N7kQC1BHG00",
+    "pdf_file": "",
+    "description": "Financial support for pregnant women workers.",
+    "apply_steps": [
+      "Register online",
+      "Submit maternity proof",
+      "Verification",
+      "Fund transfer"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Pregnancy Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "Female",
+      "minAge": 18,
+      "maxAge": 45,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "gujarat-swarnim",
+    "name": "New Swarnim Yojana (for Women Only) – GNTDNT",
+    "category": "Women & Child",
+    "type": "State",
+    "state": "Gujarat",
+    "official_link": "https://gntdconline.gujarat.gov.in/",
+    "youtube_video": "https://youtu.be/NdxcSKN04g8",
+    "pdf_file": "",
+    "description": "Loan assistance for women entrepreneurs from GNT/DNT communities.",
+    "apply_steps": [
+      "Online registration",
+      "Loan application",
+      "Approval & disbursement"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Caste Certificate",
+      "Project Report",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "Female",
+      "minAge": 18,
+      "maxAge": 55,
+      "caste": [
+        "GNT",
+        "DNT"
+      ],
+      "income": 300000,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "gujarat-mmulsy",
+    "name": "Mukhyamantri Mahila Utkarsh Yojana",
+    "category": "Women & Child",
+    "type": "State",
+    "state": "Gujarat",
+    "official_link": "https://mmuy.gujarat.gov.in/",
+    "youtube_video": "https://youtu.be/inLqzIC3m0",
+    "pdf_file": "",
+    "description": "Interest-free loans for women SHGs.",
+    "apply_steps": [
+      "SHG registration",
+      "Apply online",
+      "Loan approval"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "SHG Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "Female",
+      "minAge": 18,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "gujarat-mahila-samriddhi-gntdnt",
+    "name": "Mahila Samriddhi Yojana (for Women Only) – GNTDNT",
+    "category": "Women & Child",
+    "type": "State",
+    "state": "Gujarat",
+    "official_link": "https://gtkdconline.gujarat.gov.in/",
+    "youtube_video": "https://youtu.be/dWcgeoMC97Y",
+    "pdf_file": "",
+    "description": "Loan and subsidy for women entrepreneurs under GNTDNT.",
+    "apply_steps": [
+      "Online registration",
+      "Apply loan",
+      "Approval"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Caste Certificate",
+      "Project Report",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "Female",
+      "minAge": 18,
+      "maxAge": 55,
+      "caste": [
+        "GNT",
+        "DNT"
+      ],
+      "income": 300000,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "gujarat-goat-unit-st",
+    "name": "Subsidy for Establishment of Goat Unit (10+1) for ST Women",
+    "category": "Women & Child",
+    "type": "State",
+    "state": "Gujarat",
+    "official_link": "https://ikhedut.gujarat.gov.in/site/",
+    "youtube_video": "https://youtu.be/pLpNyAKg6s",
+    "pdf_file": "",
+    "description": "Subsidy support for Scheduled Tribe women to establish goat farming units.",
+    "apply_steps": [
+      "Apply online",
+      "Upload documents",
+      "Site verification",
+      "Subsidy release"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Caste Certificate",
+      "Land Proof",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "Female",
+      "minAge": 18,
+      "maxAge": 60,
+      "caste": [
+        "ST"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "haryana-self-marriage-hbocwwb",
+    "name": "Financial Assistance for Self-Marriage of Registered Women Workers (HBOCWWB)",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Haryana",
+    "official_link": "https://hrylabour.gov.in/",
+    "youtube_video": "https://youtu.be/OPqmAmdKxW0",
+    "pdf_file": "",
+    "description": "Financial assistance for self-marriage of registered women workers.",
+    "apply_steps": [
+      "Register on Labour Portal",
+      "Apply online",
+      "Upload documents",
+      "Verification",
+      "Fund transfer"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Marriage Certificate",
+      "Labour Registration Card",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "Female",
+      "minAge": 18,
+      "maxAge": 40,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "haryana-mahila-nirman",
+    "name": "Mukhyamantri Mahila Nirman Shramik Samman Yojana (HBOCWWB)",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Haryana",
+    "official_link": "https://hrylabour.gov.in/",
+    "youtube_video": "https://youtu.be/DHv71_vS6EE",
+    "pdf_file": "",
+    "description": "Honorarium support to registered women construction workers.",
+    "apply_steps": [
+      "Login to Labour Portal",
+      "Apply scheme",
+      "Verification",
+      "DBT transfer"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Labour Card",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "Female",
+      "minAge": 18,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "haryana-sewing-machine",
+    "name": "Sewing Machine Scheme – Haryana Labour Welfare Board",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Haryana",
+    "official_link": "https://hrylabour.gov.in/",
+    "youtube_video": "https://youtu.be/7yvOJfC2N0s",
+    "pdf_file": "",
+    "description": "Free sewing machines for registered women workers.",
+    "apply_steps": [
+      "Register on Labour Portal",
+      "Apply scheme",
+      "Verification",
+      "Machine distribution"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Labour Card",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "Female",
+      "minAge": 18,
+      "maxAge": 55,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "haryana-family-pension",
+    "name": "Family Pension Scheme (HBOCWWB)",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Haryana",
+    "official_link": "https://saralharyana.gov.in/",
+    "youtube_video": "https://youtu.be/e3hyfW69M8Y",
+    "pdf_file": "",
+    "description": "Monthly pension to dependents of deceased registered workers.",
+    "apply_steps": [
+      "Apply on SARAL portal",
+      "Upload documents",
+      "Verification",
+      "Pension approval"
+    ],
+    "documents_required": [
+      "Death Certificate",
+      "Labour Card",
+      "Aadhaar Card",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 0,
+      "maxAge": 0,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "haryana-war-widow",
+    "name": "Financial Assistance to War Widows of Defence Forces",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Haryana",
+    "official_link": "https://saralharyana.gov.in/",
+    "youtube_video": "https://youtu.be/iNXSt-NxGq",
+    "pdf_file": "",
+    "description": "Financial assistance to widows of martyrs.",
+    "apply_steps": [
+      "Apply on SARAL portal",
+      "Upload documents",
+      "Verification",
+      "Fund transfer"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Death Certificate",
+      "Service Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "Female",
+      "minAge": 18,
+      "maxAge": 70,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "haryana-ornamental-fish",
+    "name": "Medium Scale Ornamental Fish Rearing Unit (Fresh Water)",
+    "category": "Agriculture, Rural & Environment",
+    "type": "State",
+    "state": "Haryana",
+    "official_link": "https://saralharyana.gov.in/",
+    "youtube_video": "https://youtu.be/18oQst3_OFs",
+    "pdf_file": "",
+    "description": "Subsidy for setting up ornamental fish rearing units.",
+    "apply_steps": [
+      "Apply on SARAL portal",
+      "Submit project report",
+      "Verification",
+      "Subsidy release"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Land Proof",
+      "Project Report",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "haryana-fish-vending",
+    "name": "Three Wheeler with Ice Box for Fish Vending – PMMSY",
+    "category": "Agriculture, Rural & Environment",
+    "type": "State",
+    "state": "Haryana",
+    "official_link": "https://saralharyana.gov.in/",
+    "youtube_video": "https://youtu.be/JhxRYKpjAmk",
+    "pdf_file": "",
+    "description": "Subsidy for fish vendors to purchase three-wheelers with ice boxes.",
+    "apply_steps": [
+      "Online apply",
+      "Vendor verification",
+      "Vehicle purchase",
+      "Subsidy claim"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Vendor Certificate",
+      "Invoice",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 55,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "haryana-fish-vehicle",
+    "name": "Refrigerated Vehicles for Fish Transport – PMMSY",
+    "category": "Agriculture, Rural & Environment",
+    "type": "State",
+    "state": "Haryana",
+    "official_link": "https://saralharyana.gov.in/",
+    "youtube_video": "https://youtu.be/JhxRYKpjAmk",
+    "pdf_file": "",
+    "description": "Subsidy for refrigerated vehicles for fish transport.",
+    "apply_steps": [
+      "Apply online",
+      "Submit vehicle details",
+      "Verification",
+      "Subsidy release"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Vehicle Quotation",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 21,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "haryana-disabled-agri",
+    "name": "Agricultural Activities for Persons with Disabilities",
+    "category": "Agriculture, Rural & Environment",
+    "type": "State",
+    "state": "Haryana",
+    "official_link": "https://saralharyana.gov.in/",
+    "youtube_video": "https://youtu.be/Dmt0JDNj-QE",
+    "pdf_file": "",
+    "description": "Support for disabled persons to undertake agricultural activities.",
+    "apply_steps": [
+      "Apply on SARAL",
+      "Upload disability proof",
+      "Verification",
+      "Fund release"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Disability Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "haryana-fish-vending-centre",
+    "name": "PMMSY: Live Fish Vending Centres Scheme",
+    "category": "Agriculture, Rural & Environment",
+    "type": "State",
+    "state": "Haryana",
+    "official_link": "https://saralharyana.gov.in/",
+    "youtube_video": "https://youtu.be/0Ga7vcFw8Qz",
+    "pdf_file": "",
+    "description": "Assistance for setting up live fish vending centres.",
+    "apply_steps": [
+      "Online apply",
+      "Submit project report",
+      "Verification",
+      "Subsidy release"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Project Report",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 21,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "haryana-refrigerated-vehicle",
+    "name": "Refrigerated Vehicles Scheme – PMMSY (Haryana)",
+    "category": "Business & Entrepreneurship",
+    "type": "State",
+    "state": "Haryana",
+    "official_link": "https://saralharyana.gov.in/",
+    "youtube_video": "https://youtu.be/7kxeHdwKFQw",
+    "pdf_file": "",
+    "description": "Business support for fish transport through refrigerated vehicles.",
+    "apply_steps": [
+      "Apply online",
+      "Submit business plan",
+      "Verification",
+      "Subsidy release"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Vehicle Quotation",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 21,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "haryana-micro-credit",
+    "name": "Micro Credit Finance under NSKFDC – Haryana",
+    "category": "Business & Entrepreneurship",
+    "type": "State",
+    "state": "Haryana",
+    "official_link": "https://hsfdc.org.in/",
+    "youtube_video": "https://youtu.be/50zsCaQyVIQ",
+    "pdf_file": "",
+    "description": "Micro credit for self-employment for backward classes.",
+    "apply_steps": [
+      "Apply online",
+      "Submit project report",
+      "Loan sanction"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Caste Certificate",
+      "Project Report",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 55,
+      "caste": [
+        "BC"
+      ],
+      "income": 300000,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "haryana-laghu-vyavasaya",
+    "name": "Laghu Vyavasaya Scheme",
+    "category": "Business & Entrepreneurship",
+    "type": "State",
+    "state": "Haryana",
+    "official_link": "https://saralharyana.gov.in/",
+    "youtube_video": "https://youtu.be/Dmt0JDNj-QE",
+    "pdf_file": "",
+    "description": "Small business loan scheme for entrepreneurs.",
+    "apply_steps": [
+      "Apply online",
+      "Verification",
+      "Loan disbursement"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Project Report",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 21,
+      "maxAge": 55,
+      "caste": [
+        "All"
+      ],
+      "income": 300000,
+      "education": "10th Pass"
+    }
+  },
+  {
+    "id": "haryana-poultry",
+    "name": "Poultry Farming Scheme (HSFDC)",
+    "category": "Business & Entrepreneurship",
+    "type": "State",
+    "state": "Haryana",
+    "official_link": "https://hsfdc.org.in/",
+    "youtube_video": "https://youtu.be/1BigEw6sAo",
+    "pdf_file": "",
+    "description": "Loan and subsidy support for poultry farming.",
+    "apply_steps": [
+      "Apply online",
+      "Submit project report",
+      "Verification",
+      "Loan sanction"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Land Proof",
+      "Project Report",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 21,
+      "maxAge": 55,
+      "caste": [
+        "SC",
+        "BC"
+      ],
+      "income": 300000,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "haryana-disabled-business",
+    "name": "Small Business in Service/Trading Sector for Persons with Disabilities",
+    "category": "Business & Entrepreneurship",
+    "type": "State",
+    "state": "Haryana",
+    "official_link": "https://saralharyana.gov.in/",
+    "youtube_video": "https://youtu.be/b0PTgK4oUz",
+    "pdf_file": "",
+    "description": "Financial assistance for disabled entrepreneurs.",
+    "apply_steps": [
+      "Apply on SARAL",
+      "Upload disability proof",
+      "Verification",
+      "Loan disbursement"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Disability Certificate",
+      "Project Report",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 55,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "haryana-divyang-loan",
+    "name": "Divyangjan Swavalamban Yojana",
+    "category": "Banking, Financial Services & Insurance",
+    "type": "State",
+    "state": "Haryana",
+    "official_link": "https://saralharyana.gov.in/",
+    "youtube_video": "https://youtu.be/b0PTgK4oUz",
+    "pdf_file": "",
+    "description": "Loan assistance for persons with disabilities.",
+    "apply_steps": [
+      "Apply on SARAL portal",
+      "Upload documents",
+      "Verification",
+      "Loan sanction"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Disability Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 55,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "haryana-self-employment-hsfdc",
+    "name": "Professional and Self Employment Scheme (HSFDC)",
+    "category": "Banking, Financial Services & Insurance",
+    "type": "State",
+    "state": "Haryana",
+    "official_link": "https://hsfdc.org.in/",
+    "youtube_video": "https://youtu.be/uICXGNciSU7",
+    "pdf_file": "",
+    "description": "Loan scheme for professionals and entrepreneurs.",
+    "apply_steps": [
+      "Apply online",
+      "Submit project report",
+      "Loan sanction"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Project Report",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 21,
+      "maxAge": 55,
+      "caste": [
+        "SC",
+        "BC"
+      ],
+      "income": 300000,
+      "education": "Graduate"
+    }
+  },
+  {
+    "id": "haryana-testing-equipment",
+    "name": "Testing Equipment Scheme",
+    "category": "Banking, Financial Services & Insurance",
+    "type": "State",
+    "state": "Haryana",
+    "official_link": "https://saralharyana.gov.in/",
+    "youtube_video": "https://youtu.be/x0MuQHd9dM",
+    "pdf_file": "",
+    "description": "Loan support for purchase of testing equipment.",
+    "apply_steps": [
+      "Apply online",
+      "Submit quotation",
+      "Verification",
+      "Loan sanction"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Quotation",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 21,
+      "maxAge": 55,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "Diploma"
+    }
+  },
+  {
+    "id": "haryana-education-loan-nskfdc",
+    "name": "Education Loan Scheme under NSKFDC – Haryana",
+    "category": "Banking, Financial Services & Insurance",
+    "type": "State",
+    "state": "Haryana",
+    "official_link": "https://hsfdc.org.in/",
+    "youtube_video": "https://youtu.be/yS1iRE1qc18",
+    "pdf_file": "",
+    "description": "Education loan for higher studies.",
+    "apply_steps": [
+      "Apply online",
+      "Upload admission proof",
+      "Verification",
+      "Loan sanction"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Admission Letter",
+      "Income Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 35,
+      "caste": [
+        "SC",
+        "BC"
+      ],
+      "income": 300000,
+      "education": "12th Pass"
+    }
+  },
+  {
+    "id": "haryana-minority-credit",
+    "name": "Education Loan Scheme – Credit Line 2 for Minority Community",
+    "category": "Banking, Financial Services & Insurance",
+    "type": "State",
+    "state": "Haryana",
+    "official_link": "https://saralharyana.gov.in/",
+    "youtube_video": "https://youtu.be/yS1iRE1qc18",
+    "pdf_file": "",
+    "description": "Education loan for minority students.",
+    "apply_steps": [
+      "Apply on SARAL",
+      "Upload documents",
+      "Verification",
+      "Loan sanction"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Minority Certificate",
+      "Admission Letter",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 35,
+      "caste": [
+        "Minority"
+      ],
+      "income": 300000,
+      "education": "12th Pass"
+    }
+  },
+  {
+    "id": "haryana-post-matric-minority",
+    "name": "Haryana Post Matric Scholarship for Minority",
+    "category": "Education & Learning",
+    "type": "State",
+    "state": "Haryana",
+    "official_link": "https://scholarships.gov.in/",
+    "youtube_video": "https://youtu.be/F8kUVi27T7U",
+    "pdf_file": "",
+    "description": "Post-matric scholarship for minority community students in Haryana.",
+    "apply_steps": [
+      "Register on NSP portal",
+      "Fill application form",
+      "Upload documents",
+      "Submit application"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Minority Certificate",
+      "Income Certificate",
+      "Marksheet",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 15,
+      "maxAge": 30,
+      "caste": [
+        "Minority"
+      ],
+      "income": 250000,
+      "education": "10th Pass"
+    }
+  },
+  {
+    "id": "haryana-post-matric-lig",
+    "name": "Post Matric Scholarship for Lower Income Group Students",
+    "category": "Education & Learning",
+    "type": "State",
+    "state": "Haryana",
+    "official_link": "https://harchhatravratti.highereduhry.ac.in/",
+    "youtube_video": "https://youtu.be/8LHqzmETOYo",
+    "pdf_file": "",
+    "description": "Scholarship for economically weaker students pursuing higher studies in India.",
+    "apply_steps": [
+      "Register on Harchhatravratti portal",
+      "Apply scholarship",
+      "Upload documents"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Income Certificate",
+      "Bonafide Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 16,
+      "maxAge": 30,
+      "caste": [
+        "All"
+      ],
+      "income": 200000,
+      "education": "12th Pass"
+    }
+  },
+  {
+    "id": "haryana-hscst-fellowship",
+    "name": "HSCST Fellowship Programme",
+    "category": "Education & Learning",
+    "type": "State",
+    "state": "Haryana",
+    "official_link": "https://harchhatravratti.highereduhry.ac.in/",
+    "youtube_video": "https://youtu.be/GpcxpCeJB4",
+    "pdf_file": "",
+    "description": "Fellowship support for SC/ST research scholars.",
+    "apply_steps": [
+      "Register online",
+      "Apply fellowship",
+      "Upload research details"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Caste Certificate",
+      "Admission Proof",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 21,
+      "maxAge": 45,
+      "caste": [
+        "SC",
+        "ST"
+      ],
+      "income": 0,
+      "education": "Postgraduate"
+    }
+  },
+  {
+    "id": "haryana-sc-iti-scholarship",
+    "name": "Scholarship to SC Students Studying in Government ITIs",
+    "category": "Education & Learning",
+    "type": "State",
+    "state": "Haryana",
+    "official_link": "https://saralharyana.gov.in/",
+    "youtube_video": "https://youtu.be/6ttGpy3_dUk",
+    "pdf_file": "",
+    "description": "Scholarship for Scheduled Caste students enrolled in government ITIs.",
+    "apply_steps": [
+      "Apply on SARAL portal",
+      "Upload ITI admission proof",
+      "Verification"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Caste Certificate",
+      "ITI Admission Letter",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 15,
+      "maxAge": 30,
+      "caste": [
+        "SC"
+      ],
+      "income": 250000,
+      "education": "10th Pass"
+    }
+  },
+  {
+    "id": "haryana-worker-children-education",
+    "name": "Financial Assistance for Education of Children of Registered Workers (HBOCWWB)",
+    "category": "Education & Learning",
+    "type": "State",
+    "state": "Haryana",
+    "official_link": "https://hrylabour.gov.in/",
+    "youtube_video": "https://youtu.be/dDMqVckRHBc",
+    "pdf_file": "",
+    "description": "Education assistance for children of registered construction workers.",
+    "apply_steps": [
+      "Login to Labour Portal",
+      "Apply scheme",
+      "Upload documents",
+      "Verification"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Labour Card",
+      "Bonafide Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 5,
+      "maxAge": 25,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "Any"
+    }
+  },
+  {
+    "id": "haryana-tirth-yatra",
+    "name": "Mukhya Mantri Tirth Yatra Yojana",
+    "category": "Travel & Tourism",
+    "type": "State",
+    "state": "Haryana",
+    "official_link": "https://saralharyana.gov.in/",
+    "youtube_video": "https://youtu.be/qgZFOsZfUc",
+    "pdf_file": "",
+    "description": "Free pilgrimage tours for senior citizens.",
+    "apply_steps": [
+      "Apply on SARAL portal",
+      "Select destination",
+      "Verification",
+      "Tour allotment"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Age Proof",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 60,
+      "maxAge": 0,
+      "caste": [
+        "All"
+      ],
+      "income": 300000,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "haryana-leave-travel",
+    "name": "Leave Travel Concession Scheme – Haryana Labour Welfare Board",
+    "category": "Travel & Tourism",
+    "type": "State",
+    "state": "Haryana",
+    "official_link": "https://hrylabour.gov.in/",
+    "youtube_video": "https://youtu.be/CAa06h9CyKc",
+    "pdf_file": "",
+    "description": "Travel concession for registered workers and their families.",
+    "apply_steps": [
+      "Login to Labour Portal",
+      "Apply scheme",
+      "Upload travel proof",
+      "Verification"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Labour Card",
+      "Travel Tickets",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "haryana-swarn-jayanti-yatra",
+    "name": "Swaran Jayanti Guru Darshan Yatra Scheme",
+    "category": "Travel & Tourism",
+    "type": "State",
+    "state": "Haryana",
+    "official_link": "https://haryanatourism.gov.in/",
+    "youtube_video": "https://youtu.be/LH48eQ3ia",
+    "pdf_file": "",
+    "description": "Pilgrimage tours for devotees to religious places.",
+    "apply_steps": [
+      "Apply online",
+      "Select tour",
+      "Verification"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Age Proof"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 40,
+      "maxAge": 0,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "haryana-kailash-yatra",
+    "name": "Kailash Mansarovar Yatra Scheme",
+    "category": "Travel & Tourism",
+    "type": "State",
+    "state": "Haryana",
+    "official_link": "https://www.passportindia.gov.in/",
+    "youtube_video": "https://youtu.be/-rrdHR9WDck",
+    "pdf_file": "",
+    "description": "Support for pilgrims going to Kailash Mansarovar.",
+    "apply_steps": [
+      "Apply online",
+      "Submit documents",
+      "Verification"
+    ],
+    "documents_required": [
+      "Passport",
+      "Aadhaar Card",
+      "Medical Certificate"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 70,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "haryana-free-passport",
+    "name": "Free Passport Scheme",
+    "category": "Travel & Tourism",
+    "type": "State",
+    "state": "Haryana",
+    "official_link": "https://www.passportindia.gov.in/",
+    "youtube_video": "https://youtu.be/yEAGJsUKOc",
+    "pdf_file": "",
+    "description": "Free passport fee reimbursement for eligible citizens.",
+    "apply_steps": [
+      "Apply passport",
+      "Apply reimbursement",
+      "Verification"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Passport Receipt",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 200000,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "hp-unemployment-allowance",
+    "name": "Unemployment Allowance Scheme",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Himachal Pradesh",
+    "official_link": "https://eemis.hp.nic.in/unemp/index.html",
+    "youtube_video": "https://youtu.be/3qz-VYdoiV4",
+    "pdf_file": "",
+    "description": "Monthly unemployment allowance for educated unemployed youth of Himachal Pradesh.",
+    "apply_steps": [
+      "Register on eEMIS portal",
+      "Fill application form",
+      "Upload documents",
+      "Submit application"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Domicile Certificate",
+      "Educational Certificates",
+      "Unemployment Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 35,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "10th Pass"
+    }
+  },
+  {
+    "id": "hp-thakur-sen-scholarship",
+    "name": "Thakur Sen Negi Utkrisht Chhatravriti Yojana",
+    "category": "Education & Learning",
+    "type": "State",
+    "state": "Himachal Pradesh",
+    "official_link": "https://scholarships.gov.in/",
+    "youtube_video": "https://youtu.be/eK8wQHyAJc",
+    "pdf_file": "",
+    "description": "Merit-based scholarship for academically brilliant students.",
+    "apply_steps": [
+      "Register on NSP",
+      "Apply scholarship",
+      "Upload documents",
+      "Submit application"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Marksheet",
+      "Income Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 15,
+      "maxAge": 25,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "10th Pass"
+    }
+  },
+  {
+    "id": "hp-vidyarthi-kalyan",
+    "name": "Mukhyamantri Vidyarthi Kalyan Yojana",
+    "category": "Education & Learning",
+    "type": "State",
+    "state": "Himachal Pradesh",
+    "official_link": "https://scholarships.gov.in/",
+    "youtube_video": "https://youtu.be/Ul-fZlaznPA",
+    "pdf_file": "",
+    "description": "Financial assistance for students from economically weaker sections.",
+    "apply_steps": [
+      "Register on NSP",
+      "Apply scheme",
+      "Upload documents"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Income Certificate",
+      "Bonafide Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 12,
+      "maxAge": 25,
+      "caste": [
+        "All"
+      ],
+      "income": 200000,
+      "education": "8th Pass"
+    }
+  },
+  {
+    "id": "hp-vivekananda-scholarship",
+    "name": "Swami Vivekananda Utkrisht Chhatravriti Yojana",
+    "category": "Education & Learning",
+    "type": "State",
+    "state": "Himachal Pradesh",
+    "official_link": "https://scholarships.gov.in/",
+    "youtube_video": "https://youtu.be/mi4Kep3lRQ",
+    "pdf_file": "",
+    "description": "Scholarship for meritorious students securing top ranks.",
+    "apply_steps": [
+      "Apply online",
+      "Upload mark sheets",
+      "Verification"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Marksheet",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 15,
+      "maxAge": 25,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "10th Pass"
+    }
+  },
+  {
+    "id": "hp-technical-education-scholarship",
+    "name": "Technical Education Scholarship Scheme for ITI",
+    "category": "Education & Learning",
+    "type": "State",
+    "state": "Himachal Pradesh",
+    "official_link": "https://scholarships.gov.in/",
+    "youtube_video": "https://youtu.be/uXdFl5ebo2g",
+    "pdf_file": "",
+    "description": "Scholarship for students enrolled in ITI technical courses.",
+    "apply_steps": [
+      "Apply on NSP",
+      "Upload ITI admission proof",
+      "Verification"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "ITI Admission Letter",
+      "Marksheet",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 15,
+      "maxAge": 30,
+      "caste": [
+        "All"
+      ],
+      "income": 250000,
+      "education": "10th Pass"
+    }
+  },
+  {
+    "id": "hp-krishak-bakri-palan",
+    "name": "Krishak Bakri Palan Yojana",
+    "category": "Agriculture, Rural & Environment",
+    "type": "State",
+    "state": "Himachal Pradesh",
+    "official_link": "https://hpahdht.hp.gov.in/Home/krishak_bakri_palan_yojna",
+    "youtube_video": "https://youtu.be/pLpNyAKg6s",
+    "pdf_file": "",
+    "description": "Subsidy for farmers to establish goat rearing units.",
+    "apply_steps": [
+      "Apply online",
+      "Submit project details",
+      "Verification",
+      "Subsidy release"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Land Proof",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "hp-uttam-pashu-puraskar",
+    "name": "Uttam Pashu Puraskar Yojana",
+    "category": "Agriculture, Rural & Environment",
+    "type": "State",
+    "state": "Himachal Pradesh",
+    "official_link": "https://hpahdht.hp.gov.in/Home/Index",
+    "youtube_video": "https://youtu.be/41d5AqyCeCM",
+    "pdf_file": "",
+    "description": "Award scheme for best livestock breeders.",
+    "apply_steps": [
+      "Apply through veterinary office",
+      "Animal verification",
+      "Award distribution"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Livestock Records",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 65,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "hp-him-kukkut-palan",
+    "name": "Him Kukkut Palan Yojana",
+    "category": "Agriculture, Rural & Environment",
+    "type": "State",
+    "state": "Himachal Pradesh",
+    "official_link": "https://hpahdht.hp.gov.in/Home/Him_Kukkut_Palan_Yojna",
+    "youtube_video": "https://youtu.be/XQ58ZuaspUM",
+    "pdf_file": "",
+    "description": "Subsidy scheme for poultry farming units.",
+    "apply_steps": [
+      "Apply online",
+      "Submit project report",
+      "Verification",
+      "Subsidy release"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Land Proof",
+      "Project Report",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "hp-shahri-jeevika",
+    "name": "Mukhyamantri Shahri Ajeevika Guarantee Yojana",
+    "category": "Skill & Employment",
+    "type": "State",
+    "state": "Himachal Pradesh",
+    "official_link": "https://mmsagyud.hp.gov.in/",
+    "youtube_video": "https://youtu.be/oP_04E-mxKQ",
+    "pdf_file": "",
+    "description": "Urban livelihood guarantee scheme providing employment opportunities.",
+    "apply_steps": [
+      "Register online",
+      "Apply job card",
+      "Work allotment"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Domicile Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "hp-disability-pension",
+    "name": "Disability Pension Scheme (HPBOCWWB)",
+    "category": "Health & Wellness",
+    "type": "State",
+    "state": "Himachal Pradesh",
+    "official_link": "https://bocw.hp.nic.in/index.aspx",
+    "youtube_video": "https://youtu.be/e7obV_XMptQ",
+    "pdf_file": "",
+    "description": "Monthly pension for persons with disabilities.",
+    "apply_steps": [
+      "Apply online",
+      "Upload disability proof",
+      "Verification",
+      "Pension approval"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Disability Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 70,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "hp-mukhya-mantri-sahara",
+    "name": "Mukhyamantri Sahara Yojana",
+    "category": "Health & Wellness",
+    "type": "State",
+    "state": "Himachal Pradesh",
+    "official_link": "https://sahara.hp.gov.in/Home/Default",
+    "youtube_video": "https://youtu.be/dT7v7RYy0s",
+    "pdf_file": "",
+    "description": "Financial assistance for seriously ill patients.",
+    "apply_steps": [
+      "Apply online",
+      "Upload medical reports",
+      "Verification",
+      "Fund transfer"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Medical Certificate",
+      "Income Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 0,
+      "maxAge": 0,
+      "caste": [
+        "All"
+      ],
+      "income": 200000,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "hp-awas-yojana-bocw",
+    "name": "Mukhyamantri Awas Yojana (HPBOCWWB)",
+    "category": "Housing & Shelter",
+    "type": "State",
+    "state": "Himachal Pradesh",
+    "official_link": "https://bocw.hp.nic.in/index.aspx",
+    "youtube_video": "https://youtu.be/Q2_8Cukr1Ww",
+    "pdf_file": "",
+    "description": "Housing assistance for registered construction workers.",
+    "apply_steps": [
+      "Apply online",
+      "Upload house proof",
+      "Verification",
+      "Fund release"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Labour Card",
+      "Land Proof",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "hp-subsidized-rams",
+    "name": "Scheme of Provision of Subsidized Rams to Sheep Breeders",
+    "category": "Banking, Financial Services & Insurance",
+    "type": "State",
+    "state": "Himachal Pradesh",
+    "official_link": "https://hpahdht.hp.gov.in/Home/sheep_breeders",
+    "youtube_video": "https://youtu.be/8QBnIi5Hr4",
+    "pdf_file": "",
+    "description": "Subsidy for sheep breeders to improve flock quality.",
+    "apply_steps": [
+      "Apply online",
+      "Submit breeder details",
+      "Verification",
+      "Subsidy release"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Livestock Records",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 65,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "jharkhand-safety-kit",
+    "name": "Nirman Shramik Safety Kit Yojana",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Jharkhand",
+    "official_link": "https://shramadhan.jharkhand.gov.in/home",
+    "youtube_video": "https://youtu.be/saePVXAFSyQ",
+    "pdf_file": "",
+    "description": "Free safety kits for registered construction workers.",
+    "apply_steps": [
+      "Register on Shramadhan portal",
+      "Apply online",
+      "Verification",
+      "Kit distribution"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Labour Registration Card",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "jharkhand-mrityu-sahayata",
+    "name": "Jharkhand Nirman Karmakar Mrityu/Durghatana Sahayata Yojana",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Jharkhand",
+    "official_link": "https://shramadhan.jharkhand.gov.in/home",
+    "youtube_video": "https://youtu.be/B2Aaq6o7rV8",
+    "pdf_file": "",
+    "description": "Financial assistance in case of death or accident of construction workers.",
+    "apply_steps": [
+      "Apply online",
+      "Upload incident proof",
+      "Verification",
+      "Fund transfer"
+    ],
+    "documents_required": [
+      "Death/Accident Certificate",
+      "Labour Card",
+      "Aadhaar Card",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "jharkhand-auzar-sahayata",
+    "name": "Shramik Auzar Sahayata Yojana",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Jharkhand",
+    "official_link": "https://shramadhan.jharkhand.gov.in/home",
+    "youtube_video": "https://youtu.be/e0AvXhInzyQ",
+    "pdf_file": "",
+    "description": "Tool assistance scheme for registered construction workers.",
+    "apply_steps": [
+      "Login to Shramadhan portal",
+      "Apply scheme",
+      "Verification",
+      "Tool distribution"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Labour Card",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "jharkhand-marango-scholarship",
+    "name": "Marang Gomke Jaipal Singh Munda Overseas Scholarship",
+    "category": "Education & Learning",
+    "type": "State",
+    "state": "Jharkhand",
+    "official_link": "https://www.chevening.org/",
+    "youtube_video": "https://youtu.be/kEJCZWppGpl",
+    "pdf_file": "",
+    "description": "Overseas scholarship for meritorious tribal students of Jharkhand.",
+    "apply_steps": [
+      "Apply online",
+      "Upload admission proof",
+      "Verification"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Tribal Certificate",
+      "Admission Letter",
+      "Passport"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 21,
+      "maxAge": 40,
+      "caste": [
+        "ST"
+      ],
+      "income": 600000,
+      "education": "Graduate"
+    }
+  },
+  {
+    "id": "jharkhand-bc-post-matric",
+    "name": "Jharkhand State Backward Classes Post-Matric Scholarship",
+    "category": "Education & Learning",
+    "type": "State",
+    "state": "Jharkhand",
+    "official_link": "https://ekalyan.cgg.gov.in/",
+    "youtube_video": "https://youtu.be/5_uCnyLkQzg",
+    "pdf_file": "",
+    "description": "Post-matric scholarship for Backward Classes students.",
+    "apply_steps": [
+      "Register on eKalyan portal",
+      "Apply scholarship",
+      "Upload documents"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Caste Certificate",
+      "Income Certificate",
+      "Marksheet",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 15,
+      "maxAge": 30,
+      "caste": [
+        "BC"
+      ],
+      "income": 250000,
+      "education": "10th Pass"
+    }
+  },
+  {
+    "id": "jharkhand-sc-pre-matric",
+    "name": "Jharkhand State Scheduled Caste Pre-Matric Scholarship",
+    "category": "Education & Learning",
+    "type": "State",
+    "state": "Jharkhand",
+    "official_link": "https://ekalyan.cgg.gov.in/",
+    "youtube_video": "https://youtu.be/kwAQulYS96M",
+    "pdf_file": "",
+    "description": "Pre-matric scholarship for Scheduled Caste students.",
+    "apply_steps": [
+      "Register on eKalyan portal",
+      "Apply scholarship",
+      "Upload documents"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Caste Certificate",
+      "Income Certificate",
+      "School Bonafide",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 8,
+      "maxAge": 18,
+      "caste": [
+        "SC"
+      ],
+      "income": 200000,
+      "education": "Class 5–10"
+    }
+  },
+  {
+    "id": "jharkhand-gurji-student-card",
+    "name": "Gurji Student Credit Card (GSCC) Scheme",
+    "category": "Banking, Financial Services & Insurance",
+    "type": "State",
+    "state": "Jharkhand",
+    "official_link": "https://gscc.jharkhand.gov.in/",
+    "youtube_video": "https://youtu.be/A4X-oPJTxcE",
+    "pdf_file": "",
+    "description": "Education loan scheme for higher studies.",
+    "apply_steps": [
+      "Apply online",
+      "Upload admission proof",
+      "Verification",
+      "Loan sanction"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Admission Letter",
+      "Income Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 35,
+      "caste": [
+        "All"
+      ],
+      "income": 600000,
+      "education": "12th Pass"
+    }
+  },
+  {
+    "id": "jharkhand-pension-jbocwwb",
+    "name": "Pension Yojana (JBOCWWB)",
+    "category": "Banking, Financial Services & Insurance",
+    "type": "State",
+    "state": "Jharkhand",
+    "official_link": "https://shramadhan.jharkhand.gov.in/home",
+    "youtube_video": "https://youtu.be/sLEI7WXG4E",
+    "pdf_file": "",
+    "description": "Monthly pension for registered construction workers.",
+    "apply_steps": [
+      "Apply online",
+      "Upload documents",
+      "Verification",
+      "Pension approval"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Labour Card",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 60,
+      "maxAge": 0,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "jharkhand-rojgar-srijan",
+    "name": "Mukhyamantri Rojgar Srijan Yojana",
+    "category": "Business & Entrepreneurship",
+    "type": "State",
+    "state": "Jharkhand",
+    "official_link": "https://cmegp.jharkhand.gov.in/index.php/WebSetup/index",
+    "youtube_video": "https://youtu.be/ODP30WnwpTc",
+    "pdf_file": "",
+    "description": "Subsidy and loan support for setting up micro enterprises.",
+    "apply_steps": [
+      "Apply online",
+      "Submit project report",
+      "Bank loan sanction",
+      "Subsidy disbursement"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Project Report",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 50,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "8th Pass"
+    }
+  },
+  {
+    "id": "jharkhand-petrol-subsidy",
+    "name": "Jharkhand Petrol Subsidy Scheme",
+    "category": "Transport & Infrastructure",
+    "type": "State",
+    "state": "Jharkhand",
+    "official_link": "https://jssfs.jharkhand.gov.in/",
+    "youtube_video": "https://youtu.be/qXovcGANrsM",
+    "pdf_file": "",
+    "description": "Petrol subsidy for vehicle owners from weaker sections.",
+    "apply_steps": [
+      "Register online",
+      "Link vehicle details",
+      "Verification",
+      "Subsidy transfer"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Vehicle RC",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 300000,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "karnataka-pension-kbocwwb",
+    "name": "Pension Scheme (K.B.O.C.W.W.B)",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Karnataka",
+    "official_link": "https://kbocwwb.karnataka.gov.in/login",
+    "youtube_video": "https://youtu.be/nGEwjxy2Q2s",
+    "pdf_file": "",
+    "description": "Monthly pension for registered construction workers.",
+    "apply_steps": [
+      "Login to KBOCWWB portal",
+      "Apply online",
+      "Upload documents",
+      "Verification",
+      "Pension approval"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Labour Card",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 60,
+      "maxAge": 0,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "karnataka-vehicle-subsidy",
+    "name": "Subsidy Scheme for Purchase of Taxi / Goods Vehicle / Passenger Autorickshaw",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Karnataka",
+    "official_link": "https://kbocwwb.karnataka.gov.in/login",
+    "youtube_video": "https://youtu.be/VCeFCQuL6oE",
+    "pdf_file": "",
+    "description": "Subsidy assistance for workers to purchase commercial vehicles.",
+    "apply_steps": [
+      "Apply online",
+      "Upload vehicle quotation",
+      "Verification",
+      "Subsidy disbursement"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Labour Card",
+      "Vehicle Quotation",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 21,
+      "maxAge": 55,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "karnataka-simple-marriage-st",
+    "name": "Incentive for the Simple Marriage (Scheduled Tribe)",
+    "category": "Social Welfare & Empowerment",
+    "type": "State",
+    "state": "Karnataka",
+    "official_link": "https://hwd.karnataka.gov.in/",
+    "youtube_video": "https://youtu.be/9w_tTxTIC2M",
+    "pdf_file": "",
+    "description": "Marriage incentive for Scheduled Tribe couples opting for simple marriage.",
+    "apply_steps": [
+      "Apply online",
+      "Upload marriage certificate",
+      "Verification",
+      "Incentive transfer"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Caste Certificate",
+      "Marriage Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 40,
+      "caste": [
+        "ST"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "karnataka-shrama-shakthi",
+    "name": "Shrama Shakthi Scheme",
+    "category": "Business & Entrepreneurship",
+    "type": "State",
+    "state": "Karnataka",
+    "official_link": "https://kmdc.karnataka.gov.in/en",
+    "youtube_video": "https://youtu.be/M_a7hma1cE",
+    "pdf_file": "",
+    "description": "Loan and subsidy scheme for self-employment ventures.",
+    "apply_steps": [
+      "Register online",
+      "Submit project report",
+      "Verification",
+      "Loan sanction"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Project Report",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 21,
+      "maxAge": 55,
+      "caste": [
+        "Minority"
+      ],
+      "income": 300000,
+      "education": "10th Pass"
+    }
+  },
+  {
+    "id": "karnataka-sericulture-reelers",
+    "name": "Incentive Scheme for Sericulture Reelers",
+    "category": "Business & Entrepreneurship",
+    "type": "State",
+    "state": "Karnataka",
+    "official_link": "https://kmdconline.karnataka.gov.in/Portal/home",
+    "youtube_video": "https://youtu.be/Zu6L78JbXnQ",
+    "pdf_file": "",
+    "description": "Incentive support for sericulture reeling units.",
+    "apply_steps": [
+      "Apply online",
+      "Upload unit details",
+      "Verification",
+      "Incentive release"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Sericulture Registration",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 21,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "karnataka-sanchari-marata-malige",
+    "name": "Swavalambi / Sanchari Marata Malige",
+    "category": "Business & Entrepreneurship",
+    "type": "State",
+    "state": "Karnataka",
+    "official_link": "https://sevasindhu.karnataka.gov.in/Sevasindhu/English",
+    "youtube_video": "https://youtu.be/f7Kt5HuqJVY",
+    "pdf_file": "",
+    "description": "Mobile vending assistance scheme for small traders.",
+    "apply_steps": [
+      "Apply on Seva Sindhu",
+      "Upload business details",
+      "Verification",
+      "Asset distribution"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Vendor Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 55,
+      "caste": [
+        "All"
+      ],
+      "income": 300000,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "karnataka-griha-lakshmi",
+    "name": "Griha Lakshmi Scheme",
+    "category": "Women & Child",
+    "type": "State",
+    "state": "Karnataka",
+    "official_link": "https://sevasindhus.karnataka.gov.in/",
+    "youtube_video": "https://youtu.be/lQ4KJePwAG0",
+    "pdf_file": "",
+    "description": "Monthly financial assistance to women heads of families.",
+    "apply_steps": [
+      "Apply on Seva Sindhu",
+      "Upload documents",
+      "Verification",
+      "DBT transfer"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Ration Card",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "Female",
+      "minAge": 18,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 200000,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "karnataka-sc-widow-remarriage",
+    "name": "Incentive for the SC Widow Re-Marriage",
+    "category": "Women & Child",
+    "type": "State",
+    "state": "Karnataka",
+    "official_link": "https://swservices.karnataka.gov.in/SWIncentive/VRM/VRMHAhome.aspx",
+    "youtube_video": "https://youtu.be/EpVt4_MbU0",
+    "pdf_file": "",
+    "description": "Incentive for Scheduled Caste widows who remarry.",
+    "apply_steps": [
+      "Apply online",
+      "Upload documents",
+      "Verification",
+      "Incentive transfer"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Caste Certificate",
+      "Marriage Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "Female",
+      "minAge": 18,
+      "maxAge": 50,
+      "caste": [
+        "SC"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "karnataka-shramashakti-women",
+    "name": "Shramashakti Special Women’s Scheme",
+    "category": "Women & Child",
+    "type": "State",
+    "state": "Karnataka",
+    "official_link": "https://kmdconline.karnataka.gov.in/Portal/home",
+    "youtube_video": "https://youtu.be/M_a7hma1cE",
+    "pdf_file": "",
+    "description": "Self-employment assistance for women entrepreneurs.",
+    "apply_steps": [
+      "Register online",
+      "Apply scheme",
+      "Verification",
+      "Loan sanction"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Project Report",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "Female",
+      "minAge": 21,
+      "maxAge": 55,
+      "caste": [
+        "Minority"
+      ],
+      "income": 300000,
+      "education": "10th Pass"
+    }
+  },
+  {
+    "id": "karnataka-community-training",
+    "name": "Community Based Training Scheme",
+    "category": "Women & Child",
+    "type": "State",
+    "state": "Karnataka",
+    "official_link": "https://kmdconline.karnataka.gov.in/Portal/home",
+    "youtube_video": "https://youtu.be/f8Xm8A_28s0",
+    "pdf_file": "",
+    "description": "Skill training program for women and youth.",
+    "apply_steps": [
+      "Register online",
+      "Select course",
+      "Training enrollment"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Educational Certificates"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 40,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "8th Pass"
+    }
+  },
+  {
+    "id": "karnataka-overseas-education-loan",
+    "name": "Overseas Educational Loan Scheme",
+    "category": "Education & Learning",
+    "type": "State",
+    "state": "Karnataka",
+    "official_link": "https://kmdconline.karnataka.gov.in/Portal/home",
+    "youtube_video": "https://youtu.be/34WT16DbzS0",
+    "pdf_file": "",
+    "description": "Education loan assistance for overseas studies.",
+    "apply_steps": [
+      "Apply online",
+      "Upload admission proof",
+      "Verification",
+      "Loan sanction"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Passport",
+      "Admission Letter",
+      "Income Certificate"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 40,
+      "caste": [
+        "Minority"
+      ],
+      "income": 600000,
+      "education": "Graduate"
+    }
+  },
+  {
+    "id": "karnataka-arivu-loan",
+    "name": "Arivu Education Loan Scheme",
+    "category": "Education & Learning",
+    "type": "State",
+    "state": "Karnataka",
+    "official_link": "https://kmdconline.karnataka.gov.in/Portal/home",
+    "youtube_video": "https://youtu.be/Lqr6EJauZCA",
+    "pdf_file": "",
+    "description": "Education loan for higher studies within India.",
+    "apply_steps": [
+      "Apply online",
+      "Upload admission proof",
+      "Verification",
+      "Loan sanction"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Admission Letter",
+      "Income Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 35,
+      "caste": [
+        "Minority"
+      ],
+      "income": 600000,
+      "education": "12th Pass"
+    }
+  },
+  {
+    "id": "karnataka-vehicle-subsidy-bfsi",
+    "name": "Subsidy Scheme for Purchase of Taxi / Goods Vehicle / Passenger Autorickshaw",
+    "category": "Banking, Financial Services & Insurance",
+    "type": "State",
+    "state": "Karnataka",
+    "official_link": "https://kbocwwb.karnataka.gov.in/login",
+    "youtube_video": "https://youtu.be/VCeFCQuL6oE",
+    "pdf_file": "",
+    "description": "Subsidy assistance for purchase of commercial vehicles.",
+    "apply_steps": [
+      "Apply online",
+      "Upload quotation",
+      "Verification",
+      "Subsidy release"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Vehicle Quotation",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 21,
+      "maxAge": 55,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "karnataka-sericulture-reelers-bfsi",
+    "name": "Incentive Scheme for Sericulture Reelers",
+    "category": "Banking, Financial Services & Insurance",
+    "type": "State",
+    "state": "Karnataka",
+    "official_link": "https://kmdconline.karnataka.gov.in/Portal/home",
+    "youtube_video": "https://youtu.be/Zu6L78JbXnQ",
+    "pdf_file": "",
+    "description": "Incentive assistance for sericulture reelers.",
+    "apply_steps": [
+      "Apply online",
+      "Upload details",
+      "Verification",
+      "Incentive release"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Sericulture Registration",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 21,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "karnataka-disability-pension",
+    "name": "Disability Pension (HPBOCWWB)",
+    "category": "Health & Wellness",
+    "type": "State",
+    "state": "Karnataka",
+    "official_link": "https://kbocwwb.karnataka.gov.in/login",
+    "youtube_video": "https://youtu.be/e7obV_XMptQ",
+    "pdf_file": "",
+    "description": "Monthly pension for disabled registered construction workers.",
+    "apply_steps": [
+      "Apply online",
+      "Upload disability proof",
+      "Verification",
+      "Pension approval"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Disability Certificate",
+      "Labour Card",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 70,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "karnataka-accident-assistance",
+    "name": "Accident Assistance (K.B.O.C.W.W.B)",
+    "category": "Health & Wellness",
+    "type": "State",
+    "state": "Karnataka",
+    "official_link": "https://kbocwwb.karnataka.gov.in/login",
+    "youtube_video": "https://youtu.be/KlotLCwT2q",
+    "pdf_file": "",
+    "description": "Financial assistance in case of accident of registered workers.",
+    "apply_steps": [
+      "Apply online",
+      "Upload accident proof",
+      "Verification",
+      "Fund transfer"
+    ],
+    "documents_required": [
+      "Accident Certificate",
+      "Labour Card",
+      "Aadhaar Card",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 65,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "karnataka-ganga-kalyana",
+    "name": "Ganga Kalyana Scheme",
+    "category": "Agriculture, Rural & Environment",
+    "type": "State",
+    "state": "Karnataka",
+    "official_link": "https://kmdconline.karnataka.gov.in/Portal/home",
+    "youtube_video": "https://youtu.be/A4NHfTV20qQ",
+    "pdf_file": "",
+    "description": "Irrigation assistance through borewell and pump sets for farmers.",
+    "apply_steps": [
+      "Apply online",
+      "Upload land details",
+      "Verification",
+      "Installation"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Land Records",
+      "Caste Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 60,
+      "caste": [
+        "SC",
+        "ST",
+        "OBC"
+      ],
+      "income": 300000,
+      "education": "No Bar"
+    }
+  },
+  {
+    "id": "karnataka-santwana",
+    "name": "Santwana Scheme – Karnataka",
+    "category": "Housing & Shelter",
+    "type": "State",
+    "state": "Karnataka",
+    "official_link": "https://kmdconline.karnataka.gov.in/Portal/home",
+    "youtube_video": "https://youtu.be/idQWmwaolwY",
+    "pdf_file": "",
+    "description": "Financial assistance for housing and shelter support.",
+    "apply_steps": [
+      "Apply online",
+      "Upload house details",
+      "Verification",
+      "Fund release"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Income Certificate",
+      "Bank Passbook"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 60,
+      "caste": [
+        "All"
+      ],
+      "income": 200000,
+      "education": "No Bar"
     }
   },
   {
@@ -5975,6 +10906,102 @@
       "gender": "All",
       "minAge": 18,
       "maxAge": 40,
+      "caste": [
+        "All"
+      ],
+      "income": 0
+    }
+  },
+  {
+    "id": "pm-kisan",
+    "name": "PM-KISAN Samman Nidhi",
+    "category": "Agriculture, Rural & Environment",
+    "type": "Central",
+    "state": "",
+    "official_link": "https://pmkisan.gov.in",
+    "youtube_video": "https://youtu.be/52ZX8klOHW4",
+    "pdf_file": "",
+    "description": "Income support of Rs 6000 per year to farmer families across India.",
+    "apply_steps": [
+      "Visit PM-KISAN portal",
+      "Register with Aadhaar",
+      "Submit land details",
+      "Receive direct benefit transfer"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Land Records",
+      "Bank Account",
+      "Mobile Number"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 18,
+      "maxAge": 100,
+      "caste": [
+        "All"
+      ],
+      "income": 0,
+      "employment": "Farmer"
+    }
+  },
+  {
+    "id": "ayushman-bharat",
+    "name": "Ayushman Bharat - PM-JAY",
+    "category": "Health & Wellness",
+    "type": "Central",
+    "state": "",
+    "official_link": "https://pmjay.gov.in",
+    "youtube_video": "https://youtu.be/RcGGWjJKIIk",
+    "pdf_file": "",
+    "description": "Health coverage of Rs 5 lakhs per family per year for secondary and tertiary hospitalization.",
+    "apply_steps": [
+      "Check eligibility on portal",
+      "Visit CSC or empaneled hospital",
+      "Get Ayushman card",
+      "Avail cashless treatment"
+    ],
+    "documents_required": [
+      "Aadhaar Card",
+      "Ration Card",
+      "SECC Data verification"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 0,
+      "maxAge": 100,
+      "caste": [
+        "All"
+      ],
+      "income": 200000
+    }
+  },
+  {
+    "id": "nps-vatsalya",
+    "name": "NPS Vatsalya",
+    "category": "Banking, Financial Services & Insurance",
+    "type": "Central",
+    "state": "",
+    "official_link": "https://npstrust.org.in",
+    "youtube_video": "",
+    "pdf_file": "",
+    "description": "Pension scheme for minors to secure their financial future with minimal investment.",
+    "apply_steps": [
+      "Visit any POP-SP",
+      "Open NPS Vatsalya account",
+      "Make minimum contribution",
+      "Continue till child turns 18"
+    ],
+    "documents_required": [
+      "Child's Aadhaar/Birth Certificate",
+      "Parent's Aadhaar",
+      "Parent's PAN",
+      "Bank Account"
+    ],
+    "eligibility": {
+      "gender": "All",
+      "minAge": 0,
+      "maxAge": 18,
       "caste": [
         "All"
       ],
