@@ -309,40 +309,6 @@
     }
   },
   {
-    "id": "laptops-disabled-ap",
-    "name": "Sanction of Laptops - Andhra Pradesh",
-    "category": "Education & Learning",
-    "type": "State",
-    "state": "Andhra Pradesh",
-    "official_link": "https://apdascac.ap.gov.in",
-    "youtube_video": "https://youtu.be/pA2InouZHdc",
-    "pdf_file": "",
-    "description": "Free laptops for differently-abled students pursuing higher education.",
-    "apply_steps": [
-      "Apply online",
-      "Submit educational documents",
-      "Disability verification",
-      "Laptop distribution"
-    ],
-    "documents_required": [
-      "Aadhaar Card",
-      "Disability Certificate",
-      "Educational Certificates",
-      "Income Certificate"
-    ],
-    "eligibility": {
-      "gender": "All",
-      "minAge": 18,
-      "maxAge": 35,
-      "caste": [
-        "All"
-      ],
-      "income": 250000,
-      "disability": true,
-      "education": "Graduate"
-    }
-  },
-  {
     "id": "bharati-graduation-ap",
     "name": "Bharati Scheme for Education - Graduation",
     "category": "Education & Learning",
@@ -11138,38 +11104,6 @@
     }
   },
   {
-    "id": "maharashtra-ladki-bahin",
-    "name": "Mukhyamantri - Majhi Ladki Bahin Yojana",
-    "category": "Women & Child",
-    "type": "State",
-    "state": "Maharashtra",
-    "official_link": "https://ladakibahin.maharashtra.gov.in/",
-    "youtube_video": "https://youtu.be/mCDruPisyWE",
-    "pdf_file": "",
-    "description": "Monthly financial assistance of Rs 1500 to women in Maharashtra.",
-    "apply_steps": [
-      "Apply online",
-      "Submit documents",
-      "Verification",
-      "Monthly credit to bank account"
-    ],
-    "documents_required": [
-      "Aadhaar Card",
-      "Bank Account",
-      "Domicile Certificate",
-      "Income Certificate"
-    ],
-    "eligibility": {
-      "gender": "Female",
-      "minAge": 21,
-      "maxAge": 60,
-      "caste": [
-        "All"
-      ],
-      "income": 250000
-    }
-  },
-  {
     "id": "maharashtra-namo-shetkari",
     "name": "Namo Shetkari Mahasanman Nidhi Yojana",
     "category": "Agriculture, Rural & Environment",
@@ -15735,36 +15669,6 @@
       ],
       "income": 0,
       "education": "10th Pass"
-    }
-  },
-  {
-    "id": "uk-destitute-widow-pension-wc",
-    "name": "Destitute Widow Pension Scheme - Uttarakhand",
-    "category": "Women and Child",
-    "type": "State",
-    "state": "Uttarakhand",
-    "official_link": "https://ssp.uk.gov.in/",
-    "youtube_video": "https://youtu.be/ZKFVq5pqrEc",
-    "pdf_file": "",
-    "description": "Monthly pension support to destitute widows in Uttarakhand.",
-    "apply_steps": [
-      "Apply online",
-      "Verification"
-    ],
-    "documents_required": [
-      "Aadhaar Card",
-      "Husband Death Certificate",
-      "Income Certificate"
-    ],
-    "eligibility": {
-      "gender": "Female",
-      "minAge": 18,
-      "maxAge": 0,
-      "caste": [
-        "All"
-      ],
-      "income": 0,
-      "education": "No Bar"
     }
   },
   {

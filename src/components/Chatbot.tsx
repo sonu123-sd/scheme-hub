@@ -6,129 +6,263 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { MessageCircle, X, Send, Bot, User } from 'lucide-react';
 import schemes from '@/data/schemes.json';
 
+type Message = {
+  role: 'user' | 'assistant';
+  content: string;
+};
 const Chatbot = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState([
-    {
-      role: 'assistant',
-      content: 'Namaste! 🙏 I am your Scheme Hub AI Assistant. Ask me anything about government schemes, eligibility, required documents, or how to apply!'
-    }
-  ]);
+const [isOpen, setIsOpen] = useState(false);
+const initialMessages: Message[] = [
+  {
+    role: 'assistant',
+    content:
+      'Namaste! 🙏 I am your Scheme Hub AI Assistant. How can I help you today?',
+  },
+];
+const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const scrollRef = useRef(null);
+
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
-  }, [messages]);
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages, isTyping]);
 
-  const findSchemes = (query) => {
-    const lowerQuery = query.toLowerCase();
-    return schemes.filter(scheme => 
-      scheme.name.toLowerCase().includes(lowerQuery) ||
-      scheme.category.toLowerCase().includes(lowerQuery) ||
-      scheme.description.toLowerCase().includes(lowerQuery) ||
-      scheme.state?.toLowerCase().includes(lowerQuery)
-    ).slice(0, 5);
+const isGreeting = (text: string) =>
+  /^(h+i+|h+e+l+o+|h+e+y+|n+a+m+a+s+t+e+|n+a+m+a+s+k+a+r+)$/i.test(
+    text.trim()
+  );
+const isNewsQuery = (text: string) =>
+  ['news', 'latest', 'updates', 'what is new', 'new schemes'].some((w) =>
+    text.includes(w)
+  );
+
+const isSpotlightQuery = (text: string) =>
+  ['spotlight', 'featured', 'highlighted', 'top schemes'].some((w) =>
+    text.includes(w)
+  );
+
+  const contains = (text: string, words: string[]) =>
+    words.some((w) => text.includes(w));
+
+  const findScheme = (query: string) => {
+    const q = query.toLowerCase();
+    return schemes.find((scheme: any) =>
+      scheme.name.toLowerCase().includes(q)
+    );
   };
 
-  const generateResponse = (userMessage) => {
-    const lowerMessage = userMessage.toLowerCase();
+  const generateResponse = (userMessage: string) => {
+    const text = userMessage.toLowerCase().trim();
 
-    // Greeting
-    if (lowerMessage.match(/^(hi|hello|hey|namaste|namaskar)/)) {
-      return "Namaste! 🙏 How can I help you today? You can ask me about:\n• Finding schemes\n• Eligibility criteria\n• Required documents\n• How to apply\n• Dashboard features";
+    /* Greeting */
+    if (isGreeting(text)) {
+      return 'How can I help you today?.';
+    }
+  /* News */
+if (isNewsQuery(text)) {
+  return `
+Latest News & Updates:
+
+• Newly launched government schemes  
+• Recent policy updates  
+• Application deadlines  
+• Eligibility or benefit changes  
+
+Check News section on website for latest updates.
+`;
+}
+
+/* Spotlight */
+if (isSpotlightQuery(text)) {
+  return `
+Spotlight Schemes:
+
+• Popular and trending schemes  
+• High benefit schemes  
+• Time-sensitive schemes  
+• Government priority programs  
+
+Check Spotlight section to see highlighted schemes.
+`;
+}
+    /* Dashboard */
+    if (contains(text, ['dashboard'])) {
+      return `
+Dashboard Features:
+
+• Profile Management – Update your personal details  
+• Eligibility Checker – Find schemes matching your profile  
+• Saved Schemes – Bookmark schemes for later  
+• Document Vault – Upload Aadhaar, income proof, etc.  
+• Application Tracking – Track applied schemes  
+
+You can access Dashboard after login from top menu.
+`;
     }
 
-    // Help with dashboard
-    if (lowerMessage.includes('dashboard')) {
-      return "The Dashboard allows you to:\n\n1. **Edit Profile** - Update your personal details\n2. **Document Vault** - Upload & store important documents\n3. **Saved Schemes** - View schemes you've saved\n4. **Recently Viewed** - Access schemes you've looked at\n\nGo to Dashboard from the header menu after logging in.";
+    /* Profile */
+    if (contains(text, ['profile'])) {
+      return `
+Profile Section:
+
+• Update name, gender, age, income  
+• Used for eligibility checking  
+• Helps in personalized scheme suggestions  
+
+Keep profile updated for best results.
+`;
     }
 
-    // Eligibility
-    if (lowerMessage.includes('eligibility') || lowerMessage.includes('eligible')) {
-      return "To check your eligibility:\n\n1. Go to **Check Eligibility** page\n2. Fill in your details (age, gender, income, etc.)\n3. Click **Check Eligibility**\n4. View matching schemes\n\nYou can also ask me about specific scheme eligibility!";
+    /* Documents */
+    if (contains(text, ['document', 'documents'])) {
+      return `
+Document Vault:
+
+• Upload Aadhaar Card  
+• Income Certificate  
+• Caste Certificate (if required)  
+• Bank Passbook  
+
+Documents are reused while applying to schemes.
+`;
     }
 
-    // Documents
-    if (lowerMessage.includes('document') || lowerMessage.includes('documents required')) {
-      return "Common documents for government schemes:\n\n• Aadhaar Card\n• PAN Card\n• Income Certificate\n• Caste Certificate\n• Ration Card\n• Bank Passbook\n• Passport Size Photo\n\nSpecific documents vary by scheme. Ask about a specific scheme for exact requirements!";
+    /* Saved Schemes */
+    if (contains(text, ['saved', 'bookmark'])) {
+      return `
+Saved Schemes:
+
+• Bookmark schemes you like  
+• Access later from dashboard  
+• Compare schemes easily  
+
+Use Save button on any scheme page.
+`;
     }
 
-    // How to apply
-    if (lowerMessage.includes('how to apply') || lowerMessage.includes('apply for')) {
-      return "To apply for schemes:\n\n1. **Search** the scheme on Scheme Hub\n2. Click **View Details** to see requirements\n3. Check eligibility criteria\n4. Gather required documents\n5. Click **Apply Now** to go to official portal\n6. Complete the application form\n\nNeed help with a specific scheme?";
+    /* Eligibility */
+    if (contains(text, ['eligibility', 'eligible'])) {
+      return `
+Eligibility Checker:
+
+• Enter age, gender, income, category  
+• System finds matching schemes  
+• Saves time and avoids confusion  
+
+Available inside Dashboard.
+`;
     }
 
-    // About the project
-    if (lowerMessage.includes('about') || lowerMessage.includes('what is scheme hub') || lowerMessage.includes('project')) {
-      return "**Scheme Hub** is a comprehensive portal to discover Government Schemes!\n\n✅ 48+ Central & State Schemes\n✅ Easy eligibility checker\n✅ Document vault for storage\n✅ Tutorial videos for each scheme\n✅ Direct links to apply\n\nBuilt to help citizens access government benefits easily.";
+    /* Apply */
+    if (contains(text, ['apply', 'application'])) {
+      return `
+How Apply Works:
+
+• Open scheme details  
+• Check eligibility & documents  
+• Click Apply Now  
+• Redirect to official portal  
+• Fill form and submit  
+
+Some schemes are online, some offline.
+`;
     }
 
-    // Search for schemes
-    const foundSchemes = findSchemes(userMessage);
-    if (foundSchemes.length > 0) {
-      let response = `I found ${foundSchemes.length} matching scheme(s):\n\n`;
-      foundSchemes.forEach((scheme, index) => {
-        response += `**${index + 1}. ${scheme.name}**\n`;
-        response += `   Type: ${scheme.type}${scheme.state ? ` (${scheme.state})` : ''}\n`;
-        response += `   Category: ${scheme.category}\n\n`;
-      });
-      response += "Click on any scheme in the portal for full details!";
-      return response;
+    /* About Website */
+    if (contains(text, ['about', 'scheme hub', 'website', 'platform'])) {
+      return `
+About Scheme Hub:
+
+Scheme Hub is a platform to discover Government Schemes easily.
+
+• Central & State schemes  
+• Easy eligibility check  
+• Clear documents list  
+• Direct apply links  
+• Secure user dashboard  
+
+Goal is to help citizens apply correctly.`;
     }
 
-    // Categories
-    if (lowerMessage.includes('categories') || lowerMessage.includes('category')) {
-      const categories = [...new Set(schemes.map(s => s.category))];
-      return `Available categories:\n\n${categories.map(c => `• ${c}`).join('\n')}\n\nClick on any category on the homepage to browse schemes!`;
+    /* Scheme Search */
+    const scheme = findScheme(text);
+
+    if (!scheme) {
+      return 'Scheme not found. Please type exact scheme name or ask about website features.';
     }
 
-    // States
-    if (lowerMessage.includes('state') && (lowerMessage.includes('scheme') || lowerMessage.includes('list'))) {
-      const states = [...new Set(schemes.filter(s => s.state).map(s => s.state))];
-      return `States with schemes available:\n\n${states.map(s => `• ${s}`).join('\n')}\n\nVisit State Schemes page to browse by state!`;
-    }
+    return `
+Scheme Name: ${scheme.name}
 
-    // Default response
-    return "I can help you with:\n\n• **Finding schemes** - Just type a keyword\n• **Eligibility** - Ask about requirements\n• **Documents** - What papers you need\n• **How to apply** - Step by step guide\n• **Dashboard help** - Using your account\n\nTry asking something like 'PM Kisan' or 'agriculture schemes'!";
+State: ${scheme.state || 'Not specified'}
+
+Category: ${scheme.category || 'Not specified'}
+
+Description:
+${scheme.description || 'Not available'}
+
+Eligibility:
+${scheme.eligibility || 'Not specified'}
+
+Benefits:
+${scheme.benefits || 'Not specified'}
+
+Documents Required:
+${
+  Array.isArray(scheme.documents_required)
+    ? scheme.documents_required.join(', ')
+    : 'Not specified'
+}
+
+How to Apply:
+${
+  Array.isArray(scheme.apply_steps)
+    ? scheme.apply_steps.join(' → ')
+    : 'Check official portal'
+}
+
+Official Link:
+${scheme.official_link || 'Not available'}
+`;
   };
 
   const handleSend = () => {
     if (!input.trim()) return;
 
     const userMessage = input.trim();
-    setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
+
+    setMessages((prev) => [...prev, { role: 'user', content: userMessage }]);
     setInput('');
     setIsTyping(true);
 
-    // Simulate typing delay
     setTimeout(() => {
       const response = generateResponse(userMessage);
-      setMessages(prev => [...prev, { role: 'assistant', content: response }]);
+      setMessages((prev) => [
+        ...prev,
+        { role: 'assistant', content: response },
+      ]);
       setIsTyping(false);
-    }, 800);
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      handleSend();
-    }
+    }, 600);
   };
 
   return (
     <>
-      {/* Floating Button */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-primary text-primary-foreground rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105 flex items-center justify-center"
+        onClick={() => {
+          if (isOpen) {
+            setMessages(initialMessages); // reset chat
+            setInput('');
+            setIsTyping(false);
+          }
+          setIsOpen(!isOpen);
+        }}
+        className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-primary text-primary-foreground rounded-full shadow-lg hover:scale-105 transition flex items-center justify-center"
       >
         {isOpen ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
       </button>
 
-      {/* Chat Window */}
       {isOpen && (
         <Card className="fixed bottom-24 right-6 z-50 w-[360px] h-[500px] shadow-2xl flex flex-col">
           <CardHeader className="bg-primary text-primary-foreground rounded-t-lg py-4">
@@ -137,20 +271,25 @@ const Chatbot = () => {
               Scheme Hub Assistant
             </CardTitle>
           </CardHeader>
-          
+
           <CardContent className="flex-1 flex flex-col p-0 overflow-hidden">
-            <ScrollArea className="flex-1 p-4" ref={scrollRef}>
+            <ScrollArea className="flex-1 p-4">
               <div className="space-y-4">
                 {messages.map((message, index) => (
                   <div
                     key={index}
-                    className={`flex gap-2 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                    className={`flex gap-2 ${
+                      message.role === 'user'
+                        ? 'justify-end'
+                        : 'justify-start'
+                    }`}
                   >
                     {message.role === 'assistant' && (
-                      <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
                         <Bot className="h-4 w-4 text-primary" />
                       </div>
                     )}
+
                     <div
                       className={`max-w-[80%] rounded-lg px-3 py-2 text-sm whitespace-pre-wrap ${
                         message.role === 'user'
@@ -160,37 +299,37 @@ const Chatbot = () => {
                     >
                       {message.content}
                     </div>
+
                     {message.role === 'user' && (
-                      <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center flex-shrink-0">
+                      <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center">
                         <User className="h-4 w-4" />
                       </div>
                     )}
                   </div>
                 ))}
+
                 {isTyping && (
                   <div className="flex gap-2">
                     <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
                       <Bot className="h-4 w-4 text-primary" />
                     </div>
-                    <div className="bg-muted rounded-lg px-4 py-2">
-                      <div className="flex gap-1">
-                        <span className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
-                        <span className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
-                        <span className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
-                      </div>
+                    <div className="bg-muted rounded-lg px-4 py-2 text-sm">
+                      Typing...
                     </div>
                   </div>
                 )}
+
+                <div ref={messagesEndRef} />
               </div>
             </ScrollArea>
 
             <div className="p-4 border-t">
               <div className="flex gap-2">
                 <Input
-                  placeholder="Type your message..."
+                  placeholder="Type scheme name or question..."
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  onKeyPress={handleKeyPress}
+                  onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                   className="flex-1"
                 />
                 <Button onClick={handleSend} size="icon">

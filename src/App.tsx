@@ -22,6 +22,7 @@ import Disclaimer from "./pages/Disclaimer";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import Chatbot from "./components/Chatbot";
 import NotFound from "./pages/NotFound";
+import ScrollToTop from "./components/ScrollToTop"; // ✅ ADDED
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ScrollToTop /> {/* ✅ ADDED */}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
@@ -41,7 +43,7 @@ const App = () => (
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/total-schemes" element={<TotalSchemes />} />
             <Route path="/central-schemes" element={<CentralSchemes />} />
-            <Route path="/state-schemes" element={<StateSchemes />} />
+            <Route path="/state-schemes/:stateName?" element={<StateSchemes />} />
             <Route path="/category/:category" element={<CategoryView />} />
             <Route path="/eligibility" element={<Eligibility />} />
             <Route path="/scheme/:id" element={<SchemeDetail />} />

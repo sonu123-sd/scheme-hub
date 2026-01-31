@@ -27,7 +27,7 @@ const Eligibility = () => {
   const { isAuthenticated } = useAuth();
   const { t } = useTranslation();
   const navigate = useNavigate();
-  
+
   const [formData, setFormData] = useState({
     dob: '',
     gender: '',
@@ -39,7 +39,7 @@ const Eligibility = () => {
     employment: '',
     state: ''
   });
-  
+
   const [results, setResults] = useState<typeof schemes | null>(null);
   const [showResults, setShowResults] = useState(false);
 
@@ -61,9 +61,19 @@ const Eligibility = () => {
     }
 
     const age = formData.dob ? calculateAge(formData.dob) : 0;
-    
+
     const eligibleSchemes = schemes.filter(scheme => {
       const elig = scheme.eligibility;
+
+      // ✅ STRICT STATE FILTER (FIX)
+      if (scheme.type === 'State') {
+        if (!formData.state) return false;
+        if (!scheme.state) return false;
+        if (scheme.state.toLowerCase() !== formData.state.toLowerCase()) {
+          return false;
+        }
+      }
+
       let score = 0;
       let maxScore = 0;
 
@@ -86,7 +96,10 @@ const Eligibility = () => {
       // Caste check
       if (elig.caste && elig.caste.length > 0) {
         maxScore += 1;
-        if (elig.caste.includes('All') || elig.caste.some(c => c.toLowerCase() === formData.caste.toLowerCase())) {
+        if (
+          elig.caste.includes('All') ||
+          elig.caste.some(c => c.toLowerCase() === formData.caste.toLowerCase())
+        ) {
           score += 1;
         }
       }
@@ -112,21 +125,18 @@ const Eligibility = () => {
       // Education check
       if (elig.education && Array.isArray(elig.education) && elig.education.length > 0) {
         maxScore += 1;
-        if (elig.education.includes('All') || elig.education.some((e: string) => e.toLowerCase() === formData.education.toLowerCase())) {
+        if (
+          elig.education.includes('All') ||
+          elig.education.some(
+            (e: string) => e.toLowerCase() === formData.education.toLowerCase()
+          )
+        ) {
           score += 1;
         }
       }
 
-      // State check for state schemes
-      if (scheme.type === 'State' && scheme.state) {
-        maxScore += 1;
-        if (scheme.state.toLowerCase() === formData.state.toLowerCase()) {
-          score += 1;
-        }
-      }
-
-      // Return schemes with at least 50% match or if no criteria specified
-      return maxScore === 0 || (score / maxScore) >= 0.5;
+      // ✅ Final decision (same as before)
+      return maxScore === 0 || score / maxScore >= 0.5;
     });
 
     setResults(eligibleSchemes);
@@ -136,7 +146,7 @@ const Eligibility = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8">
@@ -287,8 +297,8 @@ const Eligibility = () => {
                 </div>
               </div>
 
-              <Button 
-                onClick={checkEligibility} 
+              <Button
+                onClick={checkEligibility}
                 className="w-full mt-6 bg-primary hover:bg-primary/90"
                 size="lg"
               >
@@ -356,8 +366,8 @@ const Eligibility = () => {
                   <p className="text-muted-foreground">
                     No exact matches found. Try adjusting your criteria or browse all schemes.
                   </p>
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     className="mt-4"
                     onClick={() => navigate('/total-schemes')}
                   >
@@ -369,7 +379,7 @@ const Eligibility = () => {
           )}
         </div>
       </main>
-      
+
       <Footer />
     </div>
   );
