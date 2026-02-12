@@ -5,7 +5,7 @@ const authMiddleware = require("../middleware/auth.middleware");
 const upload = require("../middleware/upload.middleware");
 const controller = require("../controllers/document.controller");
 
-/* ✅ AB ye sahi jagah hai */
+/*  AB ye sahi jagah hai */
 console.log("deleteDocument =>", controller.deleteDocument);
 
 router.post(

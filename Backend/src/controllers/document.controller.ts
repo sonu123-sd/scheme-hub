@@ -27,7 +27,7 @@ const getDocuments = async (req: any, res: any) => {
   res.json(docs);
 };
 
-/* ✅ YE FUNCTION PEHLE MISSING THA */
+/*  YE FUNCTION PEHLE MISSING THA */
 const deleteDocument = async (req: any, res: any) => {
   try {
     const { docType } = req.params;
@@ -47,7 +47,7 @@ const deleteDocument = async (req: any, res: any) => {
   }
 };
 
-/* ✅ VERY IMPORTANT */
+/*  VERY IMPORTANT */
 module.exports = {
   uploadDocument,
   getDocuments,

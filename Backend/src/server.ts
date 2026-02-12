@@ -22,7 +22,7 @@ app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 
-// ✅ CORS (MOST IMPORTANT)
+// CORS (MOST IMPORTANT)
 app.use(
   cors({
     origin: "http://localhost:8080", // frontend URL
@@ -68,21 +68,21 @@ app.post("/auth/register", async (req, res) => {
       password,
     } = req.body;
 
-    // ✅ STEP 1: Required fields check
+    //  STEP 1: Required fields check
     if (!firstName || !surname || !dob || !gender || !mobile || !email || !state || !password) {
       return res.status(400).json({ message: "Required fields missing" });
     }
 
-    // ✅ STEP 2: Email already exists check (FIRST)
+    //  STEP 2: Email already exists check (FIRST)
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: "Email already exists" });
     }
 
-    // ✅ STEP 3: Hash password
+    //  STEP 3: Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // ✅ STEP 4: Create user
+    //  STEP 4: Create user
     const user = new User({
       firstName,
       middleName,
@@ -99,7 +99,7 @@ app.post("/auth/register", async (req, res) => {
       password: hashedPassword,
     });
 
-    // ✅ STEP 5: Save
+    //  STEP 5: Save
     await user.save();
 
     const token = jwt.sign(
@@ -165,10 +165,10 @@ app.post("/auth/forgot-password", async (req, res) => {
   user.resetPasswordExpires = new Date(Date.now() + 15 * 60 * 1000);
   await user.save();
 
-  console.log("RESET TOKEN 👉", resetToken);
+  console.log("RESET TOKEN ", resetToken);
 
   return res.status(200).json({
-    resetToken, // 🔥 THIS MUST BE HERE
+    resetToken, //  THIS MUST BE HERE
   });
 });
 /* ---------- RESET PASSWORD ---------- */

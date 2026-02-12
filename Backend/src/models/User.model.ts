@@ -28,13 +28,13 @@ const userSchema = new mongoose.Schema(
     resetPasswordToken: { type: String },
     resetPasswordExpires: { type: Date },
 
-    // ✅ REQUIRED FOR SAVE / UNSAVE
+    //  REQUIRED FOR SAVE / UNSAVE
     savedSchemes: {
       type: [String],
       default: [],
     },
 
-    // ✅ REQUIRED FOR RECENT TAB
+    //  REQUIRED FOR RECENT TAB
     recentlyViewed: {
       type: [String],
       default: [],
