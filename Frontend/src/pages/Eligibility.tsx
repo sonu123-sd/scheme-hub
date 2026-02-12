@@ -66,7 +66,7 @@ const Eligibility = () => {
     const eligibleSchemes = schemes.filter(scheme => {
       const elig = scheme.eligibility;
 
-      // ✅ STRICT STATE FILTER (FIX)
+      //  STRICT STATE FILTER (FIX)
       if (scheme.type === 'State') {
         if (!formData.state) return false;
         if (!scheme.state) return false;
@@ -136,7 +136,7 @@ const Eligibility = () => {
         }
       }
 
-      // ✅ Final decision (same as before)
+      //  Final decision (same as before)
       return maxScore === 0 || score / maxScore >= 0.5;
     });
 

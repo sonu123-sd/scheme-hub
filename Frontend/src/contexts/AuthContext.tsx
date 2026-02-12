@@ -88,17 +88,17 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   }, []);
   const register = async (data: any): Promise<boolean> => {
     try {
-      // 1️⃣ Register user
+      // 1 Register user
       await api.post("/auth/register", data);
 
-      // 2️⃣ Login immediately
+      // 2️ Login immediately
       const loginRes = await loginUser(data.email, data.password);
       if (!loginRes?.token) return false;
 
-      // 3️⃣ Save token
+      // 3️ Save token
       localStorage.setItem("token", loginRes.token);
 
-      // 4️⃣ Fetch profile
+      // 4️ Fetch profile
       const profileRes = await api.get<ProfileResponse>("/auth/profile");
       const u = profileRes.data.user;
 
@@ -114,7 +114,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         return age;
       };
 
-      // 5️⃣ SAFE USER (same as login)
+      // 5️ SAFE USER (same as login)
       const safeUser: User = {
         id: u._id,
         _id: u._id,
@@ -136,7 +136,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         profilePhoto: "",
       };
 
-      // 6️⃣ SAVE USER
+      // 6️ SAVE USER
       setUser(safeUser);
       localStorage.setItem("schemeHubUser", JSON.stringify(safeUser));
 
@@ -149,14 +149,14 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
-      // 1️⃣ LOGIN API
+      // 1️ LOGIN API
       const loginRes = await loginUser(email, password);
       if (!loginRes?.token) return false;
 
-      // 2️⃣ SAVE TOKEN
+      // 2️ SAVE TOKEN
       localStorage.setItem("token", loginRes.token);
 
-      // 3️⃣ FETCH PROFILE
+      // 3️ FETCH PROFILE
       const profileRes = await api.get<ProfileResponse>("/auth/profile");
       const u = profileRes.data.user;
       const calculateAge = (dob?: string) => {
@@ -170,7 +170,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         }
         return age;
       };
-      // 4️⃣ FORCE SAFE USER SHAPE (🔥 IMPORTANT)
+      // 4️ FORCE SAFE USER SHAPE ( IMPORTANT)
       const safeUser: User = {
         id: u._id,
         _id: u._id,
@@ -179,7 +179,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         middleName: u.middleName || "",
         surname: u.surname || "",
         dob: u.dob,
-        age: calculateAge(u.dob), // 🔥 ADD THIS
+        age: calculateAge(u.dob), //  ADD THIS
         gender: u.gender,
         mobile: u.mobile || "",
         state: u.state || "",
@@ -194,7 +194,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
 
 
-      // 5️⃣ SAVE USER
+      // 5️ SAVE USER
       setUser(safeUser);
       localStorage.setItem("schemeHubUser", JSON.stringify(safeUser));
 

@@ -110,7 +110,7 @@ const Dashboard = () => {
         const file = e.target.files?.[0];
         if (!file) return;
 
-        // ✅ 10MB check
+        // 10MB check
         if (file.size > 10 * 1024 * 1024) {
           toast.error("File must be under 10MB");
           return;
@@ -121,9 +121,9 @@ const Dashboard = () => {
         formData.append("docType", docType);
 
         try {
-          await api.post("/documents", formData); // ❌ headers mat lagana
+          await api.post("/documents", formData); //  headers mat lagana
           toast.success("Document uploaded");
-          fetchDocuments(); // ✅ UI refresh
+          fetchDocuments(); //  UI refresh
         } catch (err) {
           toast.error("Upload failed");
         }
@@ -134,7 +134,7 @@ const Dashboard = () => {
     try {
       await api.delete(`/documents/${docType}`);
       toast.success("Document deleted");
-      fetchDocuments(); // 🔁 DB se reload
+      fetchDocuments(); //  DB se reload
     } catch (err) {
       toast.error("Delete failed");
     }

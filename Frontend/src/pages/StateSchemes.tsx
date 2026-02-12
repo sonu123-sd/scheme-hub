@@ -31,7 +31,7 @@ const StateSchemes = () => {
 
   const [searchQuery, setSearchQuery] = useState('');
 
-  // 🔴 FIX: selectedState ab URL se aayega
+  //  FIX: selectedState ab URL se aayega
   const selectedState = stateName
     ? decodeURIComponent(stateName)
     : null;

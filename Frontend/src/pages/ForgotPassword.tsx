@@ -26,7 +26,7 @@ import { useNavigate } from "react-router-dom";
     try {
       const res = await api.post("/auth/forgot-password", { email });
 
-      console.log("FULL RESPONSE 👉", res.data);
+      console.log("FULL RESPONSE ", res.data);
 
       const token = (res.data as any).resetToken;
 

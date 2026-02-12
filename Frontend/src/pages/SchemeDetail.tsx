@@ -15,7 +15,7 @@ const SchemeDetail: React.FC = () => {
 
   const scheme = schemes.find(s => s.id === id);
 
-  // ✅ redirect to login
+  //  redirect to login
   useEffect(() => {
     if (!isAuthenticated) {
       navigate('/login', {
@@ -25,14 +25,14 @@ const SchemeDetail: React.FC = () => {
     }
   }, [isAuthenticated, id, navigate]);
 
-  // ✅ recently viewed
+  //  recently viewed
   useEffect(() => {
     if (isAuthenticated) {
       addToRecentlyViewed(id);
     }
   }, [id, isAuthenticated, addToRecentlyViewed]);
 
-  // ✅ loading instead of blank
+  //  loading instead of blank
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen flex items-center justify-center">
