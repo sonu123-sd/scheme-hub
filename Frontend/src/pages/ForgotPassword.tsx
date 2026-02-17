@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 
 
   const ForgotPassword = () => {
-  const [email, setEmail] = useState('');
+  const [identifier, setIdentifier] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
@@ -24,7 +24,7 @@ import { useNavigate } from "react-router-dom";
     setIsLoading(true);
 
     try {
-      const res = await api.post("/auth/forgot-password", { email });
+      const res = await api.post("/auth/forgot-password", { identifier });
 
       console.log("FULL RESPONSE ", res.data);
 
@@ -72,8 +72,8 @@ import { useNavigate } from "react-router-dom";
               </CardTitle>
               <CardDescription>
                 {isSubmitted
-                  ? 'We have sent a password reset link to your email address.'
-                  : 'Enter your email address and we will send you a reset link.'
+                  ? 'We have sent a password reset link to your registered contact.'
+                  : 'Enter your registered email or phone number and we will send you a reset link.'
                 }
               </CardDescription>
             </CardHeader>
@@ -97,13 +97,13 @@ import { useNavigate } from "react-router-dom";
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email Address</Label>
+                    <Label htmlFor="identifier">Email or Phone Number</Label>
                     <Input
-                      id="email"
-                      type="email"
-                      placeholder="Enter your registered email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      id="identifier"
+                      type="text"
+                      placeholder="Enter your registered email or phone number"
+                      value={identifier}
+                      onChange={(e) => setIdentifier(e.target.value)}
                       required
                     />
                   </div>

@@ -15,6 +15,7 @@ import {
   Eye, EyeOff, ChevronLeft, AlertTriangle
 } from 'lucide-react';
 import { toast } from 'sonner';
+import api from '@/utils/api';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -39,6 +40,7 @@ const AccountSettings = () => {
     newPassword: '',
     confirmPassword: '',
   });
+  const [isChangingPassword, setIsChangingPassword] = useState(false);
 
   const [notifications, setNotifications] = useState({
     schemeUpdates: true,
@@ -51,7 +53,7 @@ const AccountSettings = () => {
     return <Navigate to="/login" replace />;
   }
 
-  const handleChangePassword = () => {
+  const handleChangePassword = async () => {
     if (!passwordForm.currentPassword || !passwordForm.newPassword || !passwordForm.confirmPassword) {
       toast.error(t('settings.allFieldsRequired'));
       return;
@@ -65,19 +67,20 @@ const AccountSettings = () => {
       return;
     }
 
-    // Verify current password
-    const users = JSON.parse(localStorage.getItem('schemeHubUsers') || '[]');
-    const currentUser = users.find((u: any) => u.id === user?.id);
-    if (!currentUser || currentUser.password !== passwordForm.currentPassword) {
-      toast.error(t('settings.incorrectPassword'));
-      return;
-    }
+    try {
+      setIsChangingPassword(true);
+      await api.post('/api/account/change-password', {
+        currentPassword: passwordForm.currentPassword,
+        newPassword: passwordForm.newPassword,
+      });
 
-    // Update password
-    currentUser.password = passwordForm.newPassword;
-    localStorage.setItem('schemeHubUsers', JSON.stringify(users));
-    setPasswordForm({ currentPassword: '', newPassword: '', confirmPassword: '' });
-    toast.success(t('settings.passwordChanged'));
+      setPasswordForm({ currentPassword: '', newPassword: '', confirmPassword: '' });
+      toast.success(t('settings.passwordChanged'));
+    } catch (err: any) {
+      toast.error(err?.response?.data?.message || t('settings.incorrectPassword'));
+    } finally {
+      setIsChangingPassword(false);
+    }
   };
 
   const handleDeleteAccount = () => {
@@ -170,8 +173,8 @@ const AccountSettings = () => {
                   placeholder="••••••••"
                 />
               </div>
-              <Button onClick={handleChangePassword}>
-                {t('settings.updatePassword')}
+              <Button onClick={handleChangePassword} disabled={isChangingPassword}>
+                {isChangingPassword ? 'Updating...' : t('settings.updatePassword')}
               </Button>
             </CardContent>
           </Card>

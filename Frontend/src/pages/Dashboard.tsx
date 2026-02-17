@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import Header from '@/components/Header';
@@ -29,6 +29,8 @@ const Dashboard = () => {
   const profilePhotoRef = useRef<HTMLInputElement>(null);
 
   const [isEditing, setIsEditing] = useState(false);
+  const [eligibleSchemes, setEligibleSchemes] = useState<any[]>([]);
+  const [eligibleLoading, setEligibleLoading] = useState(false);
   const [editForm, setEditForm] = useState({
     firstName: user?.firstName || '',
     middleName: user?.middleName || '',
@@ -71,6 +73,47 @@ const Dashboard = () => {
     return age;
   };
   const userAge = calculateAge(user?.dob);
+
+  useEffect(() => {
+    const fetchEligibleSchemes = async () => {
+      if (!isAuthenticated || !user?.dob || !user?.gender || !user?.state) {
+        setEligibleSchemes([]);
+        return;
+      }
+
+      try {
+        setEligibleLoading(true);
+        const res = await api.post<{ data: Array<Record<string, unknown>> }>("/api/eligibility/check", {
+          dateOfBirth: user.dob,
+          gender: user.gender,
+          maritalStatus: (user as any)?.maritalStatus || "",
+          caste: user.caste || "",
+          annualIncome: Number((user as any)?.income || 0),
+          disability: (user as any)?.disability || "no",
+          education: user.education || "",
+          employment: user.employment || "",
+          state: user.state || "",
+        });
+
+        setEligibleSchemes(Array.isArray(res.data?.data) ? res.data.data : []);
+      } catch (err: any) {
+        console.error("Fetch eligible schemes failed", err?.response?.data || err?.message);
+        setEligibleSchemes([]);
+      } finally {
+        setEligibleLoading(false);
+      }
+    };
+
+    fetchEligibleSchemes();
+  }, [
+    isAuthenticated,
+    user?.dob,
+    user?.gender,
+    user?.state,
+    user?.caste,
+    user?.education,
+    user?.employment,
+  ]);
 
 
   const handleProfilePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -149,30 +192,6 @@ const Dashboard = () => {
 
   const savedSchemesList = schemes.filter(s => user?.savedSchemes.includes(s.id));
   const recentlyViewedList = schemes.filter(s => user?.recentlyViewed.includes(s.id));
-
-  // Filter schemes based on user's age and gender
-  const eligibleSchemes = useMemo(() => {
-    if (!userAge || !user?.gender) return [];
-
-    const userGender = user.gender;
-
-    return schemes.filter((scheme) => {
-      const eligibility = scheme.eligibility;
-      if (!eligibility) return false;
-
-      const minAge = eligibility.minAge || 0;
-      const maxAge = eligibility.maxAge || 100;
-
-      const ageEligible = userAge >= minAge && userAge <= maxAge;
-
-      const genderEligible =
-        eligibility.gender === "All" ||
-        eligibility.gender?.toLowerCase() === userGender.toLowerCase();
-
-      return ageEligible && genderEligible;
-    });
-  }, [userAge, user?.gender]);
-
 
   // Get age category label
   const getAgeCategory = (age: number) => {
@@ -256,7 +275,11 @@ const Dashboard = () => {
                 </div>
               </CardHeader>
               <CardContent>
-                {eligibleSchemes.length === 0 ? (
+                {eligibleLoading ? (
+                  <div className="text-center py-12">
+                    <p className="text-muted-foreground">Loading eligible schemes...</p>
+                  </div>
+                ) : eligibleSchemes.length === 0 ? (
                   <div className="text-center py-12">
                     <CheckCircle2 className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
                     <p className="text-muted-foreground">Complete your profile to see eligible schemes</p>

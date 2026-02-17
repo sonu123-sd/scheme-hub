@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
-import { useTranslation } from 'react-i18next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -12,8 +11,62 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { CheckCircle, FileText, ExternalLink } from 'lucide-react';
 import schemes from '@/data/schemes.json';
-import { formatNumber, formatCurrency } from '@/i18n/formatters';
+import { useToast } from '@/hooks/use-toast';
 
+type FormDataState = {
+  dob: string;
+  gender: string;
+  maritalStatus: string;
+  caste: string;
+  income: string;
+  disability: string;
+  education: string;
+  employment: string;
+  state: string;
+};
+
+type SchemeEligibility = {
+  gender?: string;
+  minAge?: number;
+  maxAge?: number;
+  caste?: string[];
+  income?: number;
+  incomeLimit?: number;
+  education?: string;
+  disability?: boolean;
+  disabilityPercentage?: string;
+  employment?: string;
+};
+
+type SchemeItem = {
+  id: string;
+  name: string;
+  category: string;
+  type: string;
+  state?: string;
+  official_link?: string;
+  description?: string;
+  eligibility?: SchemeEligibility;
+};
+
+type EligibilityPersistState = {
+  formData: FormDataState;
+  results: SchemeItem[] | null;
+  showResults: boolean;
+};
+
+const ELIGIBILITY_STORAGE_KEY = 'schemehub:eligibility-form';
+const defaultFormData: FormDataState = {
+  dob: '',
+  gender: '',
+  maritalStatus: '',
+  caste: '',
+  income: '',
+  disability: '',
+  education: '',
+  employment: '',
+  state: '',
+};
 
 const states = [
   'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh',
@@ -26,23 +79,37 @@ const states = [
 
 const Eligibility = () => {
   const { isAuthenticated } = useAuth();
-  const { t } = useTranslation();
   const navigate = useNavigate();
+  const { toast } = useToast();
 
-  const [formData, setFormData] = useState({
-    dob: '',
-    gender: '',
-    maritalStatus: '',
-    caste: '',
-    income: '',
-    disability: '',
-    education: '',
-    employment: '',
-    state: ''
-  });
+  const [formData, setFormData] = useState<FormDataState>(defaultFormData);
 
-  const [results, setResults] = useState<any[] | null>(null);
+  const [results, setResults] = useState<SchemeItem[] | null>(null);
   const [showResults, setShowResults] = useState(false);
+  const typedSchemes = schemes as SchemeItem[];
+
+  useEffect(() => {
+    try {
+      const raw = sessionStorage.getItem(ELIGIBILITY_STORAGE_KEY);
+      if (!raw) return;
+
+      const saved = JSON.parse(raw) as EligibilityPersistState;
+      if (saved?.formData) setFormData(saved.formData);
+      if (saved?.results) setResults(saved.results);
+      if (typeof saved?.showResults === 'boolean') setShowResults(saved.showResults);
+    } catch {
+      // Ignore invalid persisted payloads.
+    }
+  }, []);
+
+  useEffect(() => {
+    const payload: EligibilityPersistState = {
+      formData,
+      results,
+      showResults,
+    };
+    sessionStorage.setItem(ELIGIBILITY_STORAGE_KEY, JSON.stringify(payload));
+  }, [formData, results, showResults]);
 
   const calculateAge = (dob: string): number => {
     const birthDate = new Date(dob);
@@ -55,18 +122,93 @@ const Eligibility = () => {
     return age;
   };
 
+  const normalize = (v: string) => (v || '').toString().trim().toLowerCase();
+
+  const educationKeywords: Record<string, string[]> = {
+    below10: ['below', 'primary', 'minimum 8th', '8th', 'no minimum', 'not required', 'any'],
+    '10th': ['10th', 'class 10', 'minimum 10th'],
+    '12th': ['12th', 'intermediate', 'class 12'],
+    graduate: ['graduate', 'higher education', 'college'],
+    postgraduate: ['post-graduate', 'post graduate', 'post graduation', 'research'],
+    professional: ['professional', 'engineering', 'polytechnic', 'iti', 'diploma', 'ca'],
+  };
+
+  const casteAliases: Record<string, string[]> = {
+    general: ['general'],
+    obc: ['obc', 'bc', 'ebc', 'sbc'],
+    sc: ['sc'],
+    st: ['st'],
+    ews: ['ews'],
+  };
+
+  const matchesEducation = (schemeEducationRaw: string, userEducation: string, userEmployment: string) => {
+    const schemeEducation = normalize(schemeEducationRaw);
+    if (!schemeEducation || ['all', 'any', 'not required', 'no minimum qualification'].includes(schemeEducation)) {
+      return true;
+    }
+
+    if (schemeEducation.includes('student') && normalize(userEmployment) === 'student') {
+      return true;
+    }
+
+    const keywords = educationKeywords[userEducation] || [];
+    return keywords.some((k) => schemeEducation.includes(k));
+  };
+
+  const matchesCaste = (schemeCasteRaw: string[], userCaste: string) => {
+    if (!Array.isArray(schemeCasteRaw) || schemeCasteRaw.length === 0) return true;
+
+    const normalized = schemeCasteRaw.map((c) => normalize(c));
+    if (normalized.includes('all')) return true;
+
+    const aliases = casteAliases[userCaste] || [userCaste];
+    return aliases.some((a) => normalized.includes(normalize(a)));
+  };
+
+  const getIncomeUpperBound = (incomeRange: string): number => {
+    if (!incomeRange) return 0;
+    if (incomeRange.includes('+')) {
+      const base = incomeRange.replace('+', '').trim();
+      return parseInt(base, 10) || 0;
+    }
+    const [_, max] = incomeRange.split('-').map((p) => p.trim());
+    return parseInt(max || '0', 10) || 0;
+  };
+
   const checkEligibility = () => {
     if (!isAuthenticated) {
       navigate('/login');
       return;
     }
 
+    if (
+      !formData.dob ||
+      !formData.gender ||
+      !formData.maritalStatus ||
+      !formData.caste ||
+      !formData.income ||
+      !formData.disability ||
+      !formData.education ||
+      !formData.employment ||
+      !formData.state
+    ) {
+      toast({
+        title: 'Incomplete details',
+        description: 'Please fill all fields to get accurate scheme matches.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     const age = formData.dob ? calculateAge(formData.dob) : 0;
+    const userIncome = getIncomeUpperBound(formData.income);
+    const hasDisability = formData.disability === 'yes';
+    const userGender = normalize(formData.gender);
 
-    const eligibleSchemes = schemes.filter(scheme => {
-      const elig = scheme.eligibility;
+    const eligibleSchemes = typedSchemes.filter((scheme) => {
+      const elig = scheme.eligibility || {};
 
-      //  STRICT STATE FILTER (FIX)
+      // State scheme must match selected state.
       if (scheme.type === 'State') {
         if (!formData.state) return false;
         if (!scheme.state) return false;
@@ -75,69 +217,59 @@ const Eligibility = () => {
         }
       }
 
-      let score = 0;
-      let maxScore = 0;
+      // Age
+      const minAge = typeof elig.minAge === 'number' ? elig.minAge : 0;
+      const maxAge = typeof elig.maxAge === 'number' ? elig.maxAge : 200;
+      if (age < minAge || age > maxAge) {
+        return false;
+      }
 
-      // Age check
-      if (elig.minAge || elig.maxAge) {
-        maxScore += 1;
-        if ((!elig.minAge || age >= elig.minAge) && (!elig.maxAge || age <= elig.maxAge)) {
-          score += 1;
+      // Gender
+      const schemeGender = normalize(elig.gender || 'all');
+      if (
+        schemeGender !== 'all' &&
+        schemeGender !== userGender &&
+        !(schemeGender === 'transgender' && userGender === 'other')
+      ) {
+        return false;
+      }
+
+      // Caste
+      if (!matchesCaste(elig.caste || [], formData.caste)) {
+        return false;
+      }
+
+      // Income
+      const schemeIncomeLimit = typeof elig.incomeLimit === 'number'
+        ? elig.incomeLimit
+        : (typeof elig.income === 'number' ? elig.income : 0);
+      if (schemeIncomeLimit > 0 && userIncome > schemeIncomeLimit) {
+        return false;
+      }
+
+      // Disability
+      if (elig.disability === true && !hasDisability) {
+        return false;
+      }
+      if (elig.disabilityPercentage && !hasDisability) {
+        return false;
+      }
+
+      // Employment (only few schemes)
+      if (elig.employment) {
+        const schemeEmployment = normalize(elig.employment);
+        const userEmployment = normalize(formData.employment);
+        if (schemeEmployment !== 'all' && !schemeEmployment.includes(userEmployment)) {
+          return false;
         }
       }
 
-      // Gender check
-      if (elig.gender && elig.gender !== 'All') {
-        maxScore += 1;
-        if (elig.gender.toLowerCase() === formData.gender.toLowerCase()) {
-          score += 1;
-        }
+      // Education
+      if (!matchesEducation(elig.education || '', formData.education, formData.employment)) {
+        return false;
       }
 
-      // Caste check
-      if (elig.caste && elig.caste.length > 0) {
-        maxScore += 1;
-        if (
-          elig.caste.includes('All') ||
-          elig.caste.some(c => c.toLowerCase() === formData.caste.toLowerCase())
-        ) {
-          score += 1;
-        }
-      }
-
-      // Income check
-      if (elig.income) {
-        maxScore += 1;
-        const userIncome = parseInt(formData.income) || 0;
-        if (userIncome <= elig.income) {
-          score += 1;
-        }
-      }
-
-      // Disability check
-      if (elig.disability !== undefined) {
-        maxScore += 1;
-        const hasDisability = formData.disability === 'yes';
-        if (elig.disability === hasDisability || elig.disability === false) {
-          score += 1;
-        }
-      }
-
-      // Education check
-      if (elig.education && Array.isArray(elig.education) && elig.education.length > 0) {
-        maxScore += 1;
-        if (
-          elig.education.includes('All') ||
-          elig.education.some(
-            (e: string) => e.toLowerCase() === formData.education.toLowerCase()
-          )
-        ) {
-          score += 1;
-        }
-      }
-
-      //  Final decision (same as before)
-      return maxScore === 0 || score / maxScore >= 0.5;
+      return true;
     });
 
     setResults(eligibleSchemes);
@@ -201,7 +333,6 @@ const Eligibility = () => {
                     <SelectContent>
                       <SelectItem value="single">Single</SelectItem>
                       <SelectItem value="married">Married</SelectItem>
-                      <SelectItem value="divorced">Divorced</SelectItem>
                       <SelectItem value="widowed">Widowed</SelectItem>
                     </SelectContent>
                   </Select>
@@ -224,14 +355,19 @@ const Eligibility = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="income">Annual Family Income (₹)</Label>
-                  <Input
-                    id="income"
-                    type="number"
-                    placeholder="Enter annual income"
-                    value={formData.income}
-                    onChange={(e) => setFormData({ ...formData, income: e.target.value })}
-                  />
+                  <Label>Annual Family Income Range (₹)</Label>
+                  <Select value={formData.income} onValueChange={(value) => setFormData({ ...formData, income: value })}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select annual income range" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="0-50000">0 - 50,000</SelectItem>
+                      <SelectItem value="50000-100000">50,000 - 100,000</SelectItem>
+                      <SelectItem value="100000-300000">100,000 - 300,000</SelectItem>
+                      <SelectItem value="300000-500000">300,000 - 500,000</SelectItem>
+                      <SelectItem value="500000+">500,000+</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 <div className="space-y-2">
@@ -321,7 +457,7 @@ const Eligibility = () => {
               </div>
 
               <div className="grid gap-4">
-                {results.map((scheme) => (
+                      {results.map((scheme) => (
                   <Card key={scheme.id} className="hover:shadow-lg transition-shadow">
                     <CardContent className="p-6">
                       <div className="flex justify-between items-start">
@@ -350,7 +486,7 @@ const Eligibility = () => {
                           <Button
                             variant="default"
                             size="sm"
-                            onClick={() => window.open(scheme.official_link, '_blank')}
+                            onClick={() => window.open(scheme.official_link || '#', '_blank')}
                           >
                             <ExternalLink className="h-4 w-4 mr-1" />
                             Apply

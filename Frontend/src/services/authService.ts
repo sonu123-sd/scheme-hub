@@ -6,11 +6,11 @@ export interface AuthResponse {
 }
 
 export const loginUser = async (
-  email: string,
+  identifier: string,
   password: string
 ): Promise<AuthResponse> => {
   const res = await api.post<AuthResponse>("/auth/login", {
-    email,
+    identifier,
     password,
   });
 

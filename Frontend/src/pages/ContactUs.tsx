@@ -254,14 +254,6 @@ const ContactUs = () => {
                     ))}
                   </div>
 
-                  <Card className="overflow-hidden">
-                    <div className="h-64 bg-muted flex items-center justify-center">
-                      <div className="text-center text-muted-foreground">
-                        <MapPin className="h-12 w-12 mx-auto mb-2 opacity-50" />
-                        <p>{t('contact.mapPlaceholder')}</p>
-                      </div>
-                    </div>
-                  </Card>
                 </div>
               </AnimatedSection>
             </div>

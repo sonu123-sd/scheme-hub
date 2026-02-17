@@ -17,41 +17,130 @@ const Register: React.FC = () => {
   const { register } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const normalizedEmail = formData.email.trim().toLowerCase();
 
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+    // ✅ First Name validation
+    if (!/^[A-Za-z\s]+$/.test(formData.firstName)) {
+      toast({
+        title: 'Error',
+        description: 'First Name should contain only alphabets',
+        variant: 'destructive',
+      });
+      return;
+    }
 
-  if (formData.password !== formData.confirmPassword) {
-    toast({
-      title: 'Error',
-      description: 'Passwords do not match',
-      variant: 'destructive',
-    });
-    return;
-  }
+    // ✅ Surname validation
+    if (!/^[A-Za-z\s]+$/.test(formData.surname)) {
+      toast({
+        title: 'Error',
+        description: 'Surname should contain only alphabets',
+        variant: 'destructive',
+      });
+      return;
+    }
 
-  setIsLoading(true);
+    // ✅ Mobile validation
+    if (!/^[0-9]{10}$/.test(formData.mobile)) {
+      toast({
+        title: 'Error',
+        description: 'Mobile must be exactly 10 digits',
+        variant: 'destructive',
+      });
+      return;
+    }
+    // ✅ Email validation (Gmail only, proper format, no spaces)
+    const gmailRegex = /^[a-z0-9](?:[a-z0-9._%+-]{0,62}[a-z0-9])?@gmail\.com$/;
+    if (!gmailRegex.test(normalizedEmail)) {
+      toast({
+        title: 'Error',
+        description: 'Enter a valid Gmail address (example@gmail.com)',
+        variant: 'destructive',
+      });
+      return;
+    }
+    // ✅ Password rule:
+    // Must start with a capital letter, contain at least one number,
+    // and at least one special character.
+    const passwordRegex = /^[A-Z](?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>_\-+=~`[\]\\\/]).+$/;
+    if (!passwordRegex.test(formData.password)) {
+      toast({
+        title: 'Error',
+        description: 'Password must start with a capital letter and include at least one number and one special character.',
+        variant: 'destructive',
+      });
+      return;
+    }
+    // ✅ Password match check
+    if (formData.password !== formData.confirmPassword) {
+      toast({
+        title: 'Error',
+        description: 'Passwords do not match',
+        variant: 'destructive',
+      });
+      return;
+    }
+    setIsLoading(true);
+    try {
+      await register({ ...formData, email: normalizedEmail });
+      toast({
+        title: 'Registration successful',
+        description: 'Welcome to Scheme Hub!',
+      });
+      navigate('/');
+    } catch (err: any) {
+      toast({
+        title: 'Registration failed',
+        description: err.message,
+        variant: 'destructive',
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  const updateField = (field: string, value: string) => {
+    let errorMessage = "";
 
-  try {
-    await register(formData); 
-    toast({
-      title: 'Registration successful',
-      description: 'Welcome to Scheme Hub!',
-    });
-    navigate('/');
-  } catch (err: any) {
-    toast({
-      title: 'Registration failed',
-      description: err.message, 
-      variant: 'destructive',
-    });
-  } finally {
-    setIsLoading(false);
-  }
-};
+    // ✅ Name fields validation (INCLUDING middleName)
+    if (["firstName", "middleName", "surname"].includes(field)) {
+      if (!/^[A-Za-z\s]*$/.test(value)) {
+        errorMessage = "Invalid name";
+      }
+    }
 
-  const updateField = (field: string, value: string) => setFormData(prev => ({ ...prev, [field]: value }));
+    if (field === "mobile") {
+      if (!/^[0-9]*$/.test(value)) {
+        setErrors((prev) => ({
+          ...prev,
+          [field]: "Invalid mobile number (numbers only)",
+        }));
+        return;
+      }
+      if (value.length > 10) {
+        return;
+      }
+    }
 
+    if (field === "email") {
+      const normalizedEmail = value.trim().toLowerCase();
+      const gmailRegex = /^[a-z0-9](?:[a-z0-9._%+-]{0,62}[a-z0-9])?@gmail\.com$/;
+      if (value && !gmailRegex.test(normalizedEmail)) {
+        errorMessage = "Enter a valid Gmail address (example@gmail.com)";
+      }
+    }
+
+    setErrors((prev) => ({
+      ...prev,
+      [field]: errorMessage,
+    }));
+
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -61,9 +150,9 @@ const handleSubmit = async (e: React.FormEvent) => {
             <h1 className="text-2xl font-heading font-bold text-center mb-8">Create Your Account</h1>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div><Label>First Name *</Label><Input value={formData.firstName} onChange={(e) => updateField('firstName', e.target.value)} required /></div>
-                <div><Label>Middle Name</Label><Input value={formData.middleName} onChange={(e) => updateField('middleName', e.target.value)} /></div>
-                <div><Label>Surname *</Label><Input value={formData.surname} onChange={(e) => updateField('surname', e.target.value)} required /></div>
+                <div><Label>First Name *</Label><Input value={formData.firstName} onChange={(e) => updateField('firstName', e.target.value)} required />{errors.firstName && (<p className="text-red-500 text-sm">{errors.firstName}</p>)}</div>
+                <div><Label>Middle Name</Label><Input value={formData.middleName} onChange={(e) => updateField('middleName', e.target.value)} />{errors.middleName && (<p className="text-red-500 text-sm">{errors.middleName}</p>)}</div>
+                <div><Label>Surname *</Label><Input value={formData.surname} onChange={(e) => updateField('surname', e.target.value)} required />{errors.surname && (<p className="text-red-500 text-sm">{errors.surname}</p>)}</div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div><Label>Date of Birth *</Label><Input type="date" value={formData.dob} onChange={(e) => updateField('dob', e.target.value)} required /></div>
@@ -78,8 +167,8 @@ const handleSubmit = async (e: React.FormEvent) => {
                 <div><Label>Employment</Label><Select value={formData.employment} onValueChange={(v) => updateField('employment', v)}><SelectTrigger><SelectValue placeholder="Select" /></SelectTrigger><SelectContent><SelectItem value="Employed">Employed</SelectItem><SelectItem value="Unemployed">Unemployed</SelectItem><SelectItem value="Self-Employed">Self-Employed</SelectItem><SelectItem value="Student">Student</SelectItem><SelectItem value="Farmer">Farmer</SelectItem></SelectContent></Select></div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div><Label>Mobile *</Label><Input value={formData.mobile} onChange={(e) => updateField('mobile', e.target.value)} required /></div>
-                <div><Label>Email *</Label><Input type="email" value={formData.email} onChange={(e) => updateField('email', e.target.value)} required /></div>
+                <div><Label>Mobile *</Label><Input value={formData.mobile} onChange={(e) => updateField('mobile', e.target.value)} inputMode="numeric" pattern="[0-9]*" maxLength={10} required />{errors.mobile && (<p className="text-red-500 text-sm">{errors.mobile}</p>)}</div>
+                <div><Label>Email</Label><Input type="email" value={formData.email} onChange={(e) => updateField('email', e.target.value)} required />{errors.email && (<p className="text-red-500 text-sm">{errors.email}</p>)}</div>
               </div>
               <div>
                 <Label>State / UT</Label>
@@ -91,6 +180,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                     <SelectItem value="Assam">Assam</SelectItem>
                     <SelectItem value="Bihar">Bihar</SelectItem>
                     <SelectItem value="Chhattisgarh">Chhattisgarh</SelectItem>
+                    <SelectItem value="Delhi">Delhi</SelectItem>
                     <SelectItem value="Goa">Goa</SelectItem>
                     <SelectItem value="Gujarat">Gujarat</SelectItem>
                     <SelectItem value="Haryana">Haryana</SelectItem>
@@ -117,7 +207,6 @@ const handleSubmit = async (e: React.FormEvent) => {
                     <SelectItem value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</SelectItem>
                     <SelectItem value="Chandigarh">Chandigarh</SelectItem>
                     <SelectItem value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</SelectItem>
-                    <SelectItem value="Delhi">Delhi</SelectItem>
                     <SelectItem value="Jammu and Kashmir">Jammu and Kashmir</SelectItem>
                     <SelectItem value="Ladakh">Ladakh</SelectItem>
                     <SelectItem value="Lakshadweep">Lakshadweep</SelectItem>
@@ -126,7 +215,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                 </Select>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="relative"><Label>Password *</Label><Input type={showPassword ? 'text' : 'password'} value={formData.password} onChange={(e) => updateField('password', e.target.value)} required /><button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-8">{showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}</button></div>
+                <div className="relative"><Label>Password *</Label><Input type={showPassword ? 'text' : 'password'} value={formData.password} onChange={(e) => updateField('password', e.target.value)} required /><button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-8">{showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}</button><p className="text-xs text-muted-foreground mt-1">Start with a capital letter, then include at least one number and one special character.</p></div>
                 <div><Label>Confirm Password *</Label><Input type="password" value={formData.confirmPassword} onChange={(e) => updateField('confirmPassword', e.target.value)} required /></div>
               </div>
               <Button type="submit" className="w-full bg-primary hover:bg-primary/90 mt-6" disabled={isLoading}>{isLoading ? 'Creating Account...' : 'Register'}</Button>

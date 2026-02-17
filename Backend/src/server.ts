@@ -119,20 +119,26 @@ app.post("/auth/register", async (req, res) => {
 /* ---------- LOGIN ---------- */
 app.post("/auth/login", async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { identifier, email, mobile, password } = req.body;
+    const loginIdentifier = (identifier || email || mobile || "").toString().trim();
 
-    if (!email || !password) {
-      return res.status(400).json({ message: "Email and password required" });
+    if (!loginIdentifier || !password) {
+      return res.status(400).json({ message: "Email/phone and password required" });
     }
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({
+      $or: [
+        { email: loginIdentifier.toLowerCase() },
+        { mobile: loginIdentifier },
+      ],
+    });
     if (!user) {
-      return res.status(401).json({ message: "Invalid email or password" });
+      return res.status(401).json({ message: "Invalid email/phone or password" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(401).json({ message: "Invalid email or password" });
+      return res.status(401).json({ message: "Invalid email/phone or password" });
     }
 
     const token = jwt.sign(
@@ -152,11 +158,21 @@ app.post("/auth/login", async (req, res) => {
 });
 /* ---------- FORGOT PASSWORD ---------- */
 app.post("/auth/forgot-password", async (req, res) => {
-  const { email } = req.body;
+  const { identifier, email, mobile } = req.body;
+  const rawIdentifier = (identifier || email || mobile || "").toString().trim();
 
-  const user = await User.findOne({ email });
+  if (!rawIdentifier) {
+    return res.status(400).json({ message: "Email or phone number is required" });
+  }
+
+  const user = await User.findOne({
+    $or: [
+      { email: rawIdentifier.toLowerCase() },
+      { mobile: rawIdentifier },
+    ],
+  });
   if (!user) {
-    return res.status(404).json({ message: "Email not found" });
+    return res.status(404).json({ message: "Email or phone number not found" });
   }
 
   const resetToken = crypto.randomBytes(32).toString("hex");

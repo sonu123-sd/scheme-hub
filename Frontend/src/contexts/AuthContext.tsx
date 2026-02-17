@@ -38,7 +38,7 @@ interface AuthContextType {
   register: (data: any) => Promise<boolean>;
   user: User | null;
   isAuthenticated: boolean;
-  login: (email: string, password: string) => Promise<boolean>;
+  login: (identifier: string, password: string) => Promise<boolean>;
   logout: () => void;
   setFirebaseUser: (firebaseUser: any) => void;
 
@@ -147,10 +147,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       throw new Error(msg);
     }
   };
-  const login = async (email: string, password: string): Promise<boolean> => {
+  const login = async (identifier: string, password: string): Promise<boolean> => {
     try {
       // 1️ LOGIN API
-      const loginRes = await loginUser(email, password);
+      const loginRes = await loginUser(identifier, password);
       if (!loginRes?.token) return false;
 
       // 2️ SAVE TOKEN
