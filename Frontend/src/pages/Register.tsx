@@ -22,7 +22,7 @@ const Register: React.FC = () => {
     e.preventDefault();
     const normalizedEmail = formData.email.trim().toLowerCase();
 
-    // ✅ First Name validation
+    // First Name validation
     if (!/^[A-Za-z\s]+$/.test(formData.firstName)) {
       toast({
         title: 'Error',
@@ -32,7 +32,7 @@ const Register: React.FC = () => {
       return;
     }
 
-    // ✅ Surname validation
+    //  Surname validation
     if (!/^[A-Za-z\s]+$/.test(formData.surname)) {
       toast({
         title: 'Error',
@@ -42,7 +42,7 @@ const Register: React.FC = () => {
       return;
     }
 
-    // ✅ Mobile validation
+    //  Mobile validation
     if (!/^[0-9]{10}$/.test(formData.mobile)) {
       toast({
         title: 'Error',
@@ -51,7 +51,7 @@ const Register: React.FC = () => {
       });
       return;
     }
-    // ✅ Email validation (Gmail only, proper format, no spaces)
+    //  Email validation (Gmail only, proper format, no spaces)
     const gmailRegex = /^[a-z0-9](?:[a-z0-9._%+-]{0,62}[a-z0-9])?@gmail\.com$/;
     if (!gmailRegex.test(normalizedEmail)) {
       toast({
@@ -61,7 +61,7 @@ const Register: React.FC = () => {
       });
       return;
     }
-    // ✅ Password rule:
+    //  Password rule:
     // Must start with a capital letter, contain at least one number,
     // and at least one special character.
     const passwordRegex = /^[A-Z](?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>_\-+=~`[\]\\\/]).+$/;
@@ -73,7 +73,7 @@ const Register: React.FC = () => {
       });
       return;
     }
-    // ✅ Password match check
+    //  Password match check
     if (formData.password !== formData.confirmPassword) {
       toast({
         title: 'Error',
@@ -103,7 +103,7 @@ const Register: React.FC = () => {
   const updateField = (field: string, value: string) => {
     let errorMessage = "";
 
-    // ✅ Name fields validation (INCLUDING middleName)
+    //  Name fields validation (INCLUDING middleName)
     if (["firstName", "middleName", "surname"].includes(field)) {
       if (!/^[A-Za-z\s]*$/.test(value)) {
         errorMessage = "Invalid name";
