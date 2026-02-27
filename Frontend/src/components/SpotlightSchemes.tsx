@@ -26,7 +26,7 @@ const SpotlightSchemes = () => {
   };
 
   return (
-    <section className="py-12 bg-gradient-to-b from-muted/30 to-background">
+    <section id="spotlight" className="py-12 bg-gradient-to-b from-muted/30 to-background">
       <div className="container">
         <AnimatedSection className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-3">

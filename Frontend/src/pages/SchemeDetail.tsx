@@ -7,6 +7,47 @@ import Footer from '@/components/Footer';
 import { useAuth } from '@/contexts/AuthContext';
 import schemes from '@/data/schemes.json';
 
+const isUnavailableValue = (value?: string) => {
+  const text = (value || '').trim().toLowerCase();
+  return !text || text === 'offline' || text === 'not found' || text === 'offline process';
+};
+
+const extractYouTubeVideoId = (value?: string) => {
+  const raw = (value || '').trim();
+  if (!raw) return null;
+
+  // direct ID support
+  if (/^[a-zA-Z0-9_-]{6,15}$/.test(raw)) return raw;
+
+  try {
+    const url = new URL(raw);
+    const host = url.hostname.replace('www.', '').toLowerCase();
+
+    if (host === 'youtu.be') {
+      return url.pathname.replace('/', '').trim() || null;
+    }
+
+    if (host === 'youtube.com' || host === 'm.youtube.com') {
+      if (url.pathname.startsWith('/watch')) {
+        return url.searchParams.get('v');
+      }
+      if (url.pathname.startsWith('/embed/')) {
+        return url.pathname.split('/embed/')[1]?.split('/')[0] || null;
+      }
+      if (url.pathname.startsWith('/shorts/')) {
+        return url.pathname.split('/shorts/')[1]?.split('/')[0] || null;
+      }
+      if (url.pathname.startsWith('/v/')) {
+        return url.pathname.split('/v/')[1]?.split('/')[0] || null;
+      }
+    }
+  } catch {
+    return null;
+  }
+
+  return null;
+};
+
 const SchemeDetail: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -50,9 +91,11 @@ const SchemeDetail: React.FC = () => {
   }
 
   const isSaved = user?.savedSchemes.includes(scheme.id);
-  const videoId = scheme.youtube_video?.match(
-    /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=))([^&?\s]+)/
-  )?.[1];
+  const youtubeUrl = isUnavailableValue(scheme.youtube_video) ? '' : (scheme.youtube_video || '').trim();
+  const videoId = extractYouTubeVideoId(youtubeUrl);
+  const embedUrl = videoId
+    ? `https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1`
+    : '';
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -117,13 +160,40 @@ const SchemeDetail: React.FC = () => {
                 </ul>
               </div>
 
-              {videoId && (
-                <div className="aspect-video rounded-xl overflow-hidden">
-                  <iframe
-                    src={`https://www.youtube.com/embed/${videoId}`}
-                    allowFullScreen
-                    className="w-full h-full border-0"
-                  />
+              {youtubeUrl && (
+                <div className="space-y-3">
+                  <h2 className="text-xl font-semibold mb-1 flex items-center gap-2">
+                    <Play className="h-5 w-5 text-primary" />
+                    Video Guide
+                  </h2>
+
+                  {embedUrl ? (
+                    <div className="aspect-video rounded-xl overflow-hidden border bg-black/5">
+                      <iframe
+                        src={embedUrl}
+                        title={`${scheme.name} video guide`}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerPolicy="strict-origin-when-cross-origin"
+                        allowFullScreen
+                        className="w-full h-full border-0"
+                      />
+                    </div>
+                  ) : (
+                    <p className="text-sm text-muted-foreground">
+                      Embedded preview unavailable for this link.
+                    </p>
+                  )}
+
+                  <a
+                    href={youtubeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-primary hover:underline"
+                  >
+                    <Play className="h-4 w-4" />
+                    Watch on YouTube
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
                 </div>
               )}
 

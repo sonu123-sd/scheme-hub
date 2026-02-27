@@ -3,13 +3,25 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { MessageCircle, X, Send, Bot, User } from "lucide-react";
+import {
+  MessageCircle,
+  X,
+  Send,
+  Bot,
+  User,
+  Loader2,
+} from "lucide-react";
 import schemes from "@/data/schemes.json";
 import { useAuth } from "@/contexts/AuthContext";
+
+type MessageMeta = {
+  mode?: "ai" | "fallback";
+};
 
 type Message = {
   role: "user" | "assistant";
   content: string;
+  meta?: MessageMeta;
 };
 
 type SchemeEligibility = {
@@ -39,12 +51,68 @@ type SchemeItem = {
 };
 
 const typedSchemes = schemes as SchemeItem[];
-
 const normalize = (v: string) => (v || "").toLowerCase().trim();
 const containsAny = (text: string, words: string[]) => words.some((w) => text.includes(w));
+const isAboutQuery = (text: string) => /^about(?:\s+(.+))?$/.test(normalize(text));
+const isAboutWebsiteQuery = (text: string) => {
+  const normalized = normalize(text);
+  const aboutMatch = normalized.match(/^about(?:\s+(.+))?$/);
+  if (!aboutMatch) return false;
+  const aboutTarget = (aboutMatch[1] || "").trim();
+  return !aboutTarget || containsAny(aboutTarget, [
+    "website",
+    "scheme hub",
+    "platform",
+    "portal",
+    "about us",
+    "us",
+    "this site",
+    "this website",
+    "this app",
+  ]);
+};
 
 const isGreeting = (text: string) =>
   /^(h+i+|h+e+l+o+|h+e+y+|n+a+m+a+s+t+e+|n+a+m+a+s+k+a+r+)$/i.test(text.trim());
+const isGreetingQuery = (text: string) => isGreeting(normalize(text));
+const isContactQuery = (text: string) =>
+  containsAny(normalize(text), ["contact", "contact us", "support", "help desk", "customer care", "helpline"]);
+const isFaqQuery = (text: string) =>
+  containsAny(normalize(text), ["faq", "faqs", "frequently asked questions", "common questions"]);
+const isAuthHelpQuery = (text: string) =>
+  containsAny(normalize(text), [
+    "login",
+    "log in",
+    "sign in",
+    "register",
+    "sign up",
+    "create account",
+    "how login",
+    "how to login",
+    "how to register",
+    "account create",
+  ]);
+const isComplaintQuery = (text: string) =>
+  containsAny(normalize(text), [
+    "complaint",
+    "complain",
+    "grievance",
+    "issue",
+    "report problem",
+    "raise ticket",
+    "query section",
+    "complaint section",
+  ]);
+const hasDirectSchemeNameMatch = (text: string, list: SchemeItem[]) => {
+  const query = normalize(text);
+  if (query.length < 4) return false;
+
+  return list.some((scheme) => {
+    const name = normalize(scheme.name || "");
+    if (!name || name.length < 4) return false;
+    return name === query || name.includes(query) || query.includes(name);
+  });
+};
 
 const calculateAge = (dob?: string) => {
   if (!dob) return null;
@@ -57,14 +125,17 @@ const calculateAge = (dob?: string) => {
   return age;
 };
 
-const schemeMatchesProfile = (scheme: SchemeItem, profile: {
-  age: number | null;
-  gender: string;
-  caste: string;
-  education: string;
-  employment: string;
-  state: string;
-}) => {
+const schemeMatchesProfile = (
+  scheme: SchemeItem,
+  profile: {
+    age: number | null;
+    gender: string;
+    caste: string;
+    education: string;
+    employment: string;
+    state: string;
+  }
+) => {
   const elig = scheme.eligibility || {};
   const schemeType = normalize(scheme.type || "");
   const schemeState = normalize(scheme.state || "");
@@ -141,10 +212,10 @@ const rankSchemesByQuery = (query: string, list: SchemeItem[]) => {
       if (description.includes(q)) score += 2;
       if (state.includes(q)) score += 2;
 
-      for (const t of tokens) {
-        if (name.includes(t)) score += 2;
-        if (category.includes(t)) score += 1;
-        if (description.includes(t)) score += 1;
+      for (const token of tokens) {
+        if (name.includes(token)) score += 2;
+        if (category.includes(token)) score += 1;
+        if (description.includes(token)) score += 1;
       }
 
       return { scheme, score };
@@ -161,14 +232,15 @@ const Chatbot = () => {
   const initialMessages: Message[] = [
     {
       role: "assistant",
-      content: "Hello! I am your Scheme Hub Assistant. Ask me about schemes, eligibility, documents, or application steps.",
+      content:
+        "Hello! I am your Scheme Hub Assistant. Ask about schemes, eligibility, documents, or application steps.",
     },
   ];
 
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-
+  const [isSending, setIsSending] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -225,11 +297,49 @@ Platform strengths:
     if (aboutMatch) {
       const aboutTarget = (aboutMatch[1] || "").trim();
 
-      if (
-        !aboutTarget ||
-        containsAny(aboutTarget, ["website", "scheme hub", "platform", "portal"])
-      ) {
+      if (!aboutTarget || containsAny(aboutTarget, [
+        "website",
+        "scheme hub",
+        "platform",
+        "portal",
+        "about us",
+        "us",
+        "this site",
+        "this website",
+        "this app",
+      ])) {
         return websiteAboutText;
+      }
+
+      if (isAuthHelpQuery(aboutTarget)) {
+        return `Login and Registration Help:
+
+1. Register:
+- Open /register
+- Enter your details (name, email/mobile, password)
+- Submit the form to create your account
+
+2. Login:
+- Open /login
+- Enter your email/mobile and password
+- Click Sign In
+
+3. Forgot password:
+- On login page, click "Forgot Password?" and reset your password.
+
+After login, open Dashboard to update profile and check scheme eligibility.`;
+      }
+
+      if (isContactQuery(aboutTarget) || isComplaintQuery(aboutTarget)) {
+        return `Support and Complaint Help:
+- Contact page: /contact
+- Share your issue with name, mobile/email, and problem details
+- For account or scheme query issues, mention screenshot and scheme name if possible
+
+You can also ask here:
+- "How to apply for [scheme]?"
+- "Which documents are required?"
+- "I am facing login problem"`;
       }
 
       const cleanedTarget = aboutTarget
@@ -246,15 +356,15 @@ Platform strengths:
         return `I could not find a scheme named "${cleanedTarget}". Try the exact scheme name, for example: "about PM-KISAN".`;
       }
 
-      const s = aboutSchemeMatches[0];
-      return `About Scheme: ${s.name}
-Type: ${s.type || "Not specified"}
-State: ${s.state || "All India"}
-Category: ${s.category || "Not specified"}
-Description: ${s.description || "Not available"}
-Official Link: ${s.official_link || "Not available"}
+      const scheme = aboutSchemeMatches[0];
+      return `About Scheme: ${scheme.name}
+Type: ${scheme.type || "Not specified"}
+State: ${scheme.state || "All India"}
+Category: ${scheme.category || "Not specified"}
+Description: ${scheme.description || "Not available"}
+Official Link: ${scheme.official_link || "Not available"}
 
-Ask "documents for ${s.name}" or "how to apply for ${s.name}" for more details.`;
+Ask "documents for ${scheme.name}" or "how to apply for ${scheme.name}" for more details.`;
     }
 
     if (containsAny(text, ["help", "menu", "what can you do", "commands"])) {
@@ -268,15 +378,58 @@ Ask "documents for ${s.name}" or "how to apply for ${s.name}" for more details.`
 Try asking:
 1. "Top schemes for my profile"
 2. "Show central schemes for students"
-3. "Documents required for PM-KISAN"
-4. "How to use this website?"`;
+3. "Documents required for PM-KISAN"`;
+    }
+
+    if (isFaqQuery(text)) {
+      return `FAQ - Quick Help:
+
+1. What is Scheme Hub?
+- Scheme Hub is an information portal to discover Central and State government schemes.
+
+2. Is Scheme Hub official?
+- It is a guidance platform. Final and official details are on government portals.
+
+3. Is it free to use?
+- Yes, browsing schemes and checking eligibility guidance are free.
+
+4. How to check eligibility?
+- Open "Check Eligibility", fill your profile details, and review suggested schemes.
+
+5. How to apply for a scheme?
+- Open scheme details and click "Apply Now" to continue on the official portal.
+
+6. What documents are usually needed?
+- Commonly Aadhaar, income certificate, caste certificate, residence proof, and bank details.
+
+7. Where to get more help?
+- Open the FAQ page (/faq) or Contact Us page (/contact).`;
+    }
+
+    if (isAuthHelpQuery(text)) {
+      return `Login and Registration Help:
+
+1. Register:
+- Open /register
+- Enter your details (name, email/mobile, password)
+- Submit the form to create your account
+
+2. Login:
+- Open /login
+- Enter your email/mobile and password
+- Click Sign In
+
+3. Forgot password:
+- On login page, click "Forgot Password?" and reset your password.
+
+After login, open Dashboard to update profile and check scheme eligibility.`;
     }
 
     if (isGreeting(text)) {
       if (!isAuthenticated) {
-        return "Hello! How can I help you today? Ask any question about schemes, eligibility, documents, or applications.";
+        return "Namaste! How can I help you today? Ask any question about schemes, eligibility, documents, or applications.";
       }
-      return `Hello ${user?.firstName || "User"}! How can I help you today? Ask any question about schemes, eligibility, documents, or applications.`;
+      return `Namaste ${user?.firstName || "User"}! How can I help you today? Ask any question about schemes, eligibility, documents, or applications.`;
     }
 
     if (containsAny(text, ["my profile", "meri profile", "my details", "meri details"])) {
@@ -330,51 +483,29 @@ Popular categories:
 Tell me your need (for example: student, farmer, housing, health), and I will suggest relevant schemes.`;
     }
 
-    if (containsAny(text, ["no schemes", "no result", "not showing scheme", "why no match"])) {
-      return `If you are getting no matches, check:
-1. Complete all profile fields (age, gender, caste, education, employment, state).
-2. Select the correct state for state-level schemes.
-3. Use realistic income range values in eligibility.
-4. Start broad from All Schemes, then narrow.
-5. Update profile in Dashboard and re-run eligibility.`;
-    }
-
-    if (containsAny(text, ["news", "latest", "update", "new schemes", "spotlight", "featured"])) {
+    if (
+      containsAny(text, [
+        "news",
+        "latest",
+        "update",
+        "new scheme",
+        "new schemes",
+        "spotlight",
+        "spot light",
+        "spliot",
+        "featured",
+      ])
+    ) {
       return "For latest updates, check the News and Spotlight sections on the Home page. You can also ask by category, like student, farmer, or women schemes.";
     }
 
-    if (
-      containsAny(text, [
-        "about website",
-        "about scheme hub",
-        "website info",
-        "platform info",
-        "what is this website",
-        "features of website",
-      ])
-    ) {
-      return websiteAboutText;
-    }
-
-    if (
-      containsAny(text, [
-        "terms",
-        "terms and conditions",
-        "term and condition",
-        "conditions",
-        "legal",
-        "rules",
-        "policy",
-      ])
-    ) {
+    if (containsAny(text, ["terms", "conditions", "legal", "policy"])) {
       return `Terms & Conditions (summary):
 - Scheme information may change as per official government updates.
 - Final eligibility is always decided by the concerned authority.
 - Users must provide accurate details while using profile and eligibility tools.
 - Scheme Hub provides guidance and navigation support, not guaranteed approval.
-- Official application is completed only on government portals.
-
-For full legal text, open the "Terms & Conditions" link in the website footer.`;
+- Official application is completed only on government portals.`;
     }
 
     if (containsAny(text, ["disclaimer", "accuracy", "guarantee", "legal notice"])) {
@@ -382,31 +513,16 @@ For full legal text, open the "Terms & Conditions" link in the website footer.`;
 - Scheme Hub aggregates scheme details for user convenience.
 - Data is sourced from scheme records and can change over time.
 - Eligibility results are indicative and not a final decision.
-- Users should verify details on official government portals before applying.
-
-You can open the full Disclaimer page from the footer under Legal.`;
+- Users should verify details on official government portals before applying.`;
     }
 
-    if (containsAny(text, ["quick links", "footer", "contact", "faq", "accessibility", "government portals"])) {
-      return `Useful website links:
+    if (containsAny(text, ["contact", "contact us", "support", "help desk", "customer care", "helpline"])) {
+      return `Contact Scheme Hub:
+- Open Contact page: /contact
+- Support email: support@schemehub.gov.in
+- Working hours: Monday to Friday, 9:30 AM to 5:30 PM
 
-Quick Links:
-- About Us
-- Contact Us
-- Accessibility
-- FAQ
-
-Legal:
-- Disclaimer
-- Terms & Conditions
-- Dashboard
-
-Government Portals:
-- DigiLocker
-- UMANG
-- MyGov
-- Data.gov.in
-- India.gov.in`;
+You can share your query there and the team will respond through official channels.`;
     }
 
     const directMatches = rankSchemesByQuery(text, typedSchemes);
@@ -432,23 +548,53 @@ Try:
 - "Top 5 schemes for my profile"
 - "Show schemes for women in Maharashtra"
 - "How to use Scheme Hub website?"
-- "Terms and conditions summary"
 - "Documents for PM-KISAN"`;
   };
 
-  const handleSend = () => {
-    if (!input.trim()) return;
-    const userMessage = input.trim();
-
-    setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
+  const resetComposer = () => {
     setInput("");
+  };
+
+  const resetChat = () => {
+    setMessages(initialMessages);
+    setIsTyping(false);
+    setIsSending(false);
+    resetComposer();
+  };
+
+  const handleSend = () => {
+    if (isSending) return;
+
+    const textInput = input.trim();
+    if (!textInput) return;
+
+    const userMessageText = textInput;
+    const userMessage: Message = {
+      role: "user",
+      content: userMessageText,
+    };
+
+    const nextMessages = [...messages, userMessage];
+    setMessages(nextMessages);
+    resetComposer();
+    setIsSending(true);
     setIsTyping(true);
 
-    setTimeout(() => {
-      const response = generateResponse(userMessage);
-      setMessages((prev) => [...prev, { role: "assistant", content: response }]);
+    try {
+      const localAnswer = generateResponse(userMessageText);
+      window.setTimeout(() => {
+        setMessages((prev) => [...prev, { role: "assistant", content: localAnswer, meta: { mode: "fallback" } }]);
+        setIsTyping(false);
+        setIsSending(false);
+      }, 180);
+    } catch {
       setIsTyping(false);
-    }, 450);
+      setIsSending(false);
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", content: "Sorry, I could not process that. Please try again.", meta: { mode: "fallback" } },
+      ]);
+    }
   };
 
   return (
@@ -456,9 +602,7 @@ Try:
       <button
         onClick={() => {
           if (isOpen) {
-            setMessages(initialMessages);
-            setInput("");
-            setIsTyping(false);
+            resetChat();
           }
           setIsOpen(!isOpen);
         }}
@@ -468,17 +612,17 @@ Try:
       </button>
 
       {isOpen && (
-        <Card className="fixed bottom-24 right-6 z-50 w-[360px] h-[500px] shadow-2xl flex flex-col">
-          <CardHeader className="bg-primary text-primary-foreground rounded-t-lg py-4">
-            <CardTitle className="flex items-center gap-2 text-lg">
+        <Card className="fixed bottom-24 right-3 z-50 w-[min(340px,calc(100vw-1.5rem))] h-[430px] shadow-2xl flex flex-col">
+          <CardHeader className="bg-primary text-primary-foreground rounded-t-lg py-3">
+            <CardTitle className="flex items-center gap-2 text-base">
               <Bot className="h-6 w-6" />
               Scheme Hub Assistant
             </CardTitle>
           </CardHeader>
 
           <CardContent className="flex-1 flex flex-col p-0 overflow-hidden">
-            <ScrollArea className="flex-1 p-4">
-              <div className="space-y-4">
+            <ScrollArea className="flex-1 p-3">
+              <div className="space-y-3">
                 {messages.map((message, index) => (
                   <div
                     key={index}
@@ -491,8 +635,7 @@ Try:
                     )}
 
                     <div
-                      className={`max-w-[82%] rounded-lg px-3 py-2 text-sm whitespace-pre-wrap ${message.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted"
-                        }`}
+                      className={`max-w-[85%] rounded-lg px-3 py-2 text-sm whitespace-pre-wrap ${message.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted"}`}
                     >
                       {message.content}
                     </div>
@@ -510,7 +653,10 @@ Try:
                     <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
                       <Bot className="h-4 w-4 text-primary" />
                     </div>
-                    <div className="bg-muted rounded-lg px-4 py-2 text-sm">Typing...</div>
+                    <div className="bg-muted rounded-lg px-4 py-2 text-sm flex items-center gap-2">
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      Thinking...
+                    </div>
                   </div>
                 )}
 
@@ -518,17 +664,17 @@ Try:
               </div>
             </ScrollArea>
 
-            <div className="p-4 border-t">
+            <div className="p-3 border-t space-y-2">
               <div className="flex gap-2">
                 <Input
-                  placeholder="Type question... e.g. schemes for students in Bihar"
+                  placeholder="Ask anything about government schemes..."
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleSend()}
                   className="flex-1"
                 />
-                <Button onClick={handleSend} size="icon">
-                  <Send className="h-4 w-4" />
+                <Button onClick={handleSend} size="icon" disabled={isSending}>
+                  {isSending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
                 </Button>
               </div>
             </div>

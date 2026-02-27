@@ -127,7 +127,7 @@ const NewsSection = () => {
   const hasActiveFilters = selectedCategory !== 'All' || selectedDateRange !== 'all';
 
   return (
-    <section className="py-12">
+    <section id="news" className="py-12">
       <div className="container">
         <AnimatedSection className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
           <div>

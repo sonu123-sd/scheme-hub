@@ -43,6 +43,16 @@ const Footer = () => {
                   {t('footer.faq')}
                 </Link>
               </li>
+              <li>
+                <a href="/#spotlight" className="text-sm hover:text-primary transition-colors">
+                  {t('schemes.spotlight')}
+                </a>
+              </li>
+              <li>
+                <a href="/#news" className="text-sm hover:text-primary transition-colors">
+                  {t('news.title')}
+                </a>
+              </li>
             </ul>
           </div>
 
