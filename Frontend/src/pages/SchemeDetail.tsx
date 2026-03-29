@@ -1,11 +1,26 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, ExternalLink, Play, CheckCircle, File } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Play, CheckCircle, File, CircleCheckBig, CircleX, Clock3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useAuth } from '@/contexts/AuthContext';
 import schemes from '@/data/schemes.json';
+import { useToast } from '@/hooks/use-toast';
+import {
+  getMyApplications,
+  saveApplicationStatus,
+  SchemeApplicationRecord,
+} from '@/services/applicationService';
 
 const isUnavailableValue = (value?: string) => {
   const text = (value || '').trim().toLowerCase();
@@ -52,6 +67,12 @@ const SchemeDetail: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { isAuthenticated, addToRecentlyViewed, saveScheme, user } = useAuth();
+  const { toast } = useToast();
+  const [applicationRecord, setApplicationRecord] = useState<SchemeApplicationRecord | null>(null);
+  const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
+  const [isStatusSaving, setIsStatusSaving] = useState(false);
+  const [isAwaitingConfirmation, setIsAwaitingConfirmation] = useState(false);
+  const confirmationTimerRef = useRef<number | null>(null);
 
 
   const scheme = schemes.find(s => s.id === id);
@@ -72,6 +93,41 @@ const SchemeDetail: React.FC = () => {
       addToRecentlyViewed(id);
     }
   }, [id, isAuthenticated, addToRecentlyViewed]);
+
+  useEffect(() => {
+    const loadCurrentApplicationStatus = async () => {
+      if (!isAuthenticated || !id) return;
+      try {
+        const records = await getMyApplications(id);
+        setApplicationRecord(records[0] || null);
+      } catch (err) {
+        console.error("Failed to load application status", err);
+      }
+    };
+
+    loadCurrentApplicationStatus();
+  }, [id, isAuthenticated]);
+
+  useEffect(() => {
+    const openDialogOnReturn = () => {
+      if (isAwaitingConfirmation) {
+        setIsConfirmDialogOpen(true);
+      }
+    };
+
+    window.addEventListener("focus", openDialogOnReturn);
+    return () => {
+      window.removeEventListener("focus", openDialogOnReturn);
+    };
+  }, [isAwaitingConfirmation]);
+
+  useEffect(() => {
+    return () => {
+      if (confirmationTimerRef.current) {
+        window.clearTimeout(confirmationTimerRef.current);
+      }
+    };
+  }, []);
 
   //  loading instead of blank
   if (!isAuthenticated) {
@@ -96,6 +152,55 @@ const SchemeDetail: React.FC = () => {
   const embedUrl = videoId
     ? `https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1`
     : '';
+
+  const handleApplyNow = () => {
+    if (!scheme.official_link) return;
+
+    window.open(scheme.official_link, "_blank", "noopener,noreferrer");
+
+    setIsAwaitingConfirmation(true);
+    setApplicationRecord((prev) => ({
+      schemeId: scheme.id,
+      applied: prev?.applied || false,
+      status: "pending",
+      applied_at: prev?.applied_at || null,
+      updated_at: new Date().toISOString(),
+    }));
+
+    if (confirmationTimerRef.current) {
+      window.clearTimeout(confirmationTimerRef.current);
+    }
+    confirmationTimerRef.current = window.setTimeout(() => {
+      setIsConfirmDialogOpen(true);
+    }, 2200);
+  };
+
+  const handleApplicationConfirmation = async (applied: boolean) => {
+    try {
+      setIsStatusSaving(true);
+      const updated = await saveApplicationStatus(scheme.id, applied);
+      setApplicationRecord(updated);
+      setIsConfirmDialogOpen(false);
+      setIsAwaitingConfirmation(false);
+      toast({
+        title: applied ? "Application marked as successful" : "Application marked as not applied",
+        description: applied
+          ? "Your scheme application was saved in dashboard tracking."
+          : "You can apply again anytime and update this status.",
+      });
+    } catch (err) {
+      console.error("Failed to save application status", err);
+      toast({
+        title: "Unable to save application status",
+        description: "Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsStatusSaving(false);
+    }
+  };
+
+  const statusLabel = applicationRecord?.status || null;
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -209,7 +314,7 @@ const SchemeDetail: React.FC = () => {
                 {scheme.official_link && (
                   <Button
                     variant="outline"
-                    onClick={() => window.open(scheme.official_link, '_blank')}
+                    onClick={handleApplyNow}
                     className="flex-1"
                   >
                     Apply Now
@@ -217,12 +322,67 @@ const SchemeDetail: React.FC = () => {
                   </Button>
                 )}
               </div>
+
+              {statusLabel && (
+                <div className="rounded-xl border p-4 bg-muted/20">
+                  <h3 className="text-sm font-semibold mb-2">Application Tracking Status</h3>
+                  {statusLabel === "applied" && (
+                    <Badge className="bg-green-100 text-green-700 hover:bg-green-100">
+                      <CircleCheckBig className="h-3.5 w-3.5 mr-1" />
+                      Applied Successfully
+                    </Badge>
+                  )}
+                  {statusLabel === "not_applied" && (
+                    <Badge className="bg-red-100 text-red-700 hover:bg-red-100">
+                      <CircleX className="h-3.5 w-3.5 mr-1" />
+                      Not Applied
+                    </Badge>
+                  )}
+                  {statusLabel === "pending" && (
+                    <Badge className="bg-amber-100 text-amber-700 hover:bg-amber-100">
+                      <Clock3 className="h-3.5 w-3.5 mr-1" />
+                      Pending Confirmation
+                    </Badge>
+                  )}
+                  {applicationRecord?.applied_at && (
+                    <p className="text-xs text-muted-foreground mt-2">
+                      Applied on: {new Date(applicationRecord.applied_at).toLocaleString("en-IN")}
+                    </p>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>
       </main>
 
       <Footer />
+
+      <Dialog open={isConfirmDialogOpen} onOpenChange={setIsConfirmDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Confirm Scheme Application</DialogTitle>
+            <DialogDescription>
+              Did you successfully apply for this scheme on the official website?
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="gap-2 sm:gap-2">
+            <Button
+              variant="outline"
+              disabled={isStatusSaving}
+              onClick={() => handleApplicationConfirmation(false)}
+            >
+              No
+            </Button>
+            <Button
+              disabled={isStatusSaving}
+              onClick={() => handleApplicationConfirmation(true)}
+            >
+              {isStatusSaving ? "Saving..." : "Yes"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

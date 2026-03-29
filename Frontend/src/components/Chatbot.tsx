@@ -226,6 +226,231 @@ const rankSchemesByQuery = (query: string, list: SchemeItem[]) => {
     .map((r) => r.scheme);
 };
 
+type AudienceTag = "student" | "farmer" | "women" | "senior";
+
+type SmartQueryFilters = {
+  age: number | null;
+  state: string | null;
+  audienceTags: AudienceTag[];
+  wantsCentral: boolean;
+  wantsStateOnly: boolean;
+  rawTokens: string[];
+};
+
+const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+const stateDisplayByNormalized = new Map<string, string>();
+typedSchemes.forEach((scheme) => {
+  const normalizedState = normalize(scheme.state || "");
+  if (normalizedState && !stateDisplayByNormalized.has(normalizedState)) {
+    stateDisplayByNormalized.set(normalizedState, scheme.state || "");
+  }
+});
+
+const stateAliases: Record<string, string> = {
+  maharastha: "maharashtra",
+  maharastra: "maharashtra",
+  maharastraa: "maharashtra",
+  maharastrah: "maharashtra",
+  mumbai: "maharashtra",
+  up: "uttar pradesh",
+  mp: "madhya pradesh",
+  "delhi ncr": "delhi",
+  orissa: "odisha",
+  pondicherry: "puducherry",
+  "andaman nicobar": "andaman and nicobar islands",
+};
+
+const extractAgeFromText = (text: string) => {
+  const normalizedText = normalize(text);
+  const regexes = [
+    /\b(?:age|aged|umr|umar)\s*(?:is|=|:|of)?\s*(\d{1,3})\b/i,
+    /\b(\d{1,3})\s*(?:years?|yrs?|saal|year)\b/i,
+    /\b(\d{1,3})\s*(?:age)\b/i,
+  ];
+
+  for (const regex of regexes) {
+    const match = normalizedText.match(regex);
+    if (match) {
+      const parsed = Number(match[1]);
+      if (parsed >= 0 && parsed <= 120) return parsed;
+    }
+  }
+
+  const allNumbers = normalizedText.match(/\b\d{1,3}\b/g)?.map(Number) || [];
+  const hasAgeHint = containsAny(normalizedText, ["age", "aged", "years", "yrs", "saal", "umr", "umar"]);
+  const hasAudienceHint = containsAny(normalizedText, ["student", "farmer", "women", "mahila", "senior"]);
+  if ((hasAgeHint || hasAudienceHint) && allNumbers.length === 1) {
+    const parsed = allNumbers[0];
+    if (parsed >= 0 && parsed <= 120) return parsed;
+  }
+
+  return null;
+};
+
+const extractStateFromText = (text: string) => {
+  const normalizedText = normalize(text).replace(/[^a-z0-9\s]/g, " ");
+
+  for (const [alias, canonical] of Object.entries(stateAliases)) {
+    const aliasRegex = new RegExp(`\\b${escapeRegExp(alias)}\\b`, "i");
+    if (aliasRegex.test(normalizedText)) {
+      return stateDisplayByNormalized.get(canonical) || canonical;
+    }
+  }
+
+  const states = [...stateDisplayByNormalized.keys()].sort((a, b) => b.length - a.length);
+  for (const state of states) {
+    const stateRegex = new RegExp(`\\b${escapeRegExp(state)}\\b`, "i");
+    if (stateRegex.test(normalizedText)) {
+      return stateDisplayByNormalized.get(state) || state;
+    }
+  }
+
+  return null;
+};
+
+const extractAudienceTags = (text: string): AudienceTag[] => {
+  const normalizedText = normalize(text);
+  const tags = new Set<AudienceTag>();
+
+  if (containsAny(normalizedText, ["student", "students", "vidyarthi", "chhatra", "school", "college"])) {
+    tags.add("student");
+  }
+  if (containsAny(normalizedText, ["farmer", "farmers", "kisan", "agriculture", "krishi"])) {
+    tags.add("farmer");
+  }
+  if (containsAny(normalizedText, ["women", "woman", "female", "mahila", "girl", "ladki"])) {
+    tags.add("women");
+  }
+  if (containsAny(normalizedText, ["senior", "old age", "elderly", "vridh", "buzurg"])) {
+    tags.add("senior");
+  }
+
+  return Array.from(tags);
+};
+
+const schemeMatchesAudienceTag = (scheme: SchemeItem, tag: AudienceTag) => {
+  const elig = scheme.eligibility || {};
+  const merged = normalize(
+    [
+      scheme.name || "",
+      scheme.category || "",
+      scheme.description || "",
+      elig.education || "",
+      elig.employment || "",
+    ].join(" ")
+  );
+
+  if (tag === "student") {
+    const education = normalize(elig.education || "");
+    return (
+      containsAny(merged, ["student", "students", "school", "college", "scholarship", "education", "study"]) ||
+      normalize(scheme.category || "").includes("education") ||
+      (education && !["all", "any", "no minimum qualification", "not required"].includes(education))
+    );
+  }
+
+  if (tag === "farmer") {
+    return containsAny(merged, ["farmer", "farmers", "kisan", "agriculture", "krishi"]);
+  }
+
+  if (tag === "women") {
+    return normalize(elig.gender || "") === "female" || containsAny(merged, ["women", "woman", "female", "girl", "mahila", "beti"]);
+  }
+
+  const minAge = typeof elig.minAge === "number" ? elig.minAge : 0;
+  return minAge >= 55 || containsAny(merged, ["senior", "old age", "elderly", "vridh", "buzurg"]);
+};
+
+const parseSmartQueryFilters = (query: string): SmartQueryFilters => {
+  const normalizedText = normalize(query);
+  const stopWords = new Set([
+    "show", "find", "for", "me", "in", "and", "or", "of", "to", "the", "a", "an",
+    "scheme", "schemes", "yojana", "age", "years", "year", "saal", "umr", "umar", "state",
+    "please", "mujhe", "mere", "meri", "mein", "ke", "ki", "ka", "hai", "do", "with",
+  ]);
+
+  return {
+    age: extractAgeFromText(normalizedText),
+    state: extractStateFromText(normalizedText),
+    audienceTags: extractAudienceTags(normalizedText),
+    wantsCentral: containsAny(normalizedText, ["central", "india level", "nationwide", "national"]),
+    wantsStateOnly: containsAny(normalizedText, ["state government", "state govt", "state scheme", "state schemes", "rajya"]),
+    rawTokens: normalizedText
+      .split(/\s+/)
+      .map((token) => token.replace(/[^a-z0-9]/g, ""))
+      .filter((token) => token.length > 2 && !stopWords.has(token) && !/^\d+$/.test(token)),
+  };
+};
+
+const findSmartMatches = (query: string, list: SchemeItem[]) => {
+  const filters = parseSmartQueryFilters(query);
+  const hasStructuredCriteria =
+    filters.age !== null ||
+    Boolean(filters.state) ||
+    filters.audienceTags.length > 0 ||
+    filters.wantsCentral ||
+    filters.wantsStateOnly;
+
+  if (!hasStructuredCriteria) return null;
+
+  const filtered = list.filter((scheme) => {
+    const elig = scheme.eligibility || {};
+    const schemeType = normalize(scheme.type || "");
+    const schemeState = normalize(scheme.state || "");
+
+    if (filters.wantsCentral && schemeType !== "central") return false;
+    if (filters.wantsStateOnly && schemeType !== "state") return false;
+
+    if (filters.state) {
+      const desiredState = normalize(filters.state);
+      if (schemeType === "state" && schemeState && schemeState !== desiredState) return false;
+    }
+
+    if (typeof filters.age === "number") {
+      const minAge = typeof elig.minAge === "number" ? elig.minAge : 0;
+      const maxAge = typeof elig.maxAge === "number" ? elig.maxAge : 200;
+      if (filters.age < minAge || filters.age > maxAge) return false;
+    }
+
+    for (const tag of filters.audienceTags) {
+      if (!schemeMatchesAudienceTag(scheme, tag)) return false;
+    }
+
+    return true;
+  });
+
+  const ranked = filtered
+    .map((scheme) => {
+      const joinedText = normalize(
+        [scheme.name || "", scheme.category || "", scheme.description || "", scheme.state || ""].join(" ")
+      );
+      let score = 0;
+
+      for (const token of filters.rawTokens) {
+        if (joinedText.includes(token)) score += 1;
+      }
+
+      if (filters.state && normalize(scheme.state || "") === normalize(filters.state)) score += 3;
+      if (filters.state && normalize(scheme.type || "") === "central") score += 1;
+      if (typeof filters.age === "number" && scheme.eligibility) score += 2;
+
+      for (const tag of filters.audienceTags) {
+        if (schemeMatchesAudienceTag(scheme, tag)) score += 2;
+      }
+
+      return { scheme, score };
+    })
+    .sort((a, b) => b.score - a.score)
+    .map((item) => item.scheme);
+
+  return {
+    filters,
+    totalCount: filtered.length,
+    matches: ranked.slice(0, 5),
+  };
+};
+
 const Chatbot = () => {
   const { user, isAuthenticated } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
@@ -377,7 +602,7 @@ Ask "documents for ${scheme.name}" or "how to apply for ${scheme.name}" for more
 
 Try asking:
 1. "Top schemes for my profile"
-2. "Show central schemes for students"
+2. "Find schemes for age 18 student in Maharashtra"
 3. "Documents required for PM-KISAN"`;
     }
 
@@ -454,6 +679,34 @@ After login, open Dashboard to update profile and check scheme eligibility.`;
 ${profileMatches.map((s, i) => `${i + 1}. ${s.name} (${s.type || "Scheme"}${s.state ? `, ${s.state}` : ""})`).join("\n")}
 
 Type any scheme name to get detailed information.`;
+    }
+
+    const smartResult = findSmartMatches(text, typedSchemes);
+    if (smartResult) {
+      const { filters, matches, totalCount } = smartResult;
+      const criteriaSummary: string[] = [];
+      if (typeof filters.age === "number") criteriaSummary.push(`Age: ${filters.age}`);
+      if (filters.state) criteriaSummary.push(`State: ${filters.state}`);
+      if (filters.audienceTags.length > 0) criteriaSummary.push(`Audience: ${filters.audienceTags.join(", ")}`);
+      if (filters.wantsCentral) criteriaSummary.push("Type: Central");
+      if (filters.wantsStateOnly) criteriaSummary.push("Type: State");
+
+      if (matches.length === 0) {
+        return `I checked our JSON scheme database but found no exact match for:
+- ${criteriaSummary.join("\n- ") || "your current criteria"}
+
+Try a broader query:
+- "student schemes in Maharashtra"
+- "age 18 schemes in Maharashtra"
+- "central schemes for students age 18"`;
+      }
+
+      return `I found ${totalCount} matching scheme(s) from the database for:
+- ${criteriaSummary.join("\n- ")}
+
+Top results:
+${matches.map((scheme, idx) => `${idx + 1}. ${scheme.name} (${scheme.type || "Scheme"}${scheme.state ? `, ${scheme.state}` : ", All India"})`).join("\n")}
+`;
     }
 
     if (containsAny(text, ["document", "documents", "paper", "aadhaar", "income certificate"])) {
@@ -547,6 +800,7 @@ Reply with a scheme name for full details (documents, eligibility, and applicati
 Try:
 - "Top 5 schemes for my profile"
 - "Show schemes for women in Maharashtra"
+- "Find student schemes in Maharashtra age 18"
 - "How to use Scheme Hub website?"
 - "Documents for PM-KISAN"`;
   };

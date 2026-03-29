@@ -4,6 +4,7 @@ import { Eye, EyeOff, Mail, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
@@ -18,6 +19,7 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [hasAcceptedPolicy, setHasAcceptedPolicy] = useState(false);
 
   const { login, setFirebaseUser, isAuthenticated } = useAuth();
   const { toast } = useToast();
@@ -29,6 +31,14 @@ const Login: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isLoading) return;
+    if (!hasAcceptedPolicy) {
+      toast({
+        title: "Consent required",
+        description: "Please accept the Privacy Policy and Terms to continue.",
+        variant: "destructive",
+      });
+      return;
+    }
 
     setIsLoading(true);
 
@@ -151,7 +161,36 @@ const Login: React.FC = () => {
                 </Link>
               </div>
 
-              <Button type="submit" className="w-full" disabled={isLoading}>
+              <div className="flex items-start gap-2 rounded-md border border-border p-3">
+                <Checkbox
+                  id="login-policy-consent"
+                  checked={hasAcceptedPolicy}
+                  onCheckedChange={(checked) =>
+                    setHasAcceptedPolicy(checked === true)
+                  }
+                  className="mt-1"
+                />
+                <Label
+                  htmlFor="login-policy-consent"
+                  className="text-sm leading-5 text-muted-foreground font-normal"
+                >
+                  I agree to the{" "}
+                  <Link to="/terms-and-conditions" className="text-primary hover:underline">
+                    Privacy Policy
+                  </Link>{" "}
+                  and{" "}
+                  <Link to="/terms" className="text-primary hover:underline">
+                    Terms and Conditions
+                  </Link>
+                  .
+                </Label>
+              </div>
+
+              <Button
+                type="submit"
+                className="w-full"
+                disabled={isLoading || !hasAcceptedPolicy}
+              >
                 {isLoading ? "Logging in..." : "Login"}
               </Button>
 

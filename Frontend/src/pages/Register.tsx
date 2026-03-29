@@ -4,6 +4,7 @@ import { Eye, EyeOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
@@ -14,12 +15,21 @@ const Register: React.FC = () => {
   const [formData, setFormData] = useState({ firstName: '', middleName: '', surname: '', dob: '', gender: '', maritalStatus: '', caste: '', education: '', employment: '', mobile: '', email: '', state: '', password: '', confirmPassword: '' });
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [hasAcceptedPolicy, setHasAcceptedPolicy] = useState(false);
   const { register } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!hasAcceptedPolicy) {
+      toast({
+        title: 'Consent required',
+        description: 'Please accept the Privacy Policy and Terms to continue.',
+        variant: 'destructive',
+      });
+      return;
+    }
     const normalizedEmail = formData.email.trim().toLowerCase();
 
     // First Name validation
@@ -218,7 +228,18 @@ const Register: React.FC = () => {
                 <div className="relative"><Label>Password *</Label><Input type={showPassword ? 'text' : 'password'} value={formData.password} onChange={(e) => updateField('password', e.target.value)} required /><button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-8">{showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}</button><p className="text-xs text-muted-foreground mt-1">Start with a capital letter, then include at least one number and one special character.</p></div>
                 <div><Label>Confirm Password *</Label><Input type="password" value={formData.confirmPassword} onChange={(e) => updateField('confirmPassword', e.target.value)} required /></div>
               </div>
-              <Button type="submit" className="w-full bg-primary hover:bg-primary/90 mt-6" disabled={isLoading}>{isLoading ? 'Creating Account...' : 'Register'}</Button>
+              <div className="flex items-start gap-2 rounded-md border border-border p-3 mt-6">
+                <Checkbox
+                  id="register-policy-consent"
+                  checked={hasAcceptedPolicy}
+                  onCheckedChange={(checked) => setHasAcceptedPolicy(checked === true)}
+                  className="mt-1"
+                />
+                <Label htmlFor="register-policy-consent" className="text-sm leading-5 text-muted-foreground font-normal">
+                  I agree to the <Link to="/terms-and-conditions" className="text-primary hover:underline">Privacy Policy</Link> and <Link to="/terms" className="text-primary hover:underline">Terms and Conditions</Link>.
+                </Label>
+              </div>
+              <Button type="submit" className="w-full bg-primary hover:bg-primary/90" disabled={isLoading || !hasAcceptedPolicy}>{isLoading ? 'Creating Account...' : 'Register'}</Button>
             </form>
             <p className="text-center mt-6 text-sm text-muted-foreground">Already have an account? <Link to="/login" className="text-primary font-medium hover:underline">Login here</Link></p>
           </div>

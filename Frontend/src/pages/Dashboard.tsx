@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import Header from '@/components/Header';
@@ -10,11 +10,11 @@ import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { User, FileText, Bookmark, Clock, Settings, Upload, Camera, Edit2, Save, X, Trash2, Eye, CheckCircle2, Users, Calendar } from 'lucide-react';
+import { User, FileText, Bookmark, Clock, Settings, Upload, Camera, Edit2, Save, X, Trash2, Eye, CheckCircle2, Users, Calendar, BriefcaseBusiness, CircleCheckBig, CircleX } from 'lucide-react';
 import { toast } from 'sonner';
 import schemes from '@/data/schemes.json';
 import api from "@/utils/api";
-import { useEffect } from "react";
+import { getMyApplications, SchemeApplicationRecord, updateApplicationStatus } from '@/services/applicationService';
 
 
 const Dashboard = () => {
@@ -31,6 +31,9 @@ const Dashboard = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [eligibleSchemes, setEligibleSchemes] = useState<any[]>([]);
   const [eligibleLoading, setEligibleLoading] = useState(false);
+  const [applicationHistory, setApplicationHistory] = useState<SchemeApplicationRecord[]>([]);
+  const [applicationLoading, setApplicationLoading] = useState(false);
+  const [updatingSchemeId, setUpdatingSchemeId] = useState<string | null>(null);
   const [editForm, setEditForm] = useState({
     firstName: user?.firstName || '',
     middleName: user?.middleName || '',
@@ -73,6 +76,28 @@ const Dashboard = () => {
     return age;
   };
   const userAge = calculateAge(user?.dob);
+
+  useEffect(() => {
+    const fetchApplicationHistory = async () => {
+      if (!isAuthenticated) {
+        setApplicationHistory([]);
+        return;
+      }
+
+      try {
+        setApplicationLoading(true);
+        const records = await getMyApplications();
+        setApplicationHistory(records);
+      } catch (err) {
+        console.error("Fetch application history failed", err);
+        setApplicationHistory([]);
+      } finally {
+        setApplicationLoading(false);
+      }
+    };
+
+    fetchApplicationHistory();
+  }, [isAuthenticated]);
 
   useEffect(() => {
     const fetchEligibleSchemes = async () => {
@@ -204,6 +229,45 @@ const Dashboard = () => {
 
   const userAgeCategory = userAge ? getAgeCategory(userAge) : null;
 
+  const formatDateTime = (value?: string | null) => {
+    if (!value) return "-";
+    const d = new Date(value);
+    if (Number.isNaN(d.getTime())) return "-";
+    return d.toLocaleString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
+  const getSchemeNameById = (schemeId: string) => {
+    const found = schemes.find((s) => s.id === schemeId);
+    return found?.name || schemeId;
+  };
+
+  const handleUpdateApplicationStatus = async (schemeId: string, applied: boolean) => {
+    try {
+      setUpdatingSchemeId(schemeId);
+      const updated = await updateApplicationStatus(schemeId, applied);
+
+      setApplicationHistory((prev) => {
+        const exists = prev.some((item) => item.schemeId === schemeId);
+        if (!exists) return [updated, ...prev];
+
+        return prev.map((item) => (item.schemeId === schemeId ? updated : item));
+      });
+
+      toast.success(applied ? "Marked as applied" : "Marked as not applied");
+    } catch (err) {
+      console.error("Update application status failed", err);
+      toast.error("Failed to update application status");
+    } finally {
+      setUpdatingSchemeId(null);
+    }
+  };
+
   const documentTypes = [
     { key: 'aadhaar', label: 'Aadhaar Card', icon: FileText },
     { key: 'pan', label: 'PAN Card', icon: FileText },
@@ -232,7 +296,7 @@ const Dashboard = () => {
         </div>
 
         <Tabs defaultValue="eligible" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-5 lg:w-auto lg:inline-grid">
+          <TabsList className="grid w-full grid-cols-6 lg:w-auto lg:inline-grid">
             <TabsTrigger value="eligible" className="flex items-center gap-2">
               <CheckCircle2 className="h-4 w-4" />
               <span className="hidden sm:inline">Eligible</span>
@@ -252,6 +316,10 @@ const Dashboard = () => {
             <TabsTrigger value="recent" className="flex items-center gap-2">
               <Clock className="h-4 w-4" />
               <span className="hidden sm:inline">Recent</span>
+            </TabsTrigger>
+            <TabsTrigger value="applications" className="flex items-center gap-2">
+              <BriefcaseBusiness className="h-4 w-4" />
+              <span className="hidden sm:inline">Applications</span>
             </TabsTrigger>
           </TabsList>
 
@@ -821,6 +889,106 @@ const Dashboard = () => {
                         </CardContent>
                       </Card>
                     ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="applications">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <BriefcaseBusiness className="h-5 w-5" />
+                  Scheme Applications ({applicationHistory.length})
+                </CardTitle>
+                <p className="text-muted-foreground text-sm">
+                  Track whether you successfully applied on official scheme websites.
+                </p>
+              </CardHeader>
+              <CardContent>
+                {applicationLoading ? (
+                  <div className="text-center py-10 text-muted-foreground">
+                    Loading application history...
+                  </div>
+                ) : applicationHistory.length === 0 ? (
+                  <div className="text-center py-12">
+                    <BriefcaseBusiness className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+                    <p className="text-muted-foreground">No application history yet</p>
+                    <Button className="mt-4" onClick={() => navigate('/total-schemes')}>
+                      Explore Schemes
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="grid gap-4">
+                    {applicationHistory.map((record) => {
+                      const scheme = schemes.find((s) => s.id === record.schemeId);
+                      return (
+                        <Card key={record.schemeId} className="hover:shadow-md transition-shadow">
+                          <CardContent className="p-4">
+                            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                              <div className="flex-1">
+                                <div className="flex items-center gap-2 mb-2 flex-wrap">
+                                  {record.status === "applied" && (
+                                    <Badge className="bg-green-100 text-green-700 hover:bg-green-100">
+                                      <CircleCheckBig className="h-3.5 w-3.5 mr-1" />
+                                      Applied Successfully
+                                    </Badge>
+                                  )}
+                                  {record.status === "not_applied" && (
+                                    <Badge className="bg-red-100 text-red-700 hover:bg-red-100">
+                                      <CircleX className="h-3.5 w-3.5 mr-1" />
+                                      Not Applied
+                                    </Badge>
+                                  )}
+                                  {record.status === "pending" && (
+                                    <Badge className="bg-amber-100 text-amber-700 hover:bg-amber-100">
+                                      <Clock className="h-3.5 w-3.5 mr-1" />
+                                      Pending
+                                    </Badge>
+                                  )}
+                                  {scheme?.type && <Badge variant="outline">{scheme.type}</Badge>}
+                                </div>
+                                <h3 className="font-semibold text-base">
+                                  {getSchemeNameById(record.schemeId)}
+                                </h3>
+                                <p className="text-sm text-muted-foreground mt-1">
+                                  Applied At: {formatDateTime(record.applied_at)}
+                                </p>
+                                <p className="text-sm text-muted-foreground">
+                                  Last Updated: {formatDateTime(record.updated_at)}
+                                </p>
+                              </div>
+
+                              <div className="flex items-center gap-2">
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => navigate(`/scheme/${record.schemeId}`)}
+                                >
+                                  View Scheme
+                                </Button>
+                                <Button
+                                  size="sm"
+                                  disabled={updatingSchemeId === record.schemeId}
+                                  onClick={() => handleUpdateApplicationStatus(record.schemeId, true)}
+                                >
+                                  Mark Yes
+                                </Button>
+                                <Button
+                                  variant="destructive"
+                                  size="sm"
+                                  disabled={updatingSchemeId === record.schemeId}
+                                  onClick={() => handleUpdateApplicationStatus(record.schemeId, false)}
+                                >
+                                  Mark No
+                                </Button>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      );
+                    })}
                   </div>
                 )}
               </CardContent>
