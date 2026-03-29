@@ -20,7 +20,7 @@ module.exports = (req: any, res: any, next: any) => {
     const decoded: any = jwt.verify(token, JWT_SECRET);
 
     req.user = {
-      userId: decoded.userId,   // 🔥 SAME NAME EVERYWHERE
+      userId: decoded.userId,   //  SAME NAME EVERYWHERE
       email: decoded.email,
     };
 

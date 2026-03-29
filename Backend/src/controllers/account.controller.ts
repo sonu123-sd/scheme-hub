@@ -8,7 +8,7 @@ POST /api/account/change-password
 exports.changePassword = async (req: any, res: any) => {
   try {
     const { currentPassword, newPassword } = req.body;
-    const userId = req.user.userId;   // auth middleware se aa raha
+    const userId = req.user.userId;   // auth middleware 
 
     const user = await User.findById(userId);
     if (!user) {

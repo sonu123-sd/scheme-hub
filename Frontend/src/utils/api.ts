@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:5000", // 🔥 /api HATA DIYA
+  baseURL: "http://localhost:5000", //  /api HATA DIYA
 });
 
 api.interceptors.request.use((config) => {
