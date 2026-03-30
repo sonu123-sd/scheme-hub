@@ -172,7 +172,7 @@ const formatSchemeDetailsFromBackend = (scheme: SchemeItem) => {
         ? elig.income
         : null;
 
-  return `Scheme Details (Backend):
+  return `Scheme Details:
 Name: ${scheme.name || "Not available"}
 Type: ${scheme.type || "Not specified"}
 State: ${scheme.state || "All India"}
