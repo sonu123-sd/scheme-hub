@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import schemes from "@/data/schemes.json";
 import { useAuth } from "@/contexts/AuthContext";
+import api from "@/utils/api";
 
 type MessageMeta = {
   mode?: "ai" | "fallback";
@@ -112,6 +113,86 @@ const hasDirectSchemeNameMatch = (text: string, list: SchemeItem[]) => {
     if (!name || name.length < 4) return false;
     return name === query || name.includes(query) || query.includes(name);
   });
+};
+
+const shouldSkipSchemeLookup = (text: string) => {
+  const normalized = normalize(text);
+  return (
+    isGreetingQuery(normalized) ||
+    isFaqQuery(normalized) ||
+    isAuthHelpQuery(normalized) ||
+    isContactQuery(normalized) ||
+    isComplaintQuery(normalized) ||
+    containsAny(normalized, [
+      "help",
+      "menu",
+      "commands",
+      "what can you do",
+      "news",
+      "latest",
+      "update",
+      "terms",
+      "policy",
+      "disclaimer",
+      "my profile",
+      "my details",
+      "meri profile",
+      "meri details",
+    ])
+  );
+};
+
+const extractLookupName = (text: string) => {
+  const trimmed = text.trim();
+  const normalized = normalize(trimmed);
+  if (!trimmed || trimmed.length < 3) return null;
+  if (shouldSkipSchemeLookup(normalized)) return null;
+
+  const aboutMatch = normalized.match(/^about(?:\s+(.+))?$/);
+  if (aboutMatch) {
+    const target = (aboutMatch[1] || "").trim();
+    if (!target || isAboutWebsiteQuery(normalized)) return null;
+    return target;
+  }
+
+  return trimmed;
+};
+
+const formatSchemeDetailsFromBackend = (scheme: SchemeItem) => {
+  const docs = Array.isArray(scheme.documents_required) ? scheme.documents_required.slice(0, 8) : [];
+  const steps = Array.isArray(scheme.apply_steps) ? scheme.apply_steps.slice(0, 8) : [];
+  const elig = scheme.eligibility || {};
+  const casteText = Array.isArray(elig.caste) && elig.caste.length > 0 ? elig.caste.join(", ") : "All";
+  const minAge = typeof elig.minAge === "number" ? String(elig.minAge) : "Any";
+  const maxAge = typeof elig.maxAge === "number" ? String(elig.maxAge) : "Any";
+  const incomeLimit =
+    typeof elig.incomeLimit === "number"
+      ? elig.incomeLimit
+      : typeof elig.income === "number"
+        ? elig.income
+        : null;
+
+  return `Scheme Details (Backend):
+Name: ${scheme.name || "Not available"}
+Type: ${scheme.type || "Not specified"}
+State: ${scheme.state || "All India"}
+Category: ${scheme.category || "Not specified"}
+Description: ${scheme.description || "Not available"}
+Official Link: ${scheme.official_link || "Not available"}
+
+Eligibility:
+- Gender: ${elig.gender || "All"}
+- Age: ${minAge} to ${maxAge}
+- Caste: ${casteText}
+- Education: ${elig.education || "Any"}
+- Employment: ${elig.employment || "Any"}
+- Income Limit: ${incomeLimit !== null ? `Rs ${incomeLimit}` : "Not specified"}
+
+Required Documents:
+${docs.length > 0 ? docs.map((doc, i) => `${i + 1}. ${doc}`).join("\n") : "Not specified"}
+
+Apply Steps:
+${steps.length > 0 ? steps.map((step, i) => `${i + 1}. ${step}`).join("\n") : "Not specified"}`;
 };
 
 const calculateAge = (dob?: string) => {
@@ -816,7 +897,7 @@ Try:
     resetComposer();
   };
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (isSending) return;
 
     const textInput = input.trim();
@@ -835,12 +916,30 @@ Try:
     setIsTyping(true);
 
     try {
+      const lookupName = extractLookupName(userMessageText);
+      if (lookupName) {
+        try {
+          const response = await api.get("/api/schemes/search", {
+            params: { name: lookupName },
+          });
+
+          const schemeData = response?.data?.data as SchemeItem | undefined;
+          if (schemeData) {
+            const backendAnswer = formatSchemeDetailsFromBackend(schemeData);
+            setMessages((prev) => [...prev, { role: "assistant", content: backendAnswer, meta: { mode: "ai" } }]);
+            setIsTyping(false);
+            setIsSending(false);
+            return;
+          }
+        } catch {
+          // Backend lookup failed or no scheme matched. Fallback continues below.
+        }
+      }
+
       const localAnswer = generateResponse(userMessageText);
-      window.setTimeout(() => {
-        setMessages((prev) => [...prev, { role: "assistant", content: localAnswer, meta: { mode: "fallback" } }]);
-        setIsTyping(false);
-        setIsSending(false);
-      }, 180);
+      setMessages((prev) => [...prev, { role: "assistant", content: localAnswer, meta: { mode: "fallback" } }]);
+      setIsTyping(false);
+      setIsSending(false);
     } catch {
       setIsTyping(false);
       setIsSending(false);

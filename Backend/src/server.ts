@@ -9,6 +9,7 @@ const savedSchemeRoutes = require("./routes/savedScheme.routes");
 const contactRoutes = require("./routes/contact.routes");
 const documentRoutes = require("./routes/document.routes");
 const schemeApplicationRoutes = require("./routes/schemeApplication.routes");
+const schemeRoutes = require("./routes/scheme.routes");
 const authMiddleware = require("./middleware/auth.middleware");
 const User = require("./models/User.model");
 const accountRoutes = require("./routes/account.routes");
@@ -34,6 +35,7 @@ app.use(
 
 app.use("/api/eligibility", eligibilityRoutes);
 app.use("/api/account", accountRoutes);
+app.use("/api/schemes", schemeRoutes);
 app.use("/api", schemeApplicationRoutes);
 app.use("/contact", contactRoutes);
 app.use("/documents", documentRoutes);
