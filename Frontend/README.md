@@ -2,7 +2,7 @@
 
 ## Project info
 
-**URL**: https://.dev/projects/REPLACE_WITH_PROJECT_ID
+**URL**: https://github.com/sonu123-sd/scheme-hub
 
 ## How can I edit this code?
 
